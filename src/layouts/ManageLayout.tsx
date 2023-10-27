@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from '@ant-design/icons'
 import styles from './ManageLayout.module.scss'
 import { Button, Divider, Space } from 'antd'
-import { PN_MANAGE_LIST, PN_MANAGE_STAR, PN_MANAGE_TRASH } from '../router'
+import { PN_MANAGE_INDEX, PN_MANAGE_STAR, PN_MANAGE_TRASH } from '../router'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
@@ -17,10 +17,10 @@ const ManageLayout: FC = () => {
           </Button>
           <Divider style={{ borderColor: 'transparent' }} />
           <Button
-            type={pathname.startsWith(PN_MANAGE_LIST) ? 'default' : 'text'}
+            type={pathname.startsWith(PN_MANAGE_INDEX) ? 'default' : 'text'}
             size="large"
             icon={<BarsOutlined />}
-            onClick={() => nav(PN_MANAGE_LIST)}
+            onClick={() => nav(PN_MANAGE_INDEX)}
           >
             我的问卷
           </Button>

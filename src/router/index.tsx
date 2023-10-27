@@ -77,6 +77,6 @@ export default router
 export const PN_HOME = '/'
 export const PN_LOGIN = '/login'
 export const PN_REGISTER = '/register'
-export const PN_MANAGE_LIST = '/manage/list'
+export const PN_MANAGE_INDEX = '/manage/list'
 export const PN_MANAGE_STAR = '/manage/star'
 export const PN_MANAGE_TRASH = '/manage/trash'

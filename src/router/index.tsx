@@ -49,6 +49,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
     ],
   },
   {
@@ -65,7 +69,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: '*', element: <NotFound /> },
 ])
 
 export default router

@@ -1,10 +1,14 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": true,
   },
-  "cSpell.words": [
-    "antd", "ahooks"
-  ],
+  // 使 vscode 插件 stylelint 生效
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "scss"],
+  "cSpell.words": ["antd", "ahooks"],
   // 默认格式化工具选择prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

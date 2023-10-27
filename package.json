@@ -25,7 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:eslint": " eslint \"src/**/*.+(js|ts|jsx|tsx)\" ",
-    "lint:style": "stylelint \"src/**/*.(css|scss)\" --cache --fix",
+    "lint:style": "stylelint \"src/**/*.(css|scss)\" --fix",
     "format": "prettier --write \"src/**/*.+(js|ts|jsx|tsx)\" ",
     "prepare": "husky install"
   },

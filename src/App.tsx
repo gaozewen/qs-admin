@@ -1,14 +1,9 @@
 import React from 'react'
-import List from './pages/manage/List'
-import './App.css'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
 
 function App() {
-  return (
-    <div>
-      <h1>问卷系统</h1>
-      <List />
-    </div>
-  )
+  return <RouterProvider router={router}></RouterProvider>
 }
 
 export default App

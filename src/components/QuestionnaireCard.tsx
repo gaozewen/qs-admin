@@ -10,7 +10,7 @@ type PropsType = {
   createdAt: string
 }
 
-const QuestionCard: FC<PropsType> = (props: PropsType) => {
+const QuestionnaireCard: FC<PropsType> = (props: PropsType) => {
   const { title, isPublished, answerCount, createdAt } = props
   return (
     <div className={styles.container}>
@@ -41,4 +41,4 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   )
 }
 
-export default QuestionCard
+export default QuestionnaireCard

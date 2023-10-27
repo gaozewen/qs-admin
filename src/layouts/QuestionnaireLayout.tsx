@@ -1,13 +1,13 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react'
+import { Outlet } from 'react-router-dom'
 
-type propTypes = {
-  children: ReactNode
-}
-const QuestionnaireLayout: FC<propTypes> = (props: propTypes) => {
+const QuestionnaireLayout: FC = () => {
   return (
     <>
       <div>QuestionnaireLayout header</div>
-      <div>{props.children}</div>
+      <div>
+        <Outlet />
+      </div>
       <div>QuestionnaireLayout footer</div>
     </>
   )

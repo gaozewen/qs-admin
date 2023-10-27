@@ -1,7 +1,20 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Home: FC = () => {
-  return <p>Home</p>
+  const nav = useNavigate()
+  const onNavToLogin = () => {
+    nav('/login')
+  }
+
+  return (
+    <div>
+      <p>Home</p>
+      <div>
+        <button onClick={onNavToLogin}>登录</button>
+      </div>
+    </div>
+  )
 }
 
 export default Home

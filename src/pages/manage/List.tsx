@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import QuestionnaireCard from '../components/QuestionnaireCard'
+import QuestionnaireCard from '../../components/QuestionnaireCard'
 import styles from './List.module.scss'
 
 const mockListData = Array(10)

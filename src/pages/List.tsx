@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react'
-// import QuestionCard from '../components/QuestionCard'
+import QuestionnaireCard from '../components/QuestionnaireCard'
 import styles from './List.module.scss'
-import QuestionCard from '../components/QuestionCard'
 
 const mockListData = Array(10)
   .fill('mock')
@@ -27,7 +26,7 @@ const List: FC = () => {
       </div>
       <div className={styles.content}>
         {list.map(item => (
-          <QuestionCard key={item._id} {...item} />
+          <QuestionnaireCard key={item._id} {...item} />
         ))}
       </div>
       <div className={styles.footer}>footer</div>

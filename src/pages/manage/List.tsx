@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
-import QuestionnaireCard from '../../components/QuestionnaireCard'
-import styles from './List.module.scss'
 import { useSearchParams } from 'react-router-dom'
+import { useTitle } from 'ahooks'
+import styles from './List.module.scss'
+import QuestionnaireCard from '../../components/QuestionnaireCard'
 
 const mockListData = Array(10)
   .fill('mock')
@@ -15,6 +16,8 @@ const mockListData = Array(10)
   }))
 
 const List: FC = () => {
+  useTitle('问卷系统 - 我的问卷')
+
   const [searchParams] = useSearchParams()
   console.log('keyword', searchParams.get('keyword'))
   const [list] = useState(mockListData)

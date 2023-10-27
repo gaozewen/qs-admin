@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": " eslint \"src/**/*.+(js|ts|jsx|tsx)\" ",
+    "lint:eslint": " eslint \"src/**/*.+(js|ts|jsx|tsx)\" ",
+    "lint:style": "stylelint \"src/**/*.(css|scss)\" --cache --fix",
     "format": "prettier --write \"src/**/*.+(js|ts|jsx|tsx)\" ",
     "prepare": "husky install"
   },
@@ -56,7 +57,19 @@
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-react": "7.33.2",
     "husky": "^8.0.3",
+    "postcss": "^8.4.31",
+    "postcss-html": "^1.5.0",
+    "postcss-scss": "^4.0.9",
     "prettier": "3.0.3",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "stylelint": "^15.11.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-recommended-scss": "^13.0.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^5.2.1"
   }
 }

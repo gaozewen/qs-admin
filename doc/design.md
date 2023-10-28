@@ -17,3 +17,9 @@
 - MainLayout
 - ManageLayout
 - QuestionnaireLayout
+
+# 管理问卷三个页面
+
+- 我的问卷：列表卡片 + LoadMore
+- 星标问卷：列表卡片 + 分页
+- 回收站：表格 + 分页

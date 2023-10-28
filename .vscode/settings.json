@@ -8,7 +8,11 @@
   "scss.validate": false,
   "stylelint.enable": true,
   "stylelint.validate": ["css", "scss"],
-  "cSpell.words": ["antd", "ahooks"],
+  "cSpell.words": [
+    "ahooks",
+    "antd",
+    "Popconfirm"
+  ],
   // 默认格式化工具选择prettier
   "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

@@ -1,8 +1,11 @@
 import React, { FC, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useTitle } from 'ahooks'
+import { Empty, Typography } from 'antd'
 import styles from './common.module.scss'
 import QuestionnaireCard from '../../components/QuestionnaireCard'
+
+const { Title } = Typography
 
 const mockListData = Array(10)
   .fill('mock')
@@ -26,12 +29,18 @@ const List: FC = () => {
     <>
       <div className={styles.header}>
         <div className={styles.left}>
-          <h3>我的问卷</h3>
+          <Title level={3} style={{ margin: '0 0 24px 0' }}>
+            我的问卷
+          </Title>
         </div>
         <div className={styles.right}>搜索</div>
       </div>
       <div className={styles.content}>
-        {list.length > 0 && list.map(item => <QuestionnaireCard key={item._id} {...item} />)}
+        {list.length > 0 ? (
+          list.map(item => <QuestionnaireCard key={item._id} {...item} />)
+        ) : (
+          <Empty description="暂无数据" />
+        )}
       </div>
       <div className={styles.footer}>loadMore.. 上滑加载更多</div>
     </>

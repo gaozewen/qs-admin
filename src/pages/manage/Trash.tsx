@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
 import { useTitle } from 'ahooks'
-import { Empty, Typography, Table, Tag } from 'antd'
+import { Empty, Typography, Table, Tag, Space, Button, Modal, message } from 'antd'
 import styles from './common.module.scss'
-import { StarFilled, StarOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
 import { ColumnsType } from 'antd/es/table'
 
 const { Title } = Typography
@@ -30,6 +30,20 @@ const mockListData = Array(18)
 const Star: FC = () => {
   useTitle('问卷系统 - 回收站')
   const [list] = useState(mockListData)
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+
+  const onDelete = () => {
+    Modal.confirm({
+      title: '确定彻底删除该问卷么？',
+      icon: <ExclamationCircleOutlined />,
+      content: '删除后将无法找回',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        message.success('删除成功')
+      },
+    })
+  }
 
   // 一定要定义 Typescript 类型才可以使用 align 等属性
   const tableColumns: ColumnsType<DataType> = [
@@ -69,6 +83,34 @@ const Star: FC = () => {
     },
   ]
 
+  const TableElement = (
+    <>
+      <div style={{ marginBottom: '16px' }}>
+        <Space>
+          <Button type="primary" disabled={selectedIds.length === 0}>
+            恢复
+          </Button>
+          <Button danger disabled={selectedIds.length === 0} onClick={onDelete}>
+            删除
+          </Button>
+        </Space>
+      </div>
+      <Table
+        columns={tableColumns}
+        dataSource={list}
+        pagination={false}
+        rowKey="_id"
+        rowSelection={{
+          type: 'checkbox',
+          onChange: selectedRowKeys => {
+            // 将 Key[] 类型当做 string[]
+            setSelectedIds(selectedRowKeys as string[])
+          },
+        }}
+      />
+    </>
+  )
+
   return (
     <>
       <div className={styles.header}>
@@ -77,14 +119,10 @@ const Star: FC = () => {
             回收站
           </Title>
         </div>
-        <div className={styles.right}>搜索</div>
+        <div className={styles.right}>搜索{JSON.stringify(selectedIds)}</div>
       </div>
       <div className={styles.content}>
-        {list.length > 0 ? (
-          <Table rowKey="_id" columns={tableColumns} dataSource={list} pagination={false} />
-        ) : (
-          <Empty description="暂无数据" />
-        )}
+        {list.length > 0 ? TableElement : <Empty description="暂无数据" />}
       </div>
       <div className={styles.footer}>分页</div>
     </>

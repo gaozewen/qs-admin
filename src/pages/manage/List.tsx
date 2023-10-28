@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useTitle } from 'ahooks'
-import styles from './List.module.scss'
+import styles from './common.module.scss'
 import QuestionnaireCard from '../../components/QuestionnaireCard'
 
 const mockListData = Array(10)
@@ -10,7 +10,7 @@ const mockListData = Array(10)
     _id: `q${index}`,
     title: `问卷${index}`,
     isPublished: [true, false][index % 2],
-    isStar: false,
+    isStar: [true, false][index % 2],
     answerCount: index % 5,
     createdAt: `10月2${index}日 1${index}:4${index}`,
   }))
@@ -31,11 +31,9 @@ const List: FC = () => {
         <div className={styles.right}>搜索</div>
       </div>
       <div className={styles.content}>
-        {list.map(item => (
-          <QuestionnaireCard key={item._id} {...item} />
-        ))}
+        {list.length > 0 && list.map(item => <QuestionnaireCard key={item._id} {...item} />)}
       </div>
-      <div className={styles.footer}>footer</div>
+      <div className={styles.footer}>loadMore.. 上滑加载更多</div>
     </>
   )
 }

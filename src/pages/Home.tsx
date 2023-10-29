@@ -1,5 +1,5 @@
 import { Button } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Typography } from 'antd'
 import { PN_MANAGE_INDEX } from '../router'
@@ -9,6 +9,12 @@ const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
   const nav = useNavigate()
+
+  useEffect(() => {
+    fetch('/api/test')
+      .then(res => res.json())
+      .then(data => alert(JSON.stringify(data)))
+  }, [])
 
   return (
     <div className={styles.container}>

@@ -4,6 +4,7 @@ import { useTitle } from 'ahooks'
 import { Empty, Typography } from 'antd'
 import styles from './common.module.scss'
 import QuestionnaireCard from '../../components/QuestionnaireCard'
+import ListSearch from '../../components/ListSearch'
 
 const { Title } = Typography
 
@@ -33,7 +34,9 @@ const List: FC = () => {
             我的问卷
           </Title>
         </div>
-        <div className={styles.right}>搜索</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {list.length > 0 ? (

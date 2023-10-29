@@ -4,6 +4,7 @@ import { Empty, Typography, Table, Tag, Space, Button, Modal, message } from 'an
 import styles from './common.module.scss'
 import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
 import { ColumnsType } from 'antd/es/table'
+import ListSearch from '../../components/ListSearch'
 
 const { Title } = Typography
 
@@ -119,7 +120,9 @@ const Star: FC = () => {
             回收站
           </Title>
         </div>
-        <div className={styles.right}>搜索{JSON.stringify(selectedIds)}</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {list.length > 0 ? TableElement : <Empty description="暂无数据" />}

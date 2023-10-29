@@ -1,7 +1,15 @@
 import React, { FC } from 'react'
+import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
+import { Spin } from 'antd'
 
 const Statistic: FC = () => {
-  return <p>Statistic</p>
+  const { loading, questionnaireData } = useLoadQuestionnaireData()
+
+  return (
+    <Spin spinning={loading} tip="加载中">
+      <p>{JSON.stringify(questionnaireData)}</p>
+    </Spin>
+  )
 }
 
 export default Statistic

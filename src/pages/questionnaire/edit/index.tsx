@@ -1,20 +1,15 @@
-import React, { FC, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { getQuestionnaireService } from '../../../services/questionnaire'
+import React, { FC } from 'react'
+import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
+import { Spin } from 'antd'
 
 const Edit: FC = () => {
-  const { id = '' } = useParams()
+  const { loading, questionnaireData } = useLoadQuestionnaireData()
 
-  useEffect(() => {
-    // useEffect 没办法直接执行 async 函数，所以这么处理
-    const fn = async () => {
-      const data = await getQuestionnaireService(id)
-      console.log('data', data)
-    }
-    fn()
-  }, [])
-
-  return <p>Edit {id}</p>
+  return (
+    <Spin spinning={loading} tip="加载中">
+      <p>{JSON.stringify(questionnaireData)}</p>
+    </Spin>
+  )
 }
 
 export default Edit

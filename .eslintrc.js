@@ -17,5 +17,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    // 关闭 any 类型警告
+    '@typescript-eslint/no-explicit-any': 'off',
+  },
 }

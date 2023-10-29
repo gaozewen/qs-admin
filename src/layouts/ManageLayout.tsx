@@ -1,18 +1,39 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from '@ant-design/icons'
 import styles from './ManageLayout.module.scss'
-import { Button, Divider, Space } from 'antd'
-import { PN_MANAGE_INDEX, PN_MANAGE_STAR, PN_MANAGE_TRASH } from '../router'
+import { Button, Divider, Space, message } from 'antd'
+import { PN_MANAGE_INDEX, PN_MANAGE_STAR, PN_MANAGE_TRASH, PN_QUESTIONNAIRE_EDIT } from '../router'
+import { createQuestionnaireService } from '../services/questionnaire'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
+
+  const [loading, setLoading] = useState(false)
+  const onCreate = async () => {
+    setLoading(true)
+    const data = await createQuestionnaireService().finally(() => {
+      setLoading(false)
+    })
+    const { id } = data || {}
+    if (id) {
+      nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)
+      message.success('创建成功')
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
         <Space direction="vertical">
-          <Button type="primary" size="large" icon={<PlusOutlined />}>
+          <Button
+            type="primary"
+            size="large"
+            icon={<PlusOutlined />}
+            loading={loading}
+            onClick={onCreate}
+          >
             新建问卷
           </Button>
           <Divider style={{ borderColor: 'transparent' }} />

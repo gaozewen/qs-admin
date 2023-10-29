@@ -13,7 +13,7 @@ const Home: FC = () => {
   useEffect(() => {
     fetch('/api/test')
       .then(res => res.json())
-      .then(data => alert(JSON.stringify(data)))
+      .then(data => console.log(data))
   }, [])
 
   return (

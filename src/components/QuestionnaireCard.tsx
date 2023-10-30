@@ -58,17 +58,33 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
     }
   )
 
-  const onDelete = () => {
+  // 删除逻辑
+  const [isDeletedState, setIsDeletedState] = useState(false)
+  const { loading: deleteLoading, run: onDelete } = useRequest(
+    async () => {
+      const data = await updateQuestionnaireService(_id, { isStar: toggleIsStarState })
+      return data
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        setIsDeletedState(true)
+        message.success('删除成功')
+      },
+    }
+  )
+  const confirmDelete = () => {
     Modal.confirm({
       title: '确定要删除该问卷吗？',
       icon: <ExclamationCircleOutlined />,
       okText: '确定',
       cancelText: '取消',
-      onOk: () => {
-        message.success('删除成功')
-      },
+      onOk: onDelete,
     })
   }
+
+  if (isDeletedState) return null
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -136,7 +152,13 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
               </Button>
             </Popconfirm>
 
-            <Button type="text" size="small" icon={<DeleteOutlined />} onClick={onDelete}>
+            <Button
+              type="text"
+              size="small"
+              icon={<DeleteOutlined />}
+              loading={deleteLoading}
+              onClick={confirmDelete}
+            >
               删除
             </Button>
           </Space>

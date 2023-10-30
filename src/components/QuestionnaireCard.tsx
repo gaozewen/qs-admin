@@ -12,17 +12,9 @@ import {
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../router'
+import { Questionnaire } from '../@types/questionnaire'
 
-type PropsType = {
-  _id: string
-  title: string
-  isStar: boolean
-  isPublished: boolean
-  answerCount: number
-  createdAt: string
-}
-
-const QuestionnaireCard: FC<PropsType> = (props: PropsType) => {
+const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props
   const nav = useNavigate()
   const onDuplicate = () => {

@@ -1,36 +1,22 @@
 import React, { FC, useState } from 'react'
 import { useTitle } from 'ahooks'
-import { Empty, Typography, Table, Tag, Space, Button, Modal, message } from 'antd'
+import { Empty, Typography, Table, Tag, Space, Button, Modal, message, Spin } from 'antd'
 import styles from './common.module.scss'
 import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
 import { ColumnsType } from 'antd/es/table'
 import ListSearch from '../../components/ListSearch'
+import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
+import { Questionnaire } from '../../@types/questionnaire'
 
 const { Title } = Typography
 
-interface DataType {
-  _id: string
-  title: string
-  isPublished: boolean
-  isStar: boolean
-  answerCount: number
-  createdAt: string
-}
-
-const mockListData = Array(18)
-  .fill('mock')
-  .map((item, index) => ({
-    _id: `q${index}`,
-    title: `问卷${index}`,
-    isPublished: [true, false][index % 2],
-    isStar: [true, false][index % 2],
-    answerCount: index % 5,
-    createdAt: `10月2${index}日 1${index}:4${index}`,
-  }))
-
 const Star: FC = () => {
   useTitle('问卷系统 - 回收站')
-  const [list] = useState(mockListData)
+
+  const { loading, data } = useLoadQuestionnaireListData({ isDeleted: true })
+  const { list = [], total = 0 } = (data || {}) as { list: Questionnaire[]; total: number }
+  console.log('total', total)
+
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   const onDelete = () => {
@@ -47,7 +33,7 @@ const Star: FC = () => {
   }
 
   // 一定要定义 Typescript 类型才可以使用 align 等属性
-  const tableColumns: ColumnsType<DataType> = [
+  const tableColumns: ColumnsType<Questionnaire> = [
     {
       title: '标题',
       dataIndex: 'title',
@@ -125,7 +111,13 @@ const Star: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {list.length > 0 ? TableElement : <Empty description="暂无数据" />}
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin spinning={loading} />
+          </div>
+        )}
+        {!loading && list.length > 0 && TableElement}
+        {!loading && list.length === 0 && <Empty description="暂无数据" />}
       </div>
       <div className={styles.footer}>分页</div>
     </>

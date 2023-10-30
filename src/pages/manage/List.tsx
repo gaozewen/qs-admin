@@ -1,30 +1,20 @@
-import React, { FC, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import React, { FC } from 'react'
 import { useTitle } from 'ahooks'
-import { Empty, Typography } from 'antd'
+import { Empty, Spin, Typography } from 'antd'
 import styles from './common.module.scss'
 import QuestionnaireCard from '../../components/QuestionnaireCard'
 import ListSearch from '../../components/ListSearch'
+import { Questionnaire } from '../../@types/questionnaire'
+import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 
 const { Title } = Typography
-
-const mockListData = Array(10)
-  .fill('mock')
-  .map((item, index) => ({
-    _id: `q${index}`,
-    title: `问卷${index}`,
-    isPublished: [true, false][index % 2],
-    isStar: [true, false][index % 2],
-    answerCount: index % 5,
-    createdAt: `10月2${index}日 1${index}:4${index}`,
-  }))
 
 const List: FC = () => {
   useTitle('问卷系统 - 我的问卷')
 
-  const [searchParams] = useSearchParams()
-  console.log('keyword', searchParams.get('keyword'))
-  const [list] = useState(mockListData)
+  const { loading, data } = useLoadQuestionnaireListData()
+  const { list = [], total = 0 } = (data || {}) as { list: Questionnaire[]; total: number }
+  console.log('total', total)
 
   return (
     <>
@@ -39,11 +29,15 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {list.length > 0 ? (
-          list.map(item => <QuestionnaireCard key={item._id} {...item} />)
-        ) : (
-          <Empty description="暂无数据" />
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin spinning={loading} />
+          </div>
         )}
+        {!loading &&
+          list.length > 0 &&
+          list.map((item: Questionnaire) => <QuestionnaireCard key={item._id} {...item} />)}
+        {!loading && list.length === 0 && <Empty description="暂无数据" />}
       </div>
       <div className={styles.footer}>loadMore.. 上滑加载更多</div>
     </>

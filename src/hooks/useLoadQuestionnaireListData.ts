@@ -15,7 +15,7 @@ const useLoadQuestionnaireListData = (opt?: Partial<Options>) => {
   const { isStar, isDeleted } = opt || {}
   const [searchParams] = useSearchParams()
 
-  const { loading, data, error } = useRequest(
+  const { loading, data, error, refresh } = useRequest(
     async () => {
       const keyword = searchParams.get(C_LIST_SEARCH_PARAM_KEY) || ''
       const page = parseInt(searchParams.get(C_LIST_PAGE_PARAM_KEY) || '') || 1
@@ -30,7 +30,7 @@ const useLoadQuestionnaireListData = (opt?: Partial<Options>) => {
     }
   )
 
-  return { loading, data, error }
+  return { loading, data, error, refresh }
 }
 
 export default useLoadQuestionnaireListData

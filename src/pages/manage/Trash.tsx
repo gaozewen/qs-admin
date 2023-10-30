@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { useTitle } from 'ahooks'
+import { useRequest, useTitle } from 'ahooks'
 import { Empty, Typography, Table, Tag, Space, Button, Modal, message, Spin } from 'antd'
 import styles from './common.module.scss'
 import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
@@ -8,15 +8,15 @@ import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 import { Questionnaire } from '../../@types/questionnaire'
 import QSPagination from '../../components/QSPagination'
+import { updateQuestionnaireService } from '../../services/questionnaire'
 
 const { Title } = Typography
 
 const Star: FC = () => {
   useTitle('问卷系统 - 回收站')
 
-  const { loading, data } = useLoadQuestionnaireListData({ isDeleted: true })
+  const { loading, data, refresh } = useLoadQuestionnaireListData({ isDeleted: true })
   const { list = [], total = 0 } = (data || {}) as { list: Questionnaire[]; total: number }
-  console.log('total', total)
 
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
@@ -32,6 +32,24 @@ const Star: FC = () => {
       },
     })
   }
+
+  // 恢复逻辑
+  const { loading: recoverLoading, run: onRecover } = useRequest(
+    async () => {
+      for await (const id of selectedIds) {
+        await updateQuestionnaireService(id, { isDeleted: false })
+      }
+    },
+    {
+      manual: true,
+      debounceWait: 500, // 防抖
+      onSuccess() {
+        message.success('恢复成功')
+        setSelectedIds([]) // 清空选择
+        refresh() // 手动刷新列表
+      },
+    }
+  )
 
   // 一定要定义 Typescript 类型才可以使用 align 等属性
   const tableColumns: ColumnsType<Questionnaire> = [
@@ -75,7 +93,7 @@ const Star: FC = () => {
     <>
       <div style={{ marginBottom: '16px' }}>
         <Space>
-          <Button type="primary" disabled={selectedIds.length === 0}>
+          <Button type="primary" disabled={selectedIds.length === 0} onClick={onRecover}>
             恢复
           </Button>
           <Button danger disabled={selectedIds.length === 0} onClick={onDelete}>
@@ -111,7 +129,7 @@ const Star: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <Spin spinning={loading} size="large">
+      <Spin spinning={loading || recoverLoading} size="large">
         <div style={{ flex: 1 }}>
           <div className={styles.content}>
             {list.length > 0 && TableElement}

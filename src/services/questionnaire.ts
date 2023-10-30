@@ -32,3 +32,13 @@ export const getQuestionnaireListService = async (
   const data = (await ajax.get(url, { params: opt })) as ResDataType
   return data
 }
+
+// 更新单个问卷
+export const updateQuestionnaireService = async (
+  id: string,
+  body: { [key: string]: any }
+): Promise<ResDataType> => {
+  const url = `/api/questionnaire/${id}`
+  const data = (await ajax.patch(url, body)) as ResDataType
+  return data
+}

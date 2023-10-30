@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd'
 import styles from './QuestionnaireCard.module.scss'
 import {
@@ -13,10 +13,30 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../router'
 import { Questionnaire } from '../@types/questionnaire'
+import { useRequest } from 'ahooks'
+import { updateQuestionnaireService } from '../services/questionnaire'
 
 const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props
   const nav = useNavigate()
+
+  const [isStarState, setIsStarState] = useState(isStar)
+
+  const toggleIsStarState = !isStarState
+  const { loading: toggleStarLoading, run: onToggleStar } = useRequest(
+    async () => {
+      const data = await updateQuestionnaireService(_id, { isStar: toggleIsStarState })
+      return data
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        setIsStarState(toggleIsStarState)
+        message.success(`${toggleIsStarState ? '标星' : '取消标星'}成功`)
+      },
+    }
+  )
+
   const onDuplicate = () => {
     message.success('复制成功')
   }
@@ -37,7 +57,7 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
         <div className={styles.left}>
           <Link to={`${isPublished ? PN_QUESTIONNAIRE_STATISTIC : PN_QUESTIONNAIRE_EDIT}/${_id}`}>
             <Space>
-              {isStar && <StarFilled />}
+              {isStarState && <StarFilled />}
               {title}
             </Space>
           </Link>
@@ -77,8 +97,14 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
         </div>
         <div className={styles.right}>
           <Space>
-            <Button type="text" size="small" icon={<StarOutlined />}>
-              {isStar ? '取消标星' : '标星'}
+            <Button
+              type="text"
+              size="small"
+              icon={<StarOutlined />}
+              loading={toggleStarLoading}
+              onClick={onToggleStar}
+            >
+              {isStarState ? '取消标星' : '标星'}
             </Button>
 
             <Popconfirm

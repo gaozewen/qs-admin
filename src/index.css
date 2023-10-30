@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 使 spin 在容器正中间 */
+:where(.css-dev-only-do-not-override-xu9wm8).ant-spin-nested-loading >div>.ant-spin {
+  max-height: none;
+}

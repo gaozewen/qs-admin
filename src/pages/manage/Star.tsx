@@ -6,6 +6,7 @@ import QuestionnaireCard from '../../components/QuestionnaireCard'
 import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 import { Questionnaire } from '../../@types/questionnaire'
+import QSPagination from '../../components/QSPagination'
 
 const { Title } = Typography
 
@@ -14,7 +15,7 @@ const Star: FC = () => {
 
   const { loading, data } = useLoadQuestionnaireListData({ isStar: true })
   const { list = [], total = 0 } = (data || {}) as { list: Questionnaire[]; total: number }
-  console.log('total', total)
+  console.log('list', list)
 
   return (
     <>
@@ -28,18 +29,15 @@ const Star: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.content}>
-        {loading && (
-          <div style={{ textAlign: 'center' }}>
-            <Spin spinning={loading} />
-          </div>
-        )}
-        {!loading &&
-          list.length > 0 &&
-          list.map((item: Questionnaire) => <QuestionnaireCard key={item._id} {...item} />)}
-        {!loading && list.length === 0 && <Empty description="暂无数据" />}
-      </div>
-      <div className={styles.footer}>分页</div>
+
+      <Spin spinning={loading} size="large">
+        <div className={styles.content}>
+          {list.length > 0 &&
+            list.map((item: Questionnaire) => <QuestionnaireCard key={item._id} {...item} />)}
+          {!loading && list.length === 0 && <Empty description="暂无数据" />}
+        </div>
+        <div className={styles.footer}>{list.length > 0 && <QSPagination total={total} />}</div>
+      </Spin>
     </>
   )
 }

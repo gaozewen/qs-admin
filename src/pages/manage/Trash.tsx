@@ -7,6 +7,7 @@ import { ColumnsType } from 'antd/es/table'
 import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 import { Questionnaire } from '../../@types/questionnaire'
+import QSPagination from '../../components/QSPagination'
 
 const { Title } = Typography
 
@@ -110,16 +111,15 @@ const Star: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.content}>
-        {loading && (
-          <div style={{ textAlign: 'center' }}>
-            <Spin spinning={loading} />
+      <Spin spinning={loading} size="large">
+        <div style={{ flex: 1 }}>
+          <div className={styles.content}>
+            {list.length > 0 && TableElement}
+            {!loading && list.length === 0 && <Empty description="暂无数据" />}
           </div>
-        )}
-        {!loading && list.length > 0 && TableElement}
-        {!loading && list.length === 0 && <Empty description="暂无数据" />}
-      </div>
-      <div className={styles.footer}>分页</div>
+          <div className={styles.footer}>{list.length > 0 && <QSPagination total={total} />}</div>
+        </div>
+      </Spin>
     </>
   )
 }

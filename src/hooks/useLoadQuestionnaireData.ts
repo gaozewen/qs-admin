@@ -1,22 +1,15 @@
-import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { getQuestionnaireService } from '../services/questionnaire'
+import { useRequest } from 'ahooks'
 
 const useLoadQuestionnaireData = () => {
   const { id = '' } = useParams()
-  const [loading, setLoading] = useState(true)
-  const [questionnaireData, setQuestionnaireData] = useState({})
+  const fn = async () => {
+    return await getQuestionnaireService(id)
+  }
+  const { loading, data, error } = useRequest(fn)
 
-  useEffect(() => {
-    const fn = async () => {
-      const data = await getQuestionnaireService(id)
-      setQuestionnaireData(data)
-      setLoading(false)
-    }
-    fn()
-  }, [])
-
-  return { loading, questionnaireData }
+  return { loading, data, error }
 }
 
 export default useLoadQuestionnaireData

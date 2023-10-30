@@ -1,27 +1,26 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from '@ant-design/icons'
 import styles from './ManageLayout.module.scss'
 import { Button, Divider, Space, message } from 'antd'
 import { PN_MANAGE_INDEX, PN_MANAGE_STAR, PN_MANAGE_TRASH, PN_QUESTIONNAIRE_EDIT } from '../router'
 import { createQuestionnaireService } from '../services/questionnaire'
+import { useRequest } from 'ahooks'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
 
-  const [loading, setLoading] = useState(false)
-  const onCreate = async () => {
-    setLoading(true)
-    const data = await createQuestionnaireService().finally(() => {
-      setLoading(false)
-    })
-    const { id } = data || {}
-    if (id) {
-      nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)
-      message.success('创建成功')
-    }
-  }
+  const { loading, run: onCreate } = useRequest(createQuestionnaireService, {
+    manual: true,
+    onSuccess: result => {
+      const { id } = result || {}
+      if (id) {
+        nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)
+        message.success('创建成功')
+      }
+    },
+  })
 
   return (
     <div className={styles.container}>

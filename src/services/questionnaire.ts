@@ -49,3 +49,10 @@ export const duplicateQuestionnaireService = async (id: string): Promise<ResData
   const data = (await ajax.post(url)) as ResDataType
   return data
 }
+
+// 批量彻底删除问卷
+export const deleteQuestionnairesService = async (ids: string[]): Promise<ResDataType> => {
+  const url = `/api/questionnaire`
+  const data = (await ajax.delete(url, { data: { ids } })) as ResDataType
+  return data
+}

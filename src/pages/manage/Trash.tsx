@@ -8,7 +8,10 @@ import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 import { Questionnaire } from '../../@types/questionnaire'
 import QSPagination from '../../components/QSPagination'
-import { updateQuestionnaireService } from '../../services/questionnaire'
+import {
+  deleteQuestionnairesService,
+  updateQuestionnaireService,
+} from '../../services/questionnaire'
 
 const { Title } = Typography
 
@@ -20,17 +23,10 @@ const Star: FC = () => {
 
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
-  const onDelete = () => {
-    Modal.confirm({
-      title: '确定彻底删除该问卷么？',
-      icon: <ExclamationCircleOutlined />,
-      content: '删除后将无法找回',
-      okText: '确定',
-      cancelText: '取消',
-      onOk: () => {
-        message.success('删除成功')
-      },
-    })
+  const onSuccessHandler = (msg: string) => {
+    message.success(msg)
+    setSelectedIds([]) // 清空选择
+    refresh() // 手动刷新列表
   }
 
   // 恢复逻辑
@@ -44,12 +40,41 @@ const Star: FC = () => {
       manual: true,
       debounceWait: 500, // 防抖
       onSuccess() {
-        message.success('恢复成功')
-        setSelectedIds([]) // 清空选择
-        refresh() // 手动刷新列表
+        onSuccessHandler('恢复成功')
       },
     }
   )
+
+  // 删除逻辑
+  const { loading: deleteLoading, run: onDelete } = useRequest(
+    async () => {
+      await deleteQuestionnairesService(selectedIds)
+    },
+    {
+      manual: true,
+      debounceWait: 500, // 防抖
+      onSuccess() {
+        onSuccessHandler('彻底删除成功')
+      },
+    }
+  )
+  // 对彻底删除按钮做防抖处理
+  let timer: any = null
+  const confirmDelete = () => {
+    if (timer) return
+    timer = setTimeout(() => {
+      Modal.confirm({
+        title: '确定彻底删除该问卷么？',
+        icon: <ExclamationCircleOutlined />,
+        content: '删除后将无法找回',
+        okText: '确定',
+        cancelText: '取消',
+        onOk: onDelete,
+      })
+
+      clearTimeout(timer)
+    }, 500)
+  }
 
   // 一定要定义 Typescript 类型才可以使用 align 等属性
   const tableColumns: ColumnsType<Questionnaire> = [
@@ -96,8 +121,8 @@ const Star: FC = () => {
           <Button type="primary" disabled={selectedIds.length === 0} onClick={onRecover}>
             恢复
           </Button>
-          <Button danger disabled={selectedIds.length === 0} onClick={onDelete}>
-            删除
+          <Button danger disabled={selectedIds.length === 0} onClick={confirmDelete}>
+            彻底删除
           </Button>
         </Space>
       </div>
@@ -129,7 +154,7 @@ const Star: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <Spin spinning={loading || recoverLoading} size="large">
+      <Spin spinning={loading || recoverLoading || deleteLoading} size="large">
         <div style={{ flex: 1 }}>
           <div className={styles.content}>
             {list.length > 0 && TableElement}

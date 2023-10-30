@@ -14,14 +14,17 @@ import { Link, useNavigate } from 'react-router-dom'
 import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../router'
 import { Questionnaire } from '../@types/questionnaire'
 import { useRequest } from 'ahooks'
-import { updateQuestionnaireService } from '../services/questionnaire'
+import {
+  duplicateQuestionnaireService,
+  updateQuestionnaireService,
+} from '../services/questionnaire'
 
 const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props
   const nav = useNavigate()
 
+  // 标星 取消标星 逻辑
   const [isStarState, setIsStarState] = useState(isStar)
-
   const toggleIsStarState = !isStarState
   const { loading: toggleStarLoading, run: onToggleStar } = useRequest(
     async () => {
@@ -37,9 +40,24 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
     }
   )
 
-  const onDuplicate = () => {
-    message.success('复制成功')
-  }
+  // 复制逻辑
+  const { loading: duplicateLoading, run: onDuplicate } = useRequest(
+    async () => {
+      const data = await duplicateQuestionnaireService(_id)
+      return data
+    },
+    {
+      manual: true,
+      onSuccess: result => {
+        const { id } = result || {}
+        if (id) {
+          nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)
+          message.success('复制成功')
+        }
+      },
+    }
+  )
+
   const onDelete = () => {
     Modal.confirm({
       title: '确定要删除该问卷吗？',
@@ -113,7 +131,7 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
               cancelText="取消"
               onConfirm={onDuplicate}
             >
-              <Button type="text" size="small" icon={<CopyOutlined />}>
+              <Button type="text" size="small" icon={<CopyOutlined />} loading={duplicateLoading}>
                 复制
               </Button>
             </Popconfirm>

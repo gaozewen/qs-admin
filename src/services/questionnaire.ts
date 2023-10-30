@@ -42,3 +42,10 @@ export const updateQuestionnaireService = async (
   const data = (await ajax.patch(url, body)) as ResDataType
   return data
 }
+
+// 复制问卷
+export const duplicateQuestionnaireService = async (id: string): Promise<ResDataType> => {
+  const url = `/api/questionnaire/duplicate/${id}`
+  const data = (await ajax.post(url)) as ResDataType
+  return data
+}

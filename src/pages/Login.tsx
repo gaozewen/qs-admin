@@ -1,9 +1,12 @@
 import React, { FC, useEffect } from 'react'
-import { Button, Checkbox, Form, Input, Space, Typography } from 'antd'
+import { Button, Checkbox, Form, Input, Space, Typography, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
-import { Link } from 'react-router-dom'
-import { PN_REGISTER } from '../router'
+import { Link, useNavigate } from 'react-router-dom'
+import { useRequest } from 'ahooks'
+import { loginService } from '../services/user'
+import { PN_MANAGE_INDEX, PN_REGISTER } from '../router'
+import { setToken } from '../utils/user-token'
 
 const { Title } = Typography
 
@@ -41,10 +44,26 @@ const Login: FC = () => {
     form.setFieldsValue({ username, password })
   }, [])
 
-  const onFinish = (values: ValuesType) => {
-    alert(JSON.stringify(values))
-    const { username, password } = values || {}
+  const nav = useNavigate()
+  const { run: onLogin, loading } = useRequest(
+    async (username: string, password: string) => {
+      return await loginService(username, password)
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        const { token = '' } = result
+        // 存储 token
+        setToken(token)
+        message.success('登录成功')
+        nav(PN_MANAGE_INDEX)
+      },
+    }
+  )
 
+  const onFinish = (values: ValuesType) => {
+    const { username, password } = values || {}
+    onLogin(username, password)
     if (values.remember) {
       rememberAccount(username, password)
     } else {
@@ -96,7 +115,7 @@ const Login: FC = () => {
 
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 登录
               </Button>
               <Link to={PN_REGISTER}>注册新用户</Link>

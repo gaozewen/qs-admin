@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
-import { Button, Form, Input, Space, Typography } from 'antd'
+import { Button, Form, Input, Space, Typography, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Register.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useRequest } from 'ahooks'
+import { registerService } from '../services/user'
 import { PN_LOGIN } from '../router'
 
 const { Title } = Typography
@@ -15,8 +17,23 @@ type ValuesType = {
 }
 
 const Register: FC = () => {
+  const nav = useNavigate()
+  const { run: onRegister, loading } = useRequest(
+    async (username: string, password: string, nickname: string) => {
+      await registerService(username, password, nickname)
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('注册成功')
+        nav(PN_LOGIN)
+      },
+    }
+  )
+
   const onFinish = (values: ValuesType) => {
-    alert(JSON.stringify(values))
+    const { username, password, nickname } = values
+    onRegister(username, password, nickname)
   }
 
   return (
@@ -60,8 +77,8 @@ const Register: FC = () => {
               { required: true, message: '请输入密码' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) Promise.resolve()
-                  else Promise.reject(new Error('两次密码不一致'))
+                  if (!value || getFieldValue('password') === value) return Promise.resolve()
+                  else return Promise.reject(new Error('两次密码不一致'))
                 },
               }),
             ]}
@@ -75,7 +92,7 @@ const Register: FC = () => {
 
           <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
             <Space>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={loading}>
                 注册
               </Button>
               <Link to={PN_LOGIN}>有账户，去登录</Link>

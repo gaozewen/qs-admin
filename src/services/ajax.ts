@@ -1,5 +1,6 @@
 import { message } from 'antd'
 import axios from 'axios'
+import { getToken } from '../utils/user-token'
 
 /**
  * @description 配置 axios 基本功能
@@ -7,6 +8,16 @@ import axios from 'axios'
 const instance = axios.create({
   timeout: 10 * 1000,
 })
+
+// request 拦截：每次请求都带上 token
+instance.interceptors.request.use(
+  config => {
+    // JWT 的固定格式
+    config.headers['Authorization'] = `Bearer ${getToken()}`
+    return config
+  },
+  error => Promise.reject(error)
+)
 
 // response 拦截：统一处理 errno 和 msg
 instance.interceptors.response.use(

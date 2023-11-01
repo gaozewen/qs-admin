@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Checkbox, Form, Input, Space, Typography, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
 import styles from './Login.module.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useRequest } from 'ahooks'
 import { loginService } from '../services/user'
-import { PN_MANAGE_INDEX, PN_REGISTER } from '../router'
+import { PN_REGISTER } from '../router'
 import { setToken } from '../utils/user-token'
+import { loginReducer } from '../store/userReducer'
 
 const { Title } = Typography
 
@@ -39,24 +41,26 @@ const getAccountFromLocalStorage = () => {
 const Login: FC = () => {
   const [form] = Form.useForm()
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const { username, password } = getAccountFromLocalStorage()
     form.setFieldsValue({ username, password })
   }, [])
 
-  const nav = useNavigate()
   const { run: onLogin, loading } = useRequest(
     async (username: string, password: string) => {
       return await loginService(username, password)
     },
     {
       manual: true,
-      onSuccess(result) {
-        const { token = '' } = result
+      async onSuccess(result) {
+        const { token = '', username, nickname } = result
         // 存储 token
         setToken(token)
+        dispatch(loginReducer({ username, nickname }))
         message.success('登录成功')
-        nav(PN_MANAGE_INDEX)
+        // 使用 useAutoNavigate 控制登录后的路由跳转 nav(PN_MANAGE_INDEX)
       },
     }
   )

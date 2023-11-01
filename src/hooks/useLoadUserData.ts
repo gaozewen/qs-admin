@@ -10,7 +10,7 @@ const useLoadUserData = () => {
   const dispatch = useDispatch()
   const [loadingUserData, setLoadingUserData] = useState<boolean>(true)
 
-  const { run: load } = useRequest(getUserInfoService, {
+  const { run: onLoadUserData } = useRequest(getUserInfoService, {
     manual: true,
     onSuccess(result) {
       const { username, nickname } = result
@@ -33,7 +33,7 @@ const useLoadUserData = () => {
       return
     }
     // store 中用户信息不存在，则请求后端数据进行加载
-    load()
+    onLoadUserData()
   }, [username])
 
   return { loadingUserData }

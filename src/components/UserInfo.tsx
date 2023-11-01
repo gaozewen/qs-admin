@@ -1,18 +1,22 @@
 import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { useRequest } from 'ahooks'
 import { UserOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
 import { PN_LOGIN } from '../router'
-import { getUserInfoService } from '../services/user'
 import { removeToken } from '../utils/user-token'
+import useGetUserInfo from '../hooks/useGetUserInfo'
+import { logoutReducer } from '../store/userReducer'
 
 const UserInfo: FC = () => {
-  const { data } = useRequest(getUserInfoService)
-  const { username, nickname } = data || {}
+  // 使用 redux 获取用户信息
+  const { username, nickname } = useGetUserInfo()
+  const dispatch = useDispatch()
   const nav = useNavigate()
 
   const onLogout = () => {
+    // 清空 redux 中的 user 数据
+    dispatch(logoutReducer())
     // 清除 token 的存储
     removeToken()
     nav(PN_LOGIN)

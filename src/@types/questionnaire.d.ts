@@ -7,3 +7,12 @@ export type Questionnaire = {
   createdAt: string
   isDeleted: boolean // 假删除
 }
+
+export type UserStateType = {
+  username: string
+  nickname: string
+}
+
+export type StateType = {
+  user: UserStateType
+}

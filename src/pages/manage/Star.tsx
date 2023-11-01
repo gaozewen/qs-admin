@@ -5,7 +5,7 @@ import styles from './common.module.scss'
 import QuestionnaireCard from '../../components/QuestionnaireCard'
 import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
-import { Questionnaire } from '../../@types/questionnaire'
+import { Questionnaire } from '../../types'
 import QSPagination from '../../components/QSPagination'
 
 const { Title } = Typography

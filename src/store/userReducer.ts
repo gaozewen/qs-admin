@@ -1,5 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { UserStateType } from '../@types/questionnaire'
+
+export type UserStateType = {
+  username: string
+  nickname: string
+}
 
 const INIT_STATE: UserStateType = { username: '', nickname: '' }
 

@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../router'
-import { Questionnaire } from '../@types/questionnaire'
+import { Questionnaire } from '../types'
 import { useRequest } from 'ahooks'
 import {
   duplicateQuestionnaireService,

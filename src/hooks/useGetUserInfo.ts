@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
-import { StateType, UserStateType } from '../@types/questionnaire'
+import { StateType } from '../store'
+import { UserStateType } from '../store/userReducer'
 
 const useGetUserInfo = () => {
   const { username, nickname } = useSelector<StateType>(state => state.user) as UserStateType

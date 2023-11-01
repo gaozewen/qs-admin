@@ -53,3 +53,18 @@
     }
   }
 }
+
+// 解决 windows 浏览器滚动条丑的问题
+::-webkit-scrollbar { // 最外层盒子
+  width: 4px; // 滚动条最外层盒子宽度
+}
+
+::-webkit-scrollbar-thumb { // 移动指示条盒子
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track { // 指示条下面的背景盒子
+  background-color: #eee;
+  border-radius: 4px;
+}

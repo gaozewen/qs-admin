@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
+import QEditorCanvas from '../../../components/QEditorComponents/QEditorCanvas'
 
 const Edit: FC = () => {
   return (
@@ -10,7 +11,9 @@ const Edit: FC = () => {
           <div className={styles.left}></div>
           <div className={styles.main}>
             <div className={styles['canvas-wrapper']}>
-              <div className={styles.canvas}>画布</div>
+              <div className={styles.canvas}>
+                <QEditorCanvas />
+              </div>
             </div>
           </div>
           <div className={styles.right}></div>

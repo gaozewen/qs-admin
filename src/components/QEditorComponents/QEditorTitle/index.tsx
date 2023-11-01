@@ -1,8 +1,20 @@
 import React, { FC } from 'react'
-import { QEditorTitlePropsType, Q_EDITOR_TITLE_DEFAULT_PROPS } from './types'
 import { Typography } from 'antd'
 
 const { Title } = Typography
+
+export type QEditorTitlePropsType = {
+  text?: string
+  level?: 1 | 2 | 3 | 4 | 5
+  isCenter?: boolean
+}
+
+// 默认值
+export const Q_EDITOR_TITLE_DEFAULT_PROPS: QEditorTitlePropsType = {
+  text: '一行标题',
+  level: 1,
+  isCenter: false,
+}
 
 const QEditorTitle: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) => {
   const { text = '', level = 1, isCenter = false } = { ...Q_EDITOR_TITLE_DEFAULT_PROPS, ...props }
@@ -20,7 +32,7 @@ const QEditorTitle: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) =
         style={{
           textAlign: isCenter ? 'center' : 'start',
           fontSize: genFontSize(level),
-          marginBottom: 0,
+          margin: 0,
         }}
       >
         {text}

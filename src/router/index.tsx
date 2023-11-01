@@ -82,3 +82,11 @@ export const PN_MANAGE_STAR = '/manage/star'
 export const PN_MANAGE_TRASH = '/manage/trash'
 export const PN_QUESTIONNAIRE_EDIT = '/questionnaire/edit'
 export const PN_QUESTIONNAIRE_STATISTIC = '/questionnaire/statistic'
+
+export const isLoginOrRegisterRouter = (pathname: string) => {
+  return [PN_LOGIN, PN_REGISTER].includes(pathname)
+}
+
+export const isNotNeedLogin = (pathname: string) => {
+  return [PN_HOME, PN_LOGIN, PN_REGISTER].includes(pathname)
+}

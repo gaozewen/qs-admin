@@ -5,11 +5,13 @@ import styles from './MainLayout.module.scss'
 import Logo from '../components/Logo'
 import UserInfo from '../components/UserInfo'
 import useLoadUserData from '../hooks/useLoadUserData'
+import useAutoNavigate from '../hooks/useAutoNavigate'
 
 const { Header, Footer, Content } = Layout
 
 const MainLayout: FC = () => {
-  const { loading } = useLoadUserData()
+  const { loadingUserData } = useLoadUserData()
+  useAutoNavigate(loadingUserData)
 
   return (
     <Layout>
@@ -22,7 +24,7 @@ const MainLayout: FC = () => {
         </div>
       </Header>
       <Content className={styles.main}>
-        {loading ? (
+        {loadingUserData ? (
           <Spin>
             <div className={styles.main}></div>
           </Spin>

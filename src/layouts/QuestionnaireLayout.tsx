@@ -10,19 +10,15 @@ const QuestionnaireLayout: FC = () => {
   useAutoNavigate(loadingUserData)
 
   return (
-    <>
-      <div>QuestionnaireLayout header</div>
-      <div>
-        {loadingUserData ? (
-          <Spin>
-            <div className={styles.main}></div>
-          </Spin>
-        ) : (
-          <Outlet />
-        )}
-      </div>
-      <div>QuestionnaireLayout footer</div>
-    </>
+    <div>
+      {loadingUserData ? (
+        <Spin>
+          <div className={styles.main}></div>
+        </Spin>
+      ) : (
+        <Outlet />
+      )}
+    </div>
   )
 }
 

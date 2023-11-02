@@ -14,8 +14,12 @@
     }
 
     .cp {
-      // 屏蔽鼠标行为，组件不让被点击到
+      // 屏蔽鼠标行为，组件不让被点击到（比如 input 等）
       pointer-events: none;
     }
+  }
+  
+  .selected {
+    border-color: #1890ff !important;
   }
 }

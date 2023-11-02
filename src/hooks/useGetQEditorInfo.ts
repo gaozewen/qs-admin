@@ -4,8 +4,10 @@ import { QEditorStateType } from '../store/qEditorReducer'
 
 // 获取 redux 中 QEditor State
 const useGetQEditorInfo = () => {
-  const { componentList } = useSelector<StateType>(state => state.qEditor) as QEditorStateType
-  return { componentList }
+  const { componentList, selectedId } = useSelector<StateType>(
+    state => state.qEditor
+  ) as QEditorStateType
+  return { componentList, selectedId }
 }
 
 export default useGetQEditorInfo

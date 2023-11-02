@@ -1,7 +1,9 @@
-import React, { FC } from 'react'
+import React, { FC, MouseEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import cs from 'classnames'
 import styles from './index.module.scss'
 import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
-import { ComponentInfoType } from '../../../store/qEditorReducer'
+import { ComponentInfoType, changeSelectedIdAction } from '../../../store/qEditorReducer'
 import { getComponentConfigByType } from '..'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
@@ -13,13 +15,26 @@ const genComponent = (componentInfo: ComponentInfoType) => {
 }
 
 const QEditorCanvas: FC = () => {
-  const { componentList } = useGetQEditorInfo()
+  const { componentList, selectedId } = useGetQEditorInfo()
+  const dispatch = useDispatch()
+  // 是 React 中的 MouseEvent 类型
+  const onSelect = (event: MouseEvent, fe_id: string) => {
+    event.stopPropagation()
+    dispatch(changeSelectedIdAction(fe_id))
+  }
   return (
     <div className={styles.canvas}>
       {componentList.map(componentInfo => {
         const { fe_id } = componentInfo
         return (
-          <div key={fe_id} className={styles['cp-wrapper']}>
+          <div
+            key={fe_id}
+            className={cs({
+              [styles['cp-wrapper']]: true,
+              [styles.selected]: fe_id === selectedId,
+            })}
+            onClick={e => onSelect(e, fe_id)}
+          >
             <div className={styles.cp}>{genComponent(componentInfo)}</div>
           </div>
         )

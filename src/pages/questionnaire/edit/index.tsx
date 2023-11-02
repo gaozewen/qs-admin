@@ -6,6 +6,7 @@ import { Spin } from 'antd'
 import { useDispatch } from 'react-redux'
 import { changeSelectedIdAction } from '../../../store/qEditorReducer'
 import LeftPanel from './LeftPanel'
+import RightPanel from './RightPanel'
 
 const Edit: FC = () => {
   const { loading } = useLoadQuestionnaireData()
@@ -36,7 +37,9 @@ const Edit: FC = () => {
               </div>
             </div>
           </div>
-          <div className={styles.right}></div>
+          <div className={styles.right}>
+            <RightPanel />
+          </div>
         </div>
       </div>
     </div>

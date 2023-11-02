@@ -14,6 +14,7 @@ export type QEditorComponentConfigType = {
   type: string
   defaultProps: QEditorComponentPropsType
   Component: QEditorComponentType
+  PropsComponent: QEditorComponentType
 }
 
 // 所有组件的配置列表

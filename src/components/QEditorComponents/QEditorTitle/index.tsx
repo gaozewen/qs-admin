@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
+import QEditorTitlePropsComponent from './QEditorTitlePropsComponent'
 
 const { Title } = Typography
 
@@ -45,6 +46,7 @@ export const QEditorTitleConfig = {
   title: '标题',
   type: 'title',
   Component: QEditorTitle,
+  PropsComponent: QEditorTitlePropsComponent,
   defaultProps: Q_EDITOR_TITLE_DEFAULT_PROPS,
 }
 

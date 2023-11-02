@@ -4,7 +4,7 @@ import { QEditorComponentPropsType } from '../components/QEditorComponents'
 
 // 后端返回的 QEditor 的组件数据
 export type ComponentInfoType = {
-  fe_id: string
+  fe_id: string // 前端控制生成的不重复的 id
   type: string
   title: string
   props: QEditorComponentPropsType

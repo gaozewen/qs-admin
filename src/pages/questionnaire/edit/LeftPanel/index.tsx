@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-// import styles from './index.module.scss'
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons'
 import { Tabs } from 'antd'
 import ComponentLib from './ComponentLib'

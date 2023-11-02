@@ -7,7 +7,10 @@ const useGetQEditorInfo = () => {
   const { componentList, selectedId } = useSelector<StateType>(
     state => state.qEditor
   ) as QEditorStateType
-  return { componentList, selectedId }
+
+  const selectedComponent = componentList.find(c => c.fe_id === selectedId)
+
+  return { componentList, selectedId, selectedComponent }
 }
 
 export default useGetQEditorInfo

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Input, Typography } from 'antd'
+import QEditorInputPropsComponent from './QEditorInputPropsComponent'
 
 const { Paragraph } = Typography
 
@@ -31,6 +32,7 @@ export const QEditorInputConfig = {
   title: '输入框',
   type: 'input',
   Component: QEditorInput,
+  PropsComponent: QEditorInputPropsComponent,
   defaultProps: Q_EDITOR_INPUT_DEFAULT_PROPS,
 }
 

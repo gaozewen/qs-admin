@@ -44,11 +44,25 @@ export const qEditorSlice = createSlice({
 
       state.selectedId = newComponentInfo.fe_id
     },
+    changeComponentInfoPropsAction: (
+      state: QEditorStateType,
+      action: PayloadAction<{ fe_id: string; props: QEditorComponentPropsType }>
+    ) => {
+      const { fe_id, props } = action.payload
+      const curComp = state.componentList.find(c => c.fe_id === fe_id)
+      if (curComp) {
+        curComp.props = props
+      }
+    },
   },
 })
 
-export const { resetQEditorAction, changeSelectedIdAction, addComponentAction } =
-  qEditorSlice.actions
+export const {
+  resetQEditorAction,
+  changeSelectedIdAction,
+  addComponentAction,
+  changeComponentInfoPropsAction,
+} = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer
 export default qEditorReducer

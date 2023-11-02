@@ -7,6 +7,7 @@ const { Paragraph } = Typography
 export type QEditorInputPropsType = {
   title?: string
   placeholder?: string
+  onChange?: (newProps: QEditorInputPropsType) => void
 }
 
 // 默认值

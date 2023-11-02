@@ -3,7 +3,7 @@ import { QEditorTitlePropsType } from '.'
 import { Checkbox, Form, Input, Select } from 'antd'
 
 const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) => {
-  const { text, level, isCenter } = props
+  const { text, level, isCenter, onChange } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
@@ -11,8 +11,19 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
     form.setFieldsValue({ text, level, isCenter })
   }, [text, level, isCenter])
 
+  const onValuesChange = (_: any, values: any) => {
+    if (onChange) {
+      onChange(values)
+    }
+  }
+
   return (
-    <Form layout="vertical" initialValues={{ text, level, isCenter }} form={form}>
+    <Form
+      layout="vertical"
+      initialValues={{ text, level, isCenter }}
+      form={form}
+      onValuesChange={onValuesChange}
+    >
       <Form.Item
         label="标题内容"
         name="text"

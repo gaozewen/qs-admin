@@ -17,7 +17,7 @@
       display: flex;
       height: 100%;
       margin: 0 24px;
-    
+
       .left {
         width: 285px;
         padding: 0 12px;
@@ -36,12 +36,12 @@
           width: 400px;
           height: 712px;
           overflow: auto;
+          background-color: #fff;
           box-shadow: 0 2px 10px #0000001f;
           transform: translateX(-50%) translateY(-50%);
 
           .canvas {
             height: 900px;
-            background-color: #fff;
           }
         }
       }
@@ -56,16 +56,19 @@
 }
 
 // 解决 windows 浏览器滚动条丑的问题
-::-webkit-scrollbar { // 最外层盒子
+::-webkit-scrollbar {
+  // 最外层盒子
   width: 4px; // 滚动条最外层盒子宽度
 }
 
-::-webkit-scrollbar-thumb { // 移动指示条盒子
+::-webkit-scrollbar-thumb {
+  // 移动指示条盒子
   background-color: #ccc;
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-track { // 指示条下面的背景盒子
+::-webkit-scrollbar-track {
+  // 指示条下面的背景盒子
   background-color: #eee;
   border-radius: 4px;
 }

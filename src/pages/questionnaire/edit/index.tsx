@@ -14,9 +14,15 @@ const Edit: FC = () => {
           <div className={styles.left}></div>
           <div className={styles.main}>
             <div className={styles['canvas-wrapper']}>
-              <Spin spinning={loading}>
-                <div className={styles.canvas}>{!loading && <QEditorCanvas />}</div>
-              </Spin>
+              <div className={styles.canvas}>
+                {loading ? (
+                  <div style={{ textAlign: 'center', marginTop: 188 }}>
+                    <Spin />
+                  </div>
+                ) : (
+                  <QEditorCanvas />
+                )}
+              </div>
             </div>
           </div>
           <div className={styles.right}></div>

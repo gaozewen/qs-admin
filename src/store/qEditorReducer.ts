@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { QEditorComponentPropsType } from '../components/QEditorComponents'
 
 // 后端返回的 QEditor 的组件数据
-export type ComponentInfo = {
+export type ComponentInfoType = {
   fe_id: string
   type: string
   title: string
@@ -10,7 +10,7 @@ export type ComponentInfo = {
 }
 
 export type QEditorStateType = {
-  componentList: ComponentInfo[]
+  componentList: ComponentInfoType[]
 }
 
 const INIT_STATE: QEditorStateType = { componentList: [] }

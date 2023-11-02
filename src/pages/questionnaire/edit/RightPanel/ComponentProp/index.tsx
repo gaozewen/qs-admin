@@ -5,7 +5,6 @@ import {
   QEditorComponentPropsType,
   getComponentConfigByType,
 } from '../../../../../components/QEditorComponents'
-// import styles from './index.module.scss'
 import {
   ComponentInfoType,
   changeComponentInfoPropsAction,
@@ -15,6 +14,7 @@ import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
 const NotSelected: FC = () => <div style={{ textAlign: 'center' }}>未选中组件</div>
 
 const ComponentProp: FC = () => {
+  const dispatch = useDispatch()
   const { selectedComponent } = useGetQEditorInfo()
   if (selectedComponent == null) return <NotSelected />
 
@@ -24,7 +24,6 @@ const ComponentProp: FC = () => {
 
   const { PropsComponent } = config as QEditorComponentConfigType
 
-  const dispatch = useDispatch()
   const onChange = (newProps: QEditorComponentPropsType) => {
     dispatch(changeComponentInfoPropsAction({ fe_id, props: newProps }))
   }

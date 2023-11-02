@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux'
 import { changeSelectedIdAction } from '../../../store/qEditorReducer'
 import LeftPanel from './LeftPanel'
 import RightPanel from './RightPanel'
+import HeaderPanel from './HeaderPanel'
 
 const Edit: FC = () => {
   const { loading } = useLoadQuestionnaireData()
@@ -18,7 +19,7 @@ const Edit: FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>头部</div>
+      <HeaderPanel />
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
           <div className={styles.left}>

@@ -6,7 +6,7 @@ import { Button, Space } from 'antd'
 import { PN_LOGIN } from '../router'
 import { removeToken } from '../utils/user-token'
 import useGetUserInfo from '../hooks/useGetUserInfo'
-import { logoutReducer } from '../store/userReducer'
+import { logoutAction } from '../store/userReducer'
 
 const UserInfo: FC = () => {
   // 使用 redux 获取用户信息
@@ -16,7 +16,7 @@ const UserInfo: FC = () => {
 
   const onLogout = () => {
     // 清空 redux 中的 user 数据
-    dispatch(logoutReducer())
+    dispatch(logoutAction())
     // 清除 token 的存储
     removeToken()
     nav(PN_LOGIN)

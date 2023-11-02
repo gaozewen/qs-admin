@@ -41,4 +41,11 @@ const QEditorTitle: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) =
   )
 }
 
+export const QEditorTitleConfig = {
+  title: '标题',
+  type: 'title',
+  Component: QEditorTitle,
+  defaultProps: Q_EDITOR_TITLE_DEFAULT_PROPS,
+}
+
 export default QEditorTitle

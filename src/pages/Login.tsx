@@ -8,7 +8,7 @@ import { useRequest } from 'ahooks'
 import { loginService } from '../services/user'
 import { PN_REGISTER } from '../router'
 import { setToken } from '../utils/user-token'
-import { loginReducer } from '../store/userReducer'
+import { loginAction } from '../store/userReducer'
 
 const { Title } = Typography
 
@@ -58,7 +58,7 @@ const Login: FC = () => {
         const { token = '', username, nickname } = result
         // 存储 token
         setToken(token)
-        dispatch(loginReducer({ username, nickname }))
+        dispatch(loginAction({ username, nickname }))
         message.success('登录成功')
         // 使用 useAutoNavigate 控制登录后的路由跳转 nav(PN_MANAGE_INDEX)
       },

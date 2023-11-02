@@ -27,4 +27,11 @@ const QEditorInput: FC<QEditorInputPropsType> = (props: QEditorInputPropsType) =
   )
 }
 
+export const QEditorInputConfig = {
+  title: '输入框',
+  type: 'input',
+  Component: QEditorInput,
+  defaultProps: Q_EDITOR_INPUT_DEFAULT_PROPS,
+}
+
 export default QEditorInput

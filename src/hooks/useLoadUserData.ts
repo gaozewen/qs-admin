@@ -2,7 +2,7 @@ import { useRequest } from 'ahooks'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getUserInfoService } from '../services/user'
-import { loginReducer } from '../store/userReducer'
+import { loginAction } from '../store/userReducer'
 import useGetUserInfo from './useGetUserInfo'
 
 // 当 store 中用户信息不存在，则从后端加载用户信息
@@ -17,7 +17,7 @@ const useLoadUserData = () => {
       // 后端 errno 报错，未返回 data 数据，username 不存在
       if (!username) return
       // data 数据正常返回, username 存在
-      dispatch(loginReducer({ username, nickname }))
+      dispatch(loginAction({ username, nickname }))
     },
     onFinally() {
       setLoadingUserData(false)

@@ -1,8 +1,10 @@
 import React, { FC } from 'react'
 import styles from './index.module.scss'
 import QEditorCanvas from '../../../components/QEditorComponents/QEditorCanvas'
+import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
 
 const Edit: FC = () => {
+  useLoadQuestionnaireData()
   return (
     <div className={styles.container}>
       <div className={styles.header}>头部</div>

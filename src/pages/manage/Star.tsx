@@ -30,7 +30,7 @@ const Star: FC = () => {
         </div>
       </div>
 
-      <Spin spinning={loading} size="large">
+      <Spin spinning={loading}>
         <div className={styles.content}>
           {list.length > 0 &&
             list.map((item: Questionnaire) => <QuestionnaireCard key={item._id} {...item} />)}

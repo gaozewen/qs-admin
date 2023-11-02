@@ -26,3 +26,17 @@ const QEditorComponentConfigList: QEditorComponentConfigType[] = [
 export const getComponentConfigByType = (componentType: string) => {
   return QEditorComponentConfigList.find(item => item.type === componentType)
 }
+
+// 对所有组件配置进行分组
+export const QEditorComponentConfigGroup = [
+  {
+    groupId: 'textGroup',
+    groupName: '文本显示',
+    configs: [QEditorTitleConfig],
+  },
+  {
+    groupId: 'inputGroup',
+    groupName: '用户输入',
+    configs: [QEditorInputConfig],
+  },
+]

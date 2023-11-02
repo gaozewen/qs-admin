@@ -2,9 +2,9 @@ import React, { FC, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import cs from 'classnames'
 import styles from './index.module.scss'
-import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
-import { ComponentInfoType, changeSelectedIdAction } from '../../../store/qEditorReducer'
-import { getComponentConfigByType } from '..'
+import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
+import { ComponentInfoType, changeSelectedIdAction } from '../../../../store/qEditorReducer'
+import { getComponentConfigByType } from '../../../../components/QEditorComponents'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
   const { type, props } = componentInfo
@@ -14,7 +14,7 @@ const genComponent = (componentInfo: ComponentInfoType) => {
   return <Component {...props} />
 }
 
-const QEditorCanvas: FC = () => {
+const MainCanvas: FC = () => {
   const { componentList, selectedId } = useGetQEditorInfo()
   const dispatch = useDispatch()
   // 是 React 中的 MouseEvent 类型
@@ -43,4 +43,4 @@ const QEditorCanvas: FC = () => {
   )
 }
 
-export default QEditorCanvas
+export default MainCanvas

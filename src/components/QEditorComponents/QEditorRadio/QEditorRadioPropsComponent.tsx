@@ -34,7 +34,7 @@ const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRad
       disabled={disabled}
     >
       <Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
-        <Input />
+        <Input placeholder="请输入单选标题..." />
       </Form.Item>
 
       <Form.Item label="选项" style={{ marginBottom: 0 }}>

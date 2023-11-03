@@ -28,7 +28,7 @@ const useLoadQuestionnaireData = () => {
       // 默认选中第一个组件
       selectedId = componentList[0].fe_id
     }
-    dispatch(resetQEditorAction({ componentList, selectedId }))
+    dispatch(resetQEditorAction({ componentList, selectedId, copiedComponentInfo: null }))
   }, [data])
 
   useEffect(() => {

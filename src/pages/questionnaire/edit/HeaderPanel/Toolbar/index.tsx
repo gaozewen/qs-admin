@@ -1,4 +1,6 @@
 import {
+  BlockOutlined,
+  CopyOutlined,
   DeleteOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
@@ -10,13 +12,15 @@ import { useDispatch } from 'react-redux'
 import {
   changeComponentIsHiddenAction,
   deleteSelectedComponentAction,
+  duplicateComponentAction,
+  pasteCopiedComponentAction,
   toggleComponentIsLockedAction,
 } from '../../../../../store/qEditorReducer'
 import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
 
 const Toolbar: FC = () => {
   const dispatch = useDispatch()
-  const { selectedId, selectedComponent } = useGetQEditorInfo()
+  const { selectedId, selectedComponent, copiedComponentInfo } = useGetQEditorInfo()
   const isDisabled = !selectedId
   const { isLocked } = selectedComponent || {}
 
@@ -30,6 +34,14 @@ const Toolbar: FC = () => {
 
   const onToggleIsLocked = () => {
     dispatch(toggleComponentIsLockedAction({ fe_id: selectedId }))
+  }
+
+  const onDuplicate = () => {
+    dispatch(duplicateComponentAction())
+  }
+
+  const onPaste = () => {
+    dispatch(pasteCopiedComponentAction())
   }
 
   return (
@@ -54,6 +66,24 @@ const Toolbar: FC = () => {
           icon={isLocked ? <UnlockOutlined /> : <LockOutlined />}
           disabled={isDisabled}
           onClick={onToggleIsLocked}
+        />
+      </Tooltip>
+
+      <Tooltip title="复制">
+        <Button
+          shape="circle"
+          icon={<CopyOutlined />}
+          disabled={isDisabled}
+          onClick={onDuplicate}
+        />
+      </Tooltip>
+
+      <Tooltip title="粘贴">
+        <Button
+          shape="circle"
+          icon={<BlockOutlined />}
+          disabled={!copiedComponentInfo}
+          onClick={onPaste}
         />
       </Tooltip>
     </Space>

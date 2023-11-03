@@ -1,4 +1,4 @@
-import { ComponentInfoType } from './qEditorReducer'
+import { ComponentInfoType, QEditorStateType } from './qEditorReducer'
 
 export const getVisibleComponentList = (componentList: ComponentInfoType[]) => {
   return componentList.filter(c => !c.isHidden)
@@ -6,6 +6,13 @@ export const getVisibleComponentList = (componentList: ComponentInfoType[]) => {
 
 export const getSelectedIndex = (selectedId: string, componentList: ComponentInfoType[]) => {
   return componentList.findIndex(c => c.fe_id === selectedId)
+}
+
+export const getSelectedComponentInfo = (
+  selectedId: string,
+  componentList: ComponentInfoType[]
+) => {
+  return componentList.find(c => c.fe_id === selectedId)
 }
 
 export const getNextComponentSelectedId = (
@@ -30,4 +37,22 @@ export const getNextComponentSelectedId = (
   }
 
   return willSelectedId
+}
+
+export const insertNewComponentInfo = (
+  state: QEditorStateType,
+  newComponentInfo: ComponentInfoType
+) => {
+  const { componentList, selectedId } = state
+
+  const selectedIndex = getSelectedIndex(selectedId, componentList)
+  if (selectedIndex < 0) {
+    // 没有被选中的组件
+    state.componentList.push(newComponentInfo)
+  } else {
+    // 有被选中的组件，将新组件插入到他之后
+    state.componentList.splice(selectedIndex + 1, 0, newComponentInfo)
+  }
+
+  state.selectedId = newComponentInfo.fe_id
 }

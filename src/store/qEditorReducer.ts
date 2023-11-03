@@ -1,6 +1,13 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit'
+import cloneDeep from 'lodash.clonedeep'
 import { QEditorComponentPropsType } from '../components/QEditorComponents'
-import { getNextComponentSelectedId, getSelectedIndex, getVisibleComponentList } from './utils'
+import {
+  getNextComponentSelectedId,
+  getSelectedComponentInfo,
+  getSelectedIndex,
+  getVisibleComponentList,
+  insertNewComponentInfo,
+} from './utils'
 // import { produce } from 'immer'
 
 // 后端返回的 QEditor 的组件数据
@@ -16,9 +23,14 @@ export type ComponentInfoType = {
 export type QEditorStateType = {
   componentList: ComponentInfoType[]
   selectedId: string
+  copiedComponentInfo: ComponentInfoType | null
 }
 
-const INIT_STATE: QEditorStateType = { componentList: [], selectedId: '' }
+const INIT_STATE: QEditorStateType = {
+  componentList: [],
+  selectedId: '',
+  copiedComponentInfo: null,
+}
 
 export const qEditorSlice = createSlice({
   name: 'qEditor',
@@ -33,26 +45,15 @@ export const qEditorSlice = createSlice({
       state.selectedId = action.payload
     },
     addComponentAction: (state: QEditorStateType, action: PayloadAction<ComponentInfoType>) => {
-      const { componentList, selectedId } = state
       const { payload: newComponentInfo } = action
-
-      const selectedIndex = componentList.findIndex(c => c.fe_id === selectedId)
-      if (selectedIndex < 0) {
-        // 没有被选中的组件
-        state.componentList.push(newComponentInfo)
-      } else {
-        // 有被选中的组件，将新组件插入到他之后
-        state.componentList.splice(selectedIndex + 1, 0, newComponentInfo)
-      }
-
-      state.selectedId = newComponentInfo.fe_id
+      insertNewComponentInfo(state, newComponentInfo)
     },
     changeComponentInfoPropsAction: (
       state: QEditorStateType,
       action: PayloadAction<{ fe_id: string; props: QEditorComponentPropsType }>
     ) => {
       const { fe_id, props } = action.payload
-      const curComp = state.componentList.find(c => c.fe_id === fe_id)
+      const curComp = getSelectedComponentInfo(fe_id, state.componentList)
       if (curComp) {
         curComp.props = props
       }
@@ -78,7 +79,7 @@ export const qEditorSlice = createSlice({
       // 先修改隐藏/显示后即将选择的组件 id
       state.selectedId = isHidden ? getNextComponentSelectedId(fe_id, visibleList) : fe_id
       // 再做隐藏/显示操作(先后顺序不能乱)
-      const willChangeCompInfo = componentList.find(c => c.fe_id === fe_id) as ComponentInfoType
+      const willChangeCompInfo = getSelectedComponentInfo(fe_id, componentList)
       if (willChangeCompInfo) {
         willChangeCompInfo.isHidden = isHidden
       }
@@ -89,13 +90,28 @@ export const qEditorSlice = createSlice({
       action: PayloadAction<{ fe_id: string }>
     ) => {
       const { fe_id } = action.payload
-      const willChangeCompInfo = state.componentList.find(
-        c => c.fe_id === fe_id
-      ) as ComponentInfoType
+      const willChangeCompInfo = getSelectedComponentInfo(fe_id, state.componentList)
       if (willChangeCompInfo) {
-        const { isLocked } = willChangeCompInfo
-        willChangeCompInfo.isLocked = !isLocked
+        willChangeCompInfo.isLocked = !willChangeCompInfo.isLocked
       }
+    },
+    // 复制组件
+    duplicateComponentAction: (state: QEditorStateType) => {
+      const { selectedId } = state
+      const compInfo = getSelectedComponentInfo(selectedId, state.componentList)
+      if (compInfo) {
+        // 需要使用深拷贝
+        state.copiedComponentInfo = cloneDeep(compInfo)
+      }
+    },
+    // 粘贴组件
+    pasteCopiedComponentAction: (state: QEditorStateType) => {
+      const { copiedComponentInfo } = state
+      if (copiedComponentInfo == null) return
+      // 修改 fe_id 确保其不重复
+      copiedComponentInfo.fe_id = nanoid()
+      // 将其插入组件列表
+      insertNewComponentInfo(state, copiedComponentInfo)
     },
   },
 })
@@ -108,6 +124,8 @@ export const {
   deleteSelectedComponentAction,
   changeComponentIsHiddenAction,
   toggleComponentIsLockedAction,
+  duplicateComponentAction,
+  pasteCopiedComponentAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

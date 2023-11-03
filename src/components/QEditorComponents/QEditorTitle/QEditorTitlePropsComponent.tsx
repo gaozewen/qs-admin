@@ -23,17 +23,17 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
       initialValues={{ text, level, isCenter }}
       form={form}
       onValuesChange={onValuesChange}
+      disabled={disabled}
     >
       <Form.Item
         label="标题内容"
         name="text"
         rules={[{ required: true, message: '请输入标题内容' }]}
       >
-        <Input disabled={disabled} />
+        <Input />
       </Form.Item>
       <Form.Item label="层级" name="level">
         <Select
-          disabled={disabled}
           options={[
             { value: 1, text: 1 },
             { value: 2, text: 2 },
@@ -46,7 +46,7 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
         // 由于 checkbox 没有 value 属性，而是 checked 来控制是否选中，所以这里用 checked 来代替 value 属性
         valuePropName="checked"
       >
-        <Checkbox disabled={disabled}>居中显示</Checkbox>
+        <Checkbox>居中显示</Checkbox>
       </Form.Item>
     </Form>
   )

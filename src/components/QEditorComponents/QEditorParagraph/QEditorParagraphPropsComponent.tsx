@@ -27,13 +27,14 @@ const QEditorParagraphPropsComponent: FC<QEditorParagraphPropsType> = (
       initialValues={{ text, isCenter }}
       form={form}
       onValuesChange={onValuesChange}
+      disabled={disabled}
     >
       <Form.Item
         label="段落内容"
         name="text"
         rules={[{ required: true, message: '请输入段落内容' }]}
       >
-        <TextArea disabled={disabled} />
+        <TextArea />
       </Form.Item>
 
       <Form.Item
@@ -41,7 +42,7 @@ const QEditorParagraphPropsComponent: FC<QEditorParagraphPropsType> = (
         // 由于 checkbox 没有 value 属性，而是 checked 来控制是否选中，所以这里用 checked 来代替 value 属性
         valuePropName="checked"
       >
-        <Checkbox disabled={disabled}>居中显示</Checkbox>
+        <Checkbox>居中显示</Checkbox>
       </Form.Item>
     </Form>
   )

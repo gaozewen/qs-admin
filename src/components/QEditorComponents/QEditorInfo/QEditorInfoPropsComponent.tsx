@@ -25,16 +25,17 @@ const QEditorInfoPropsComponent: FC<QEditorInfoPropsType> = (props: QEditorInfoP
       initialValues={{ title, desc }}
       form={form}
       onValuesChange={onValuesChange}
+      disabled={disabled}
     >
       <Form.Item
         label="问卷标题"
         name="title"
         rules={[{ required: true, message: '请输入问卷标题' }]}
       >
-        <Input disabled={disabled} />
+        <Input />
       </Form.Item>
       <Form.Item label="问卷描述" name="desc">
-        <TextArea disabled={disabled} />
+        <TextArea />
       </Form.Item>
     </Form>
   )

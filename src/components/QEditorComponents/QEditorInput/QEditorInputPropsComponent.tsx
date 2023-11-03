@@ -23,12 +23,13 @@ const QEditorInputPropsComponent: FC<QEditorInputPropsType> = (props: QEditorInp
       initialValues={{ title, placeholder }}
       form={form}
       onValuesChange={onValuesChange}
+      disabled={disabled}
     >
       <Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
-        <Input disabled={disabled} />
+        <Input />
       </Form.Item>
       <Form.Item label="Placeholder" name="placeholder">
-        <Input disabled={disabled} />
+        <Input />
       </Form.Item>
     </Form>
   )

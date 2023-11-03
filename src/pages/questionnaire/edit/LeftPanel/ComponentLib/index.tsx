@@ -21,7 +21,6 @@ const genComponent = (config: QEditorComponentConfigType) => {
         type,
         title,
         props: defaultProps,
-        isHidden: false,
       })
     )
   }

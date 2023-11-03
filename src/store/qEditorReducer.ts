@@ -9,7 +9,7 @@ export type ComponentInfoType = {
   type: string
   title: string
   props: QEditorComponentPropsType
-  isHidden: boolean
+  isHidden?: boolean
 }
 
 export type QEditorStateType = {
@@ -65,17 +65,19 @@ export const qEditorSlice = createSlice({
       // 再做删除操作(先后顺序不能乱)
       state.componentList.splice(willDeleteIndex, 1)
     },
+    // 隐藏/显示
     changeComponentIsHiddenAction: (
       state: QEditorStateType,
       action: PayloadAction<{ fe_id: string; isHidden: boolean }>
     ) => {
       const { componentList } = state
       const { fe_id, isHidden } = action.payload
+
       const visibleList = getVisibleComponentList(componentList)
-      // 先修改隐藏后即将选择的组件 id
-      state.selectedId = getNextComponentSelectedId(fe_id, visibleList)
-      // 再做隐藏操作(先后顺序不能乱)
-      const willChangeCompInfo = visibleList.find(c => c.fe_id === fe_id) as ComponentInfoType
+      // 先修改隐藏/显示后即将选择的组件 id
+      state.selectedId = isHidden ? getNextComponentSelectedId(fe_id, visibleList) : fe_id
+      // 再做隐藏/显示操作(先后顺序不能乱)
+      const willChangeCompInfo = componentList.find(c => c.fe_id === fe_id) as ComponentInfoType
       if (willChangeCompInfo) {
         willChangeCompInfo.isHidden = isHidden
       }

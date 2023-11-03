@@ -3,14 +3,14 @@ import { Radio, Space, Typography } from 'antd'
 import QEditorRadioPropsComponent from './QEditorRadioPropsComponent'
 
 const { Paragraph } = Typography
-export type QEditorOptionType = {
+export type QEditorRadioOptionType = {
   text: string
   value: string
 }
 
 export type QEditorRadioPropsType = {
   title?: string
-  options?: QEditorOptionType[]
+  options?: QEditorRadioOptionType[]
   value?: string
   isVertical?: boolean
   onChange?: (newProps: QEditorRadioPropsType) => void

@@ -1,23 +1,25 @@
 import React, { FC, useEffect } from 'react'
-import { QEditorRadioOptionType, QEditorRadioPropsType } from '.'
-import { Button, Checkbox, Form, Input, Select, Space } from 'antd'
+import { QEditorCheckboxItemType, QEditorCheckboxPropsType } from '.'
+import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { nanoid } from '@reduxjs/toolkit'
 
-const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRadioPropsType) => {
-  const { title, options, value, isVertical, onChange, disabled } = props
+const QEditorCheckboxPropsComponent: FC<QEditorCheckboxPropsType> = (
+  props: QEditorCheckboxPropsType
+) => {
+  const { title, list, isVertical, onChange, disabled } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
     // 监听 props 变化同步更新表单组件的值
-    form.setFieldsValue({ title, options, value, isVertical })
-  }, [title, options, value, isVertical])
+    form.setFieldsValue({ title, list, isVertical })
+  }, [title, list, isVertical])
 
   const onValuesChange = (_: any, values: any) => {
-    values.options = values.options.map((opt: QEditorRadioOptionType) => {
-      if (opt == null) return { text: '', value: nanoid() }
-      if (opt.value == null || opt.value == '') return { ...opt, value: nanoid() }
-      return opt
+    values.list = values.list.map((item: QEditorCheckboxItemType) => {
+      if (item == null) return { text: '', value: nanoid() }
+      if (item.value == null || item.value == '') return { ...item, value: nanoid() }
+      return item
     })
 
     if (onChange) {
@@ -28,34 +30,37 @@ const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRad
   return (
     <Form
       layout="vertical"
-      initialValues={{ title, options, value, isVertical }}
+      initialValues={{ title, list, isVertical }}
       form={form}
       onValuesChange={onValuesChange}
       disabled={disabled}
     >
       <Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
-        <Input placeholder="请输入单选标题..." />
+        <Input placeholder="请输入多选标题..." />
       </Form.Item>
 
       <Form.Item label="选项" style={{ marginBottom: 0 }}>
-        <Form.List name="options">
+        <Form.List name="list">
           {(fields, { add, remove }) => (
             <>
               {fields.map(({ key, name }, index) => (
                 <Space key={key} align="baseline">
+                  <Form.Item name={[name, 'checked']} valuePropName="checked">
+                    <Checkbox />
+                  </Form.Item>
                   <Form.Item
                     name={[name, 'text']}
                     rules={[
                       { required: true, message: '请输入选项文字' },
                       ({ getFieldValue }) => ({
                         validator(_, text) {
-                          const options = getFieldValue('options')
+                          const list = getFieldValue('list')
                           // 记录 text 相同的个数:
                           // 当 text 有值时，预期为 1
                           // 当 text 为''时，预期为 0
                           let num = 0
-                          options.forEach((opt: QEditorRadioOptionType) => {
-                            if (text && opt.text === text) num++
+                          list.forEach((item: QEditorCheckboxItemType) => {
+                            if (text && item.text === text) num++
                           })
                           //
                           if (num <= 1) return Promise.resolve()
@@ -71,7 +76,7 @@ const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRad
               ))}
               <Form.Item>
                 <Button
-                  onClick={() => add({ text: '', value: '' })}
+                  onClick={() => add({ text: '', value: '', checked: false })}
                   type="link"
                   block
                   icon={<PlusOutlined />}
@@ -82,14 +87,6 @@ const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRad
             </>
           )}
         </Form.List>
-      </Form.Item>
-
-      <Form.Item label="默认选中" name="value">
-        <Select
-          options={[{ label: '不选中', value: '' }].concat(
-            (options || []).map(opt => ({ label: opt.text, value: opt.value }))
-          )}
-        />
       </Form.Item>
 
       <Form.Item
@@ -103,4 +100,4 @@ const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRad
   )
 }
 
-export default QEditorRadioPropsComponent
+export default QEditorCheckboxPropsComponent

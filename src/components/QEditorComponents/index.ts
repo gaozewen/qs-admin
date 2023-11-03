@@ -5,6 +5,7 @@ import { QEditorParagraphConfig, QEditorParagraphPropsType } from './QEditorPara
 import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
 import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextarea'
 import { QEditorRadioConfig, QEditorRadioPropsType } from './QEditorRadio'
+import { QEditorCheckboxConfig, QEditorCheckboxPropsType } from './QEditorCheckbox'
 
 // 所有组件统一的 Props 类型定义
 export type QEditorComponentPropsType =
@@ -14,6 +15,7 @@ export type QEditorComponentPropsType =
   | QEditorInfoPropsType
   | QEditorTextareaPropsType
   | QEditorRadioPropsType
+  | QEditorCheckboxPropsType
 
 // 所有组件统一的类型定义
 export type QEditorComponentType =
@@ -23,6 +25,7 @@ export type QEditorComponentType =
   | FC<QEditorInfoPropsType>
   | FC<QEditorTextareaPropsType>
   | FC<QEditorRadioPropsType>
+  | FC<QEditorCheckboxPropsType>
 
 // 所有组件统一的 Config 类型定义
 export type QEditorComponentConfigType = {
@@ -41,6 +44,7 @@ const QEditorComponentConfigList: QEditorComponentConfigType[] = [
   QEditorInfoConfig,
   QEditorTextareaConfig,
   QEditorRadioConfig,
+  QEditorCheckboxConfig,
 ]
 
 // 根据组件类型获取相应的组件配置
@@ -63,6 +67,6 @@ export const QEditorComponentConfigGroup = [
   {
     groupId: 'chooseGroup',
     groupName: '用户选择',
-    configs: [QEditorRadioConfig],
+    configs: [QEditorRadioConfig, QEditorCheckboxConfig],
   },
 ]

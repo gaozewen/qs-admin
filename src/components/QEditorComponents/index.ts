@@ -3,6 +3,7 @@ import { QEditorInputConfig, QEditorInputPropsType } from './QEditorInput'
 import { QEditorTitleConfig, QEditorTitlePropsType } from './QEditorTitle'
 import { QEditorParagraphConfig, QEditorParagraphPropsType } from './QEditorParagraph'
 import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
+import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextarea'
 
 // 所有组件统一的 Props 类型定义
 export type QEditorComponentPropsType =
@@ -10,6 +11,7 @@ export type QEditorComponentPropsType =
   | QEditorInputPropsType
   | QEditorParagraphPropsType
   | QEditorInfoPropsType
+  | QEditorTextareaPropsType
 
 // 所有组件统一的类型定义
 export type QEditorComponentType =
@@ -17,6 +19,7 @@ export type QEditorComponentType =
   | FC<QEditorInputPropsType>
   | FC<QEditorParagraphPropsType>
   | FC<QEditorInfoPropsType>
+  | FC<QEditorTextareaPropsType>
 
 // 所有组件统一的 Config 类型定义
 export type QEditorComponentConfigType = {
@@ -33,6 +36,7 @@ const QEditorComponentConfigList: QEditorComponentConfigType[] = [
   QEditorInputConfig,
   QEditorParagraphConfig,
   QEditorInfoConfig,
+  QEditorTextareaConfig,
 ]
 
 // 根据组件类型获取相应的组件配置
@@ -50,6 +54,6 @@ export const QEditorComponentConfigGroup = [
   {
     groupId: 'inputGroup',
     groupName: '用户输入',
-    configs: [QEditorInputConfig],
+    configs: [QEditorInputConfig, QEditorTextareaConfig],
   },
 ]

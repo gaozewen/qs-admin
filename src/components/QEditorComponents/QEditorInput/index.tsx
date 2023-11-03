@@ -14,7 +14,7 @@ export type QEditorInputPropsType = {
 // 默认值
 export const Q_EDITOR_INPUT_DEFAULT_PROPS: QEditorInputPropsType = {
   title: '输入框标题',
-  placeholder: '请输入',
+  placeholder: '请输入...',
 }
 
 const QEditorInput: FC<QEditorInputPropsType> = (props: QEditorInputPropsType) => {

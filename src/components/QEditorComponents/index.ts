@@ -2,18 +2,21 @@ import { FC } from 'react'
 import { QEditorInputConfig, QEditorInputPropsType } from './QEditorInput'
 import { QEditorTitleConfig, QEditorTitlePropsType } from './QEditorTitle'
 import { QEditorParagraphConfig, QEditorParagraphPropsType } from './QEditorParagraph'
+import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
 
 // 所有组件统一的 Props 类型定义
 export type QEditorComponentPropsType =
   | QEditorTitlePropsType
   | QEditorInputPropsType
   | QEditorParagraphPropsType
+  | QEditorInfoPropsType
 
 // 所有组件统一的类型定义
 export type QEditorComponentType =
   | FC<QEditorTitlePropsType>
   | FC<QEditorInputPropsType>
   | FC<QEditorParagraphPropsType>
+  | FC<QEditorInfoPropsType>
 
 // 所有组件统一的 Config 类型定义
 export type QEditorComponentConfigType = {
@@ -29,6 +32,7 @@ const QEditorComponentConfigList: QEditorComponentConfigType[] = [
   QEditorTitleConfig,
   QEditorInputConfig,
   QEditorParagraphConfig,
+  QEditorInfoConfig,
 ]
 
 // 根据组件类型获取相应的组件配置
@@ -41,7 +45,7 @@ export const QEditorComponentConfigGroup = [
   {
     groupId: 'textGroup',
     groupName: '文本显示',
-    configs: [QEditorTitleConfig, QEditorParagraphConfig],
+    configs: [QEditorInfoConfig, QEditorTitleConfig, QEditorParagraphConfig],
   },
   {
     groupId: 'inputGroup',

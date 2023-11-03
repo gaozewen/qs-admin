@@ -113,6 +113,24 @@ export const qEditorSlice = createSlice({
       // 将其插入组件列表
       insertNewComponentInfo(state, copiedComponentInfo)
     },
+    // 选中上一个可见的组件
+    selectPrevComponentAction: (state: QEditorStateType) => {
+      const { selectedId, componentList } = state
+      const visibleList = getVisibleComponentList(componentList)
+      const selectedIndex = getSelectedIndex(selectedId, visibleList)
+      // 未选中组件或选中的是第一个组件，则不做任何操作
+      if (selectedIndex <= 0) return
+      state.selectedId = state.componentList[selectedIndex - 1].fe_id
+    },
+    // 选中下一个可见的组件
+    selectNextComponentAction: (state: QEditorStateType) => {
+      const { selectedId, componentList } = state
+      const visibleList = getVisibleComponentList(componentList)
+      const selectedIndex = getSelectedIndex(selectedId, visibleList)
+      // 未选中组件或选中的是最后一个组件，则不做任何操作
+      if (selectedIndex < 0 || selectedIndex === visibleList.length - 1) return
+      state.selectedId = state.componentList[selectedIndex + 1].fe_id
+    },
   },
 })
 
@@ -126,6 +144,8 @@ export const {
   toggleComponentIsLockedAction,
   duplicateComponentAction,
   pasteCopiedComponentAction,
+  selectPrevComponentAction,
+  selectNextComponentAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

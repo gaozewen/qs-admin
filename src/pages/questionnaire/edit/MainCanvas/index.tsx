@@ -6,6 +6,7 @@ import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
 import { ComponentInfoType, changeSelectedIdAction } from '../../../../store/qEditorReducer'
 import { getComponentConfigByType } from '../../../../components/QEditorComponents'
 import { getVisibleComponentList } from '../../../../store/utils'
+import useBindCanvasKeyPress from '../../../../hooks/useBindCanvasKeyPress'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
   const { type, props } = componentInfo
@@ -18,6 +19,9 @@ const genComponent = (componentInfo: ComponentInfoType) => {
 const MainCanvas: FC = () => {
   const { componentList, selectedId } = useGetQEditorInfo()
   const dispatch = useDispatch()
+  // 绑定键盘快捷键监听
+  useBindCanvasKeyPress()
+
   // 是 React 中的 MouseEvent 类型
   const onSelect = (event: MouseEvent, fe_id: string) => {
     event.stopPropagation()

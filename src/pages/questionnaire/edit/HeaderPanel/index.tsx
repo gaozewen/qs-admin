@@ -3,6 +3,7 @@ import { Button, Space, Typography } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
+import Toolbar from './Toolbar'
 
 const { Title } = Typography
 
@@ -19,7 +20,9 @@ const HeaderPanel: FC = () => {
             <Title>问卷标题</Title>
           </Space>
         </div>
-        <div className={styles.main}>中间</div>
+        <div className={styles.main}>
+          <Toolbar />
+        </div>
         <div className={styles.right}>
           <Space>
             <Button>保存</Button>

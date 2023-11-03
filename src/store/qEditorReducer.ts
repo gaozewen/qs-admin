@@ -54,6 +54,30 @@ export const qEditorSlice = createSlice({
         curComp.props = props
       }
     },
+    deleteSelectedComponentAction: (state: QEditorStateType) => {
+      const { componentList, selectedId } = state
+      const len = componentList.length
+      const willDeleteIndex = componentList.findIndex(c => c.fe_id === selectedId)
+      // 没找到选中的，则不做任何处理
+      if (willDeleteIndex < 0) return
+      // 删除后默认选中下一个组件
+      let willSelectedIndex = willDeleteIndex + 1
+      let willSelectedId = ''
+      // 若删除的是末尾组件，则默认选择前一个组件
+      if (willDeleteIndex + 1 === len) {
+        willSelectedIndex = willDeleteIndex - 1
+      }
+      // 若删除的是不是最后一个组件，则赋值 selectedId
+      if (len > 1) {
+        willSelectedId = componentList[willSelectedIndex].fe_id
+      }
+
+      // 先修删除后即将选中的组件 id
+      state.selectedId = willSelectedId
+
+      // 再删除需要删除的组件
+      componentList.splice(willDeleteIndex, 1)
+    },
   },
 })
 
@@ -62,6 +86,7 @@ export const {
   changeSelectedIdAction,
   addComponentAction,
   changeComponentInfoPropsAction,
+  deleteSelectedComponentAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

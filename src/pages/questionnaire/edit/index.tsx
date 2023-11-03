@@ -27,15 +27,13 @@ const Edit: FC = () => {
           </div>
           <div className={styles.main} onClick={onClearSelectedId}>
             <div className={styles['canvas-wrapper']}>
-              <div className={styles.canvas}>
-                {loading ? (
-                  <div style={{ textAlign: 'center', marginTop: 188 }}>
-                    <Spin />
-                  </div>
-                ) : (
-                  <MainCanvas />
-                )}
-              </div>
+              {loading ? (
+                <div style={{ textAlign: 'center', marginTop: 188 }}>
+                  <Spin />
+                </div>
+              ) : (
+                <MainCanvas />
+              )}
             </div>
           </div>
           <div className={styles.right}>

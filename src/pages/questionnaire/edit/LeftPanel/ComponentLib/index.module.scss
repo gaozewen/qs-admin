@@ -1,7 +1,9 @@
 .wrapper {
   padding: 12px;
+  margin-bottom: 12px;
   cursor: pointer;
-  border: 1px solid #fff;
+  background-color: #f7f7f7;
+  border: 1px solid #f7f7f7;
   border-radius: 3px;
 
   &:hover {

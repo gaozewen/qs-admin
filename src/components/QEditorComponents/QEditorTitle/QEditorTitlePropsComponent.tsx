@@ -27,7 +27,7 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
       <Form.Item
         label="标题内容"
         name="text"
-        rules={[{ required: true, message: '请输入标题 内容' }]}
+        rules={[{ required: true, message: '请输入标题内容' }]}
       >
         <Input disabled={disabled} />
       </Form.Item>

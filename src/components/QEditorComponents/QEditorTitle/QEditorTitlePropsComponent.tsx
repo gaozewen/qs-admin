@@ -3,7 +3,7 @@ import { QEditorTitlePropsType } from '.'
 import { Checkbox, Form, Input, Select } from 'antd'
 
 const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) => {
-  const { text, level, isCenter, onChange } = props
+  const { text, level, isCenter, onChange, disabled } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
@@ -29,10 +29,11 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
         name="text"
         rules={[{ required: true, message: '请输入标题 内容' }]}
       >
-        <Input />
+        <Input disabled={disabled} />
       </Form.Item>
       <Form.Item label="层级" name="level">
         <Select
+          disabled={disabled}
           options={[
             { value: 1, text: 1 },
             { value: 2, text: 2 },
@@ -45,7 +46,7 @@ const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTit
         // 由于 checkbox 没有 value 属性，而是 checked 来控制是否选中，所以这里用 checked 来代替 value 属性
         valuePropName="checked"
       >
-        <Checkbox>居中显示</Checkbox>
+        <Checkbox disabled={disabled}>居中显示</Checkbox>
       </Form.Item>
     </Form>
   )

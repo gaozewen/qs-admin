@@ -10,6 +10,7 @@ export type ComponentInfoType = {
   title: string
   props: QEditorComponentPropsType
   isHidden?: boolean
+  isLocked?: boolean
 }
 
 export type QEditorStateType = {
@@ -82,6 +83,20 @@ export const qEditorSlice = createSlice({
         willChangeCompInfo.isHidden = isHidden
       }
     },
+    // 锁定、解锁
+    toggleComponentIsLockedAction: (
+      state: QEditorStateType,
+      action: PayloadAction<{ fe_id: string }>
+    ) => {
+      const { fe_id } = action.payload
+      const willChangeCompInfo = state.componentList.find(
+        c => c.fe_id === fe_id
+      ) as ComponentInfoType
+      if (willChangeCompInfo) {
+        const { isLocked } = willChangeCompInfo
+        willChangeCompInfo.isLocked = !isLocked
+      }
+    },
   },
 })
 
@@ -92,6 +107,7 @@ export const {
   changeComponentInfoPropsAction,
   deleteSelectedComponentAction,
   changeComponentIsHiddenAction,
+  toggleComponentIsLockedAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

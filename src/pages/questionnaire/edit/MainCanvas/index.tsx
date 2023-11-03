@@ -26,13 +26,14 @@ const MainCanvas: FC = () => {
   return (
     <div className={styles.canvas}>
       {getVisibleComponentList(componentList).map(componentInfo => {
-        const { fe_id } = componentInfo
+        const { fe_id, isLocked } = componentInfo
         return (
           <div
             key={fe_id}
             className={cs({
               [styles['cp-wrapper']]: true,
               [styles.selected]: fe_id === selectedId,
+              [styles.locked]: isLocked,
             })}
             onClick={e => onSelect(e, fe_id)}
           >

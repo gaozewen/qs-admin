@@ -18,7 +18,7 @@ const ComponentProp: FC = () => {
   const { selectedComponent } = useGetQEditorInfo()
   if (selectedComponent == null) return <NotSelected />
 
-  const { type, props, fe_id } = selectedComponent as ComponentInfoType
+  const { type, props, fe_id, isLocked } = selectedComponent as ComponentInfoType
   const config = getComponentConfigByType(type)
   if (config == null) return <NotSelected />
 
@@ -28,7 +28,7 @@ const ComponentProp: FC = () => {
     dispatch(changeComponentInfoPropsAction({ fe_id, props: newProps }))
   }
 
-  return <PropsComponent {...props} onChange={onChange} />
+  return <PropsComponent {...props} onChange={onChange} disabled={isLocked} />
 }
 
 export default ComponentProp

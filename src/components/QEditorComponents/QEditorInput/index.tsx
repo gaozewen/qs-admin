@@ -8,6 +8,7 @@ export type QEditorInputPropsType = {
   title?: string
   placeholder?: string
   onChange?: (newProps: QEditorInputPropsType) => void
+  disabled?: boolean
 }
 
 // 默认值

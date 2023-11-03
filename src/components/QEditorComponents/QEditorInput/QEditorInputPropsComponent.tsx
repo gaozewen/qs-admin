@@ -3,7 +3,7 @@ import { QEditorInputPropsType } from '.'
 import { Form, Input } from 'antd'
 
 const QEditorInputPropsComponent: FC<QEditorInputPropsType> = (props: QEditorInputPropsType) => {
-  const { title, placeholder, onChange } = props
+  const { title, placeholder, onChange, disabled } = props
   const [form] = Form.useForm()
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const QEditorInputPropsComponent: FC<QEditorInputPropsType> = (props: QEditorInp
       onValuesChange={onValuesChange}
     >
       <Form.Item label="标题" name="title" rules={[{ required: true, message: '请输入标题' }]}>
-        <Input />
+        <Input disabled={disabled} />
       </Form.Item>
       <Form.Item label="Placeholder" name="placeholder">
-        <Input />
+        <Input disabled={disabled} />
       </Form.Item>
     </Form>
   )

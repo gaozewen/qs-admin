@@ -24,21 +24,23 @@ const MainCanvas: FC = () => {
   }
   return (
     <div className={styles.canvas}>
-      {componentList.map(componentInfo => {
-        const { fe_id } = componentInfo
-        return (
-          <div
-            key={fe_id}
-            className={cs({
-              [styles['cp-wrapper']]: true,
-              [styles.selected]: fe_id === selectedId,
-            })}
-            onClick={e => onSelect(e, fe_id)}
-          >
-            <div className={styles.cp}>{genComponent(componentInfo)}</div>
-          </div>
-        )
-      })}
+      {componentList
+        .filter(c => !c.isHidden)
+        .map(componentInfo => {
+          const { fe_id } = componentInfo
+          return (
+            <div
+              key={fe_id}
+              className={cs({
+                [styles['cp-wrapper']]: true,
+                [styles.selected]: fe_id === selectedId,
+              })}
+              onClick={e => onSelect(e, fe_id)}
+            >
+              <div className={styles.cp}>{genComponent(componentInfo)}</div>
+            </div>
+          )
+        })}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { QEditorComponentPropsType } from '../components/QEditorComponents'
+import { getNextComponentSelectedId, getSelectedIndex, getVisibleComponentList } from './utils'
 // import { produce } from 'immer'
 
 // 后端返回的 QEditor 的组件数据
@@ -8,6 +9,7 @@ export type ComponentInfoType = {
   type: string
   title: string
   props: QEditorComponentPropsType
+  isHidden: boolean
 }
 
 export type QEditorStateType = {
@@ -56,27 +58,27 @@ export const qEditorSlice = createSlice({
     },
     deleteSelectedComponentAction: (state: QEditorStateType) => {
       const { componentList, selectedId } = state
-      const len = componentList.length
-      const willDeleteIndex = componentList.findIndex(c => c.fe_id === selectedId)
-      // 没找到选中的，则不做任何处理
-      if (willDeleteIndex < 0) return
-      // 删除后默认选中下一个组件
-      let willSelectedIndex = willDeleteIndex + 1
-      let willSelectedId = ''
-      // 若删除的是末尾组件，则默认选择前一个组件
-      if (willDeleteIndex + 1 === len) {
-        willSelectedIndex = willDeleteIndex - 1
+      const willDeleteIndex = getSelectedIndex(selectedId, componentList)
+      const visibleList = getVisibleComponentList(componentList)
+      // 先修改删除后即将选中的组件 id
+      state.selectedId = getNextComponentSelectedId(selectedId, visibleList)
+      // 再做删除操作(先后顺序不能乱)
+      state.componentList.splice(willDeleteIndex, 1)
+    },
+    changeComponentIsHiddenAction: (
+      state: QEditorStateType,
+      action: PayloadAction<{ fe_id: string; isHidden: boolean }>
+    ) => {
+      const { componentList } = state
+      const { fe_id, isHidden } = action.payload
+      const visibleList = getVisibleComponentList(componentList)
+      // 先修改隐藏后即将选择的组件 id
+      state.selectedId = getNextComponentSelectedId(fe_id, visibleList)
+      // 再做隐藏操作(先后顺序不能乱)
+      const willChangeCompInfo = visibleList.find(c => c.fe_id === fe_id) as ComponentInfoType
+      if (willChangeCompInfo) {
+        willChangeCompInfo.isHidden = isHidden
       }
-      // 若删除的是不是最后一个组件，则赋值 selectedId
-      if (len > 1) {
-        willSelectedId = componentList[willSelectedIndex].fe_id
-      }
-
-      // 先修删除后即将选中的组件 id
-      state.selectedId = willSelectedId
-
-      // 再删除需要删除的组件
-      componentList.splice(willDeleteIndex, 1)
     },
   },
 })
@@ -87,6 +89,7 @@ export const {
   addComponentAction,
   changeComponentInfoPropsAction,
   deleteSelectedComponentAction,
+  changeComponentIsHiddenAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

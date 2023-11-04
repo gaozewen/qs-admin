@@ -22,13 +22,25 @@ const useLoadQuestionnaireData = () => {
   useEffect(() => {
     // 根据后端返回的问卷数据来设置 redux 中的 qEditor
     if (!data) return
-    const { componentList = [] } = data
+    const { componentList = [], title = '', desc = '', js = '', css = '' } = data
     let selectedId = ''
     if (componentList && componentList.length > 0) {
       // 默认选中第一个组件
       selectedId = componentList[0].fe_id
     }
-    dispatch(resetQEditorAction({ componentList, selectedId, copiedComponentInfo: null }))
+    dispatch(
+      resetQEditorAction({
+        componentList,
+        selectedId,
+        copiedComponentInfo: null,
+        pageInfo: {
+          title,
+          desc,
+          js,
+          css,
+        },
+      })
+    )
   }, [data])
 
   useEffect(() => {

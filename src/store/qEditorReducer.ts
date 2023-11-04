@@ -20,16 +20,25 @@ export type ComponentInfoType = {
   isLocked?: boolean
 }
 
+export type PageInfoType = {
+  title: string
+  desc?: string
+  js?: string
+  css?: string
+}
+
 export type QEditorStateType = {
   componentList: ComponentInfoType[]
   selectedId: string
   copiedComponentInfo: ComponentInfoType | null
+  pageInfo: PageInfoType
 }
 
 const INIT_STATE: QEditorStateType = {
   componentList: [],
   selectedId: '',
   copiedComponentInfo: null,
+  pageInfo: { title: '' },
 }
 
 export const qEditorSlice = createSlice({
@@ -141,6 +150,14 @@ export const qEditorSlice = createSlice({
         willChangeCompInfo.title = title
       }
     },
+    // 重置页面设置信息
+    resetPageInfoAction: (state: QEditorStateType, action: PayloadAction<PageInfoType>) => {
+      state.pageInfo = action.payload
+    },
+    // 更新页面标题
+    changePageTitleAction: (state: QEditorStateType, action: PayloadAction<string>) => {
+      state.pageInfo.title = action.payload
+    },
   },
 })
 
@@ -157,6 +174,8 @@ export const {
   selectPrevComponentAction,
   selectNextComponentAction,
   changeComponentTitleAction,
+  resetPageInfoAction,
+  changePageTitleAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

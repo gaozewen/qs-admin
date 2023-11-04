@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
-import { Button, Space, Typography } from 'antd'
+import { Button, Space } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
 import Toolbar from './Toolbar'
-
-const { Title } = Typography
+import TitleEditor from './TitleEditor'
 
 const HeaderPanel: FC = () => {
   const nav = useNavigate()
@@ -17,7 +16,7 @@ const HeaderPanel: FC = () => {
             <Button type="link" icon={<LeftOutlined />} onClick={() => nav(-1)}>
               返回
             </Button>
-            <Title>问卷标题</Title>
+            <TitleEditor />
           </Space>
         </div>
         <div className={styles.main}>

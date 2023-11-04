@@ -10,7 +10,15 @@ import {
 
 // 是否激活的元素是有效的
 const isActiveElementValid = () => {
-  if (document.activeElement === document.body) return false
+  if (
+    document.activeElement === document.body ||
+    // 点击左侧组件库新增组件时的 document.activeElement  'div[role="tabpanel"]'
+    document.activeElement?.matches('div[role="tabpanel"]') ||
+    // 新增 dnd-kit 后选中组件时的 document.activeElement 'div[role="button"]'
+    document.activeElement?.matches('div[role="button"]')
+  )
+    return false
+
   // 激活了类似 input 等需要使用键盘输入的元素，则为有效
   return true
 }

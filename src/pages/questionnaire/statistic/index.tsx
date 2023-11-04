@@ -5,7 +5,7 @@ import { Spin } from 'antd'
 const Statistic: FC = () => {
   const { loading } = useLoadQuestionnaireData()
 
-  return <Spin spinning={loading} tip="加载中"></Spin>
+  return loading ? <Spin /> : <div>数据统计页</div>
 }
 
 export default Statistic

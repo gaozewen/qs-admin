@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import Toolbar from './Toolbar'
 import TitleEditor from './TitleEditor'
 import SaveButton from './SaveButton'
+import PublishButton from './PublishButton'
 
 const HeaderPanel: FC = () => {
   const nav = useNavigate()
@@ -26,7 +27,7 @@ const HeaderPanel: FC = () => {
         <div className={styles.right}>
           <Space>
             <SaveButton />
-            <Button type="primary">发布</Button>
+            <PublishButton />
           </Space>
         </div>
       </div>

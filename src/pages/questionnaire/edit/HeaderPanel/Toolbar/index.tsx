@@ -31,6 +31,7 @@ const Toolbar: FC = () => {
   const len = visibleList.length
   const isFirst = selectedIndex === 0
   const isLast = selectedIndex === len - 1
+  const visibleListIsEmpty = len === 0
 
   const onDelete = () => {
     dispatch(deleteSelectedComponentAction())
@@ -116,11 +117,21 @@ const Toolbar: FC = () => {
       </Tooltip>
 
       <Tooltip title="上移">
-        <Button shape="circle" icon={<UpOutlined />} disabled={isFirst} onClick={onMoveUp} />
+        <Button
+          shape="circle"
+          icon={<UpOutlined />}
+          disabled={isFirst || visibleListIsEmpty}
+          onClick={onMoveUp}
+        />
       </Tooltip>
 
       <Tooltip title="下移">
-        <Button shape="circle" icon={<DownOutlined />} disabled={isLast} onClick={onMoveDown} />
+        <Button
+          shape="circle"
+          icon={<DownOutlined />}
+          disabled={isLast || visibleListIsEmpty}
+          onClick={onMoveDown}
+        />
       </Tooltip>
     </Space>
   )

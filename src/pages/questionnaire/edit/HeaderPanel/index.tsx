@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
 import Toolbar from './Toolbar'
 import TitleEditor from './TitleEditor'
+import SaveButton from './SaveButton'
 
 const HeaderPanel: FC = () => {
   const nav = useNavigate()
@@ -24,7 +25,7 @@ const HeaderPanel: FC = () => {
         </div>
         <div className={styles.right}>
           <Space>
-            <Button>保存</Button>
+            <SaveButton />
             <Button type="primary">发布</Button>
           </Space>
         </div>

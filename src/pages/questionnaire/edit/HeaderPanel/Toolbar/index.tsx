@@ -4,7 +4,6 @@ import {
   DeleteOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
-  UnlockOutlined,
 } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
 import React, { FC } from 'react'
@@ -63,7 +62,7 @@ const Toolbar: FC = () => {
         <Button
           type={isLocked ? 'primary' : 'default'}
           shape="circle"
-          icon={isLocked ? <UnlockOutlined /> : <LockOutlined />}
+          icon={<LockOutlined />}
           disabled={isDisabled}
           onClick={onToggleIsLocked}
         />

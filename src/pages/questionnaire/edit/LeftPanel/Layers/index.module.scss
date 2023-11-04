@@ -1,0 +1,46 @@
+.wrapper {
+  box-sizing: border-box;
+  display: flex;
+  height: 44px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgb(0 0 0 / 6%);
+
+  &:hover {
+    font-weight: 800;
+
+    .btns {
+      .btn {
+        opacity: 0.4;
+      }
+    }
+  }
+
+  .title {
+    flex: auto;
+    line-height: 2;
+    cursor: pointer;
+
+    &.is-hidden {
+      cursor: default;
+    }
+
+    &.selected {
+      color: #1890ff;
+      cursor: text;
+    }
+  }
+
+  .btns {
+    width: 50px;
+    padding-right: 8px;
+    padding-left: 8px;
+
+    .btn {
+      opacity: 0.2;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}

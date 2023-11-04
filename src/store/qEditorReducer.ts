@@ -131,6 +131,16 @@ export const qEditorSlice = createSlice({
       if (selectedIndex < 0 || selectedIndex === visibleList.length - 1) return
       state.selectedId = state.componentList[selectedIndex + 1].fe_id
     },
+    changeComponentTitleAction: (
+      state: QEditorStateType,
+      action: PayloadAction<{ fe_id: string; title: string }>
+    ) => {
+      const { fe_id, title } = action.payload
+      const willChangeCompInfo = getSelectedComponentInfo(fe_id, state.componentList)
+      if (willChangeCompInfo) {
+        willChangeCompInfo.title = title
+      }
+    },
   },
 })
 
@@ -146,6 +156,7 @@ export const {
   pasteCopiedComponentAction,
   selectPrevComponentAction,
   selectNextComponentAction,
+  changeComponentTitleAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

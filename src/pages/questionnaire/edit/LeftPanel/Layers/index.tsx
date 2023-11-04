@@ -71,55 +71,57 @@ const Layers: FC = () => {
       items={componentList.map(c => ({ ...c, id: c.fe_id }))}
       onDragEnd={onDragEnd}
     >
-      {componentList?.map((compInfo: ComponentInfoType) => {
-        const { fe_id, title, isHidden, isLocked } = compInfo
-        const isShowInput = fe_id === changingTitleId
-        return (
-          <SortableItem key={fe_id} id={fe_id}>
-            <div className={styles.wrapper}>
-              <div
-                onClick={() => onClickTitleHandler(fe_id)}
-                className={cs({
-                  [styles.title]: true,
-                  [styles.selected]: fe_id === selectedId,
-                })}
-              >
-                {isShowInput ? (
-                  <Input
-                    ref={inputRef}
-                    value={title}
-                    placeholder="请输入标题..."
-                    onChange={onChangeTitle}
-                    onPressEnter={() => setChangingTitleId('')}
-                    onBlur={() => setChangingTitleId('')}
-                  />
-                ) : (
-                  title
-                )}
-              </div>
+      <div className={styles.wrapper}>
+        {componentList?.map((compInfo: ComponentInfoType) => {
+          const { fe_id, title, isHidden, isLocked } = compInfo
+          const isShowInput = fe_id === changingTitleId
+          return (
+            <SortableItem key={fe_id} id={fe_id}>
+              <div className={styles['sortable-item']}>
+                <div
+                  onClick={() => onClickTitleHandler(fe_id)}
+                  className={cs({
+                    [styles.title]: true,
+                    [styles.selected]: fe_id === selectedId,
+                  })}
+                >
+                  {isShowInput ? (
+                    <Input
+                      ref={inputRef}
+                      value={title}
+                      placeholder="请输入标题..."
+                      onChange={onChangeTitle}
+                      onPressEnter={() => setChangingTitleId('')}
+                      onBlur={() => setChangingTitleId('')}
+                    />
+                  ) : (
+                    title
+                  )}
+                </div>
 
-              <Space className={styles.btns}>
-                <Button
-                  size="small"
-                  shape="circle"
-                  className={cs({ [styles.btn]: !isHidden })}
-                  type={isHidden ? 'primary' : 'default'}
-                  icon={<EyeInvisibleOutlined />}
-                  onClick={() => onToggleIsHidden(fe_id, !isHidden)}
-                />
-                <Button
-                  size="small"
-                  shape="circle"
-                  className={cs({ [styles.btn]: !isLocked })}
-                  type={isLocked ? 'primary' : 'default'}
-                  icon={<LockOutlined />}
-                  onClick={() => onToggleIsLocked(fe_id)}
-                />
-              </Space>
-            </div>
-          </SortableItem>
-        )
-      })}
+                <Space className={styles.btns}>
+                  <Button
+                    size="small"
+                    shape="circle"
+                    className={cs({ [styles.btn]: !isHidden })}
+                    type={isHidden ? 'primary' : 'default'}
+                    icon={<EyeInvisibleOutlined />}
+                    onClick={() => onToggleIsHidden(fe_id, !isHidden)}
+                  />
+                  <Button
+                    size="small"
+                    shape="circle"
+                    className={cs({ [styles.btn]: !isLocked })}
+                    type={isLocked ? 'primary' : 'default'}
+                    icon={<LockOutlined />}
+                    onClick={() => onToggleIsLocked(fe_id)}
+                  />
+                </Space>
+              </div>
+            </SortableItem>
+          )
+        })}
+      </div>
     </SortableContainer>
   )
 }

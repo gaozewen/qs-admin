@@ -25,7 +25,7 @@ const genComponent = (config: QEditorComponentConfigType) => {
     )
   }
   return (
-    <div key={type} className={styles.wrapper} onClick={onAddComponent}>
+    <div key={type} className={styles['component-wrapper']} onClick={onAddComponent}>
       <div className={styles.component}>
         <Component />
       </div>
@@ -35,7 +35,7 @@ const genComponent = (config: QEditorComponentConfigType) => {
 
 const ComponentLib: FC = () => {
   return (
-    <>
+    <div className={styles.wrapper}>
       {QEditorComponentConfigGroup.map((group, index) => {
         const { groupId, groupName, configs } = group
         return (
@@ -47,7 +47,7 @@ const ComponentLib: FC = () => {
           </div>
         )
       })}
-    </>
+    </div>
   )
 }
 

@@ -1,17 +1,22 @@
 .wrapper {
-  padding: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  background-color: #f7f7f7;
-  border: 1px solid #f7f7f7;
-  border-radius: 3px;
+  height: 758px;
+  overflow-y: scroll;
 
-  &:hover {
-    border-color: #d9d9d9;
-  }
+  .component-wrapper {
+    padding: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    background-color: #f7f7f7;
+    border: 1px solid #f7f7f7;
+    border-radius: 3px;
 
-  .component {
-    // 阻止 input 等组件的默认嗲几行为
-    pointer-events: none;
+    &:hover {
+      border-color: #d9d9d9;
+    }
+
+    .component {
+      // 阻止 input 等组件的默认嗲几行为
+      pointer-events: none;
+    }
   }
 }

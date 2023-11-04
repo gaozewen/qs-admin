@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Space, Typography } from 'antd'
 import { FormOutlined } from '@ant-design/icons'
-import styles from './Logo.module.scss'
+import styles from './index.module.scss'
 import { Link } from 'react-router-dom'
-import useGetUserInfo from '../hooks/useGetUserInfo'
-import { PN_HOME, PN_MANAGE_INDEX } from '../router'
+import useGetUserInfo from '../../hooks/useGetUserInfo'
+import { PN_HOME, PN_MANAGE_INDEX } from '../../router'
 
 const { Title } = Typography
 const Logo: FC = () => {

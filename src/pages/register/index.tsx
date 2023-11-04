@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import { Button, Form, Input, Space, Typography, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
-import styles from './Register.module.scss'
+import styles from './index.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useRequest } from 'ahooks'
-import { registerService } from '../services/user'
-import { PN_LOGIN } from '../router'
+import { registerService } from '../../services/user'
+import { PN_LOGIN } from '../../router'
 
 const { Title } = Typography
 

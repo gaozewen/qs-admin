@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import { Button, Space } from 'antd'
-import { PN_LOGIN } from '../router'
-import { removeToken } from '../utils/user-token'
-import useGetUserInfo from '../hooks/useGetUserInfo'
-import { logoutAction } from '../store/userReducer'
+import { PN_LOGIN } from '../../router'
+import { removeToken } from '../../utils/user-token'
+import useGetUserInfo from '../../hooks/useGetUserInfo'
+import { logoutAction } from '../../store/userReducer'
 
 const UserInfo: FC = () => {
   // 使用 redux 获取用户信息

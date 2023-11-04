@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Spin } from 'antd'
-import useLoadUserData from '../hooks/useLoadUserData'
-import styles from './QuestionnaireLayout.module.scss'
-import useAutoNavigate from '../hooks/useAutoNavigate'
+import useLoadUserData from '../../hooks/useLoadUserData'
+import styles from './index.module.scss'
+import useAutoNavigate from '../../hooks/useAutoNavigate'
 
 const QuestionnaireLayout: FC = () => {
   const { loadingUserData } = useLoadUserData()

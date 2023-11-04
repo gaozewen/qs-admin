@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd'
-import styles from './QuestionnaireCard.module.scss'
 import {
   CopyOutlined,
   DeleteOutlined,
@@ -11,13 +10,14 @@ import {
   StarOutlined,
 } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
-import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../router'
-import { Questionnaire } from '../types'
 import { useRequest } from 'ahooks'
+import styles from './index.module.scss'
+import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../../router'
+import { Questionnaire } from '../../types'
 import {
   duplicateQuestionnaireService,
   updateQuestionnaireService,
-} from '../services/questionnaire'
+} from '../../services/questionnaire'
 
 const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props

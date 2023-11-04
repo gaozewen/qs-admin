@@ -3,10 +3,16 @@ import { useDispatch } from 'react-redux'
 import cs from 'classnames'
 import styles from './index.module.scss'
 import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
-import { ComponentInfoType, changeSelectedIdAction } from '../../../../store/qEditorReducer'
+import {
+  ComponentInfoType,
+  changeSelectedIdAction,
+  moveComponentAction,
+} from '../../../../store/qEditorReducer'
 import { getComponentConfigByType } from '../../../../components/QEditorComponents'
 import { getVisibleComponentList } from '../../../../store/utils'
 import useBindCanvasKeyPress from '../../../../hooks/useBindCanvasKeyPress'
+import SortableContainer from '../../../../components/DragSortable/SortableContainer'
+import SortableItem from '../../../../components/DragSortable/SortableItem'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
   const { type, props } = componentInfo
@@ -27,25 +33,35 @@ const MainCanvas: FC = () => {
     event.stopPropagation()
     dispatch(changeSelectedIdAction(fe_id))
   }
+
+  const onDragEnd = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponentAction({ oldIndex, newIndex, isSortVisibleList: true }))
+  }
+
+  const visibleList = getVisibleComponentList(componentList)
+
   return (
-    <div className={styles.canvas}>
-      {getVisibleComponentList(componentList).map(componentInfo => {
-        const { fe_id, isLocked } = componentInfo
-        return (
-          <div
-            key={fe_id}
-            className={cs({
-              [styles['cp-wrapper']]: true,
-              [styles.selected]: fe_id === selectedId,
-              [styles.locked]: isLocked,
-            })}
-            onClick={e => onSelect(e, fe_id)}
-          >
-            <div className={styles.cp}>{genComponent(componentInfo)}</div>
-          </div>
-        )
-      })}
-    </div>
+    <SortableContainer items={visibleList.map(c => ({ ...c, id: c.fe_id }))} onDragEnd={onDragEnd}>
+      <div className={styles.canvas}>
+        {visibleList.map(componentInfo => {
+          const { fe_id, isLocked } = componentInfo
+          return (
+            <SortableItem key={fe_id} id={fe_id}>
+              <div
+                className={cs({
+                  [styles['cp-wrapper']]: true,
+                  [styles.selected]: fe_id === selectedId,
+                  [styles.locked]: isLocked,
+                })}
+                onClick={e => onSelect(e, fe_id)}
+              >
+                <div className={styles.cp}>{genComponent(componentInfo)}</div>
+              </div>
+            </SortableItem>
+          )
+        })}
+      </div>
+    </SortableContainer>
   )
 }
 

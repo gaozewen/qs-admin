@@ -2,8 +2,10 @@ import {
   BlockOutlined,
   CopyOutlined,
   DeleteOutlined,
+  DownOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
+  UpOutlined,
 } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
 import React, { FC } from 'react'
@@ -12,16 +14,23 @@ import {
   changeComponentIsHiddenAction,
   deleteSelectedComponentAction,
   duplicateComponentAction,
+  moveComponentAction,
   pasteCopiedComponentAction,
   toggleComponentIsLockedAction,
 } from '../../../../../store/qEditorReducer'
 import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
+import { getSelectedIndex, getVisibleComponentList } from '../../../../../store/utils'
 
 const Toolbar: FC = () => {
   const dispatch = useDispatch()
-  const { selectedId, selectedComponent, copiedComponentInfo } = useGetQEditorInfo()
+  const { selectedId, selectedComponent, copiedComponentInfo, componentList } = useGetQEditorInfo()
   const isDisabled = !selectedId
   const { isLocked } = selectedComponent || {}
+  const visibleList = getVisibleComponentList(componentList)
+  const selectedIndex = getSelectedIndex(selectedId, visibleList)
+  const len = visibleList.length
+  const isFirst = selectedIndex === 0
+  const isLast = selectedIndex === len - 1
 
   const onDelete = () => {
     dispatch(deleteSelectedComponentAction())
@@ -41,6 +50,26 @@ const Toolbar: FC = () => {
 
   const onPaste = () => {
     dispatch(pasteCopiedComponentAction())
+  }
+
+  const onMoveUp = () => {
+    dispatch(
+      moveComponentAction({
+        oldIndex: selectedIndex,
+        newIndex: selectedIndex - 1,
+        isSortVisibleList: true,
+      })
+    )
+  }
+
+  const onMoveDown = () => {
+    dispatch(
+      moveComponentAction({
+        oldIndex: selectedIndex,
+        newIndex: selectedIndex + 1,
+        isSortVisibleList: true,
+      })
+    )
   }
 
   return (
@@ -84,6 +113,14 @@ const Toolbar: FC = () => {
           disabled={!copiedComponentInfo}
           onClick={onPaste}
         />
+      </Tooltip>
+
+      <Tooltip title="上移">
+        <Button shape="circle" icon={<UpOutlined />} disabled={isFirst} onClick={onMoveUp} />
+      </Tooltip>
+
+      <Tooltip title="下移">
+        <Button shape="circle" icon={<DownOutlined />} disabled={isLast} onClick={onMoveDown} />
       </Tooltip>
     </Space>
   )

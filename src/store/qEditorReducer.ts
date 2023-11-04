@@ -3,10 +3,12 @@ import cloneDeep from 'lodash.clonedeep'
 import { QEditorComponentPropsType } from '../components/QEditorComponents'
 import {
   getNextComponentSelectedId,
+  getRealOldAndNewIndexOfComponentList,
   getSelectedComponentInfo,
   getSelectedIndex,
   getVisibleComponentList,
   insertNewComponentInfo,
+  moveArray,
 } from './utils'
 // import { produce } from 'immer'
 
@@ -158,6 +160,22 @@ export const qEditorSlice = createSlice({
     changePageTitleAction: (state: QEditorStateType, action: PayloadAction<string>) => {
       state.pageInfo.title = action.payload
     },
+    // 移动组件
+    moveComponentAction: (
+      state: QEditorStateType,
+      action: PayloadAction<{ oldIndex: number; newIndex: number; isSortVisibleList: boolean }>
+    ) => {
+      const { componentList } = state
+      // isSortVisibleList 是否是对可见列表排序
+      const { oldIndex, newIndex, isSortVisibleList } = action.payload
+      const { realOldIndex, realNewIndex } = getRealOldAndNewIndexOfComponentList({
+        componentList,
+        oldIndex,
+        newIndex,
+        isSortVisibleList,
+      })
+      moveArray(componentList, realOldIndex, realNewIndex)
+    },
   },
 })
 
@@ -176,6 +194,7 @@ export const {
   changeComponentTitleAction,
   resetPageInfoAction,
   changePageTitleAction,
+  moveComponentAction,
 } = qEditorSlice.actions
 
 const qEditorReducer = qEditorSlice.reducer

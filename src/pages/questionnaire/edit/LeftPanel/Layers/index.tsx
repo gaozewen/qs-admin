@@ -9,9 +9,12 @@ import {
   changeComponentIsHiddenAction,
   changeComponentTitleAction,
   changeSelectedIdAction,
+  moveComponentAction,
   toggleComponentIsLockedAction,
 } from '../../../../../store/qEditorReducer'
 import styles from './index.module.scss'
+import SortableContainer from '../../../../../components/DragSortable/SortableContainer'
+import SortableItem from '../../../../../components/DragSortable/SortableItem'
 
 const Layers: FC = () => {
   const { componentList, selectedId } = useGetQEditorInfo()
@@ -59,57 +62,65 @@ const Layers: FC = () => {
     dispatch(toggleComponentIsLockedAction({ fe_id }))
   }
 
+  const onDragEnd = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponentAction({ oldIndex, newIndex, isSortVisibleList: false }))
+  }
+
   return (
-    <>
+    <SortableContainer
+      items={componentList.map(c => ({ ...c, id: c.fe_id }))}
+      onDragEnd={onDragEnd}
+    >
       {componentList?.map((compInfo: ComponentInfoType) => {
         const { fe_id, title, isHidden, isLocked } = compInfo
         const isShowInput = fe_id === changingTitleId
         return (
-          <div key={fe_id} className={styles.wrapper}>
-            <div
-              onClick={() => onClickTitleHandler(fe_id)}
-              className={cs({
-                [styles.title]: true,
-                [styles['is-hidden']]: isHidden,
-                [styles.selected]: fe_id === selectedId,
-              })}
-            >
-              {isShowInput ? (
-                <Input
-                  ref={inputRef}
-                  value={title}
-                  placeholder="请输入标题..."
-                  onChange={onChangeTitle}
-                  onPressEnter={() => setChangingTitleId('')}
-                  onBlur={() => setChangingTitleId('')}
-                />
-              ) : (
-                title
-              )}
-            </div>
+          <SortableItem key={fe_id} id={fe_id}>
+            <div className={styles.wrapper}>
+              <div
+                onClick={() => onClickTitleHandler(fe_id)}
+                className={cs({
+                  [styles.title]: true,
+                  [styles.selected]: fe_id === selectedId,
+                })}
+              >
+                {isShowInput ? (
+                  <Input
+                    ref={inputRef}
+                    value={title}
+                    placeholder="请输入标题..."
+                    onChange={onChangeTitle}
+                    onPressEnter={() => setChangingTitleId('')}
+                    onBlur={() => setChangingTitleId('')}
+                  />
+                ) : (
+                  title
+                )}
+              </div>
 
-            <Space className={styles.btns}>
-              <Button
-                size="small"
-                shape="circle"
-                className={cs({ [styles.btn]: !isHidden })}
-                type={isHidden ? 'primary' : 'default'}
-                icon={<EyeInvisibleOutlined />}
-                onClick={() => onToggleIsHidden(fe_id, !isHidden)}
-              />
-              <Button
-                size="small"
-                shape="circle"
-                className={cs({ [styles.btn]: !isLocked })}
-                type={isLocked ? 'primary' : 'default'}
-                icon={<LockOutlined />}
-                onClick={() => onToggleIsLocked(fe_id)}
-              />
-            </Space>
-          </div>
+              <Space className={styles.btns}>
+                <Button
+                  size="small"
+                  shape="circle"
+                  className={cs({ [styles.btn]: !isHidden })}
+                  type={isHidden ? 'primary' : 'default'}
+                  icon={<EyeInvisibleOutlined />}
+                  onClick={() => onToggleIsHidden(fe_id, !isHidden)}
+                />
+                <Button
+                  size="small"
+                  shape="circle"
+                  className={cs({ [styles.btn]: !isLocked })}
+                  type={isLocked ? 'primary' : 'default'}
+                  icon={<LockOutlined />}
+                  onClick={() => onToggleIsLocked(fe_id)}
+                />
+              </Space>
+            </div>
+          </SortableItem>
         )
       })}
-    </>
+    </SortableContainer>
   )
 }
 

@@ -18,11 +18,6 @@
   .title {
     flex: auto;
     line-height: 2;
-    cursor: pointer;
-
-    &.is-hidden {
-      cursor: default;
-    }
 
     &.selected {
       color: #1890ff;

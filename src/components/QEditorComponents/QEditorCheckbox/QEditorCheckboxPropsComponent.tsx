@@ -71,7 +71,18 @@ const QEditorCheckboxPropsComponent: FC<QEditorCheckboxPropsType> = (
                   >
                     <Input placeholder="请输入选项文字..." />
                   </Form.Item>
-                  {index > 1 && <MinusCircleOutlined onClick={() => remove(name)} />}
+                  {index > 1 && (
+                    <MinusCircleOutlined
+                      style={{
+                        opacity: disabled ? 0.2 : 1,
+                        cursor: disabled ? 'not-allowed' : 'pointer',
+                      }}
+                      onClick={() => {
+                        if (disabled) return
+                        remove(name)
+                      }}
+                    />
+                  )}
                 </Space>
               ))}
               <Form.Item>

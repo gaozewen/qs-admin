@@ -56,3 +56,46 @@ export const insertNewComponentInfo = (
 
   state.selectedId = newComponentInfo.fe_id
 }
+
+export const getRealOldAndNewIndexOfComponentList = (params: {
+  componentList: ComponentInfoType[]
+  oldIndex: number
+  newIndex: number
+  isSortVisibleList: boolean
+}) => {
+  const { componentList, oldIndex, newIndex, isSortVisibleList } = params || {}
+  let realOldIndex = oldIndex
+  let realNewIndex = newIndex
+  if (isSortVisibleList) {
+    const visibleList = getVisibleComponentList(componentList)
+    // 可见列表中老位置的 ComponentInfo
+    const oldPositionOriginalVisibleComp = visibleList.find((vc, index) => index === oldIndex)
+    // 可见列表中新位置的原来的 ComponentInfo
+    const newPositionOriginalVisibleComp = visibleList.find((vc, index) => index === newIndex)
+    if (oldPositionOriginalVisibleComp?.fe_id && newPositionOriginalVisibleComp?.fe_id) {
+      // 找到原始列表中的真正老位置
+      realOldIndex = componentList.findIndex(c => c.fe_id === oldPositionOriginalVisibleComp?.fe_id)
+      // 找到原始列表中的真正新位置
+      realNewIndex = componentList.findIndex(c => c.fe_id === newPositionOriginalVisibleComp?.fe_id)
+    }
+  }
+  return { realOldIndex, realNewIndex }
+}
+
+export const moveArray = (arr: any[], oldIndex: number, newIndex: number) => {
+  //  oldIndex 是当前元素下标，newIndex 是拖动到的位置下标。
+
+  // 将 item 上移
+  if (oldIndex > newIndex) {
+    // 先在新位置插入元素
+    arr.splice(newIndex, 0, arr[oldIndex])
+    // 再将老位置的元素删除
+    arr.splice(oldIndex + 1, 1)
+  } else {
+    // 将 item 下移
+    // 先在新位置插入元素
+    arr.splice(newIndex + 1, 0, arr[oldIndex])
+    // 再将老位置的元素删除
+    arr.splice(oldIndex, 1)
+  }
+}

@@ -14,7 +14,7 @@ export default configureStore({
     user: userReducer,
     qEditor: undoable(qEditorReducer, {
       limit: 20, // 限时 20 步
-      debug: true,
+      // debug: true, // 【调试时使用】生产环境需要注释掉
       filter: excludeAction([
         'qEditor/resetQEditorAction',
         'qEditor/changeSelectedIdAction',

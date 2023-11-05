@@ -140,7 +140,7 @@ const Toolbar: FC = () => {
         <Button
           shape="circle"
           icon={<UpOutlined />}
-          disabled={isFirst || visibleListIsEmpty}
+          disabled={isDisabled || isFirst || visibleListIsEmpty}
           onClick={onMoveUp}
         />
       </Tooltip>
@@ -149,7 +149,7 @@ const Toolbar: FC = () => {
         <Button
           shape="circle"
           icon={<DownOutlined />}
-          disabled={isLast || visibleListIsEmpty}
+          disabled={isDisabled || isLast || visibleListIsEmpty}
           onClick={onMoveDown}
         />
       </Tooltip>

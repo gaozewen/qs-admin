@@ -1,17 +1,22 @@
 import React, { FC } from 'react'
-import styles from './index.module.scss'
-import MainCanvas from './MainCanvas'
-import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
 import { Spin } from 'antd'
 import { useDispatch } from 'react-redux'
-import { changeSelectedIdAction } from '../../../store/qEditorReducer'
+import { useTitle } from 'ahooks'
+import styles from './index.module.scss'
+import MainCanvas from './MainCanvas'
 import LeftPanel from './LeftPanel'
 import RightPanel from './RightPanel'
 import HeaderPanel from './HeaderPanel'
+import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
+import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
+import { changeSelectedIdAction } from '../../../store/qEditorReducer'
 
 const Edit: FC = () => {
-  const { loading } = useLoadQuestionnaireData()
   const dispatch = useDispatch()
+  const { loading } = useLoadQuestionnaireData()
+  const { pageInfo } = useGetQEditorInfo()
+  const { title } = pageInfo
+  useTitle(`问卷编辑 - ${title}`)
 
   const onClearSelectedId = () => {
     dispatch(changeSelectedIdAction(''))

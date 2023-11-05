@@ -5,12 +5,15 @@ import {
   DownOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
+  RedoOutlined,
+  UndoOutlined,
   UpOutlined,
 } from '@ant-design/icons'
 import { Button, Space, Tooltip } from 'antd'
 import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+  QEditorStateType,
   changeComponentIsHiddenAction,
   deleteSelectedComponentAction,
   duplicateComponentAction,
@@ -20,9 +23,16 @@ import {
 } from '../../../../../store/qEditorReducer'
 import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
 import { getSelectedIndex, getVisibleComponentList } from '../../../../../store/utils'
+import { ActionCreators, StateWithHistory } from 'redux-undo'
+import { StateType } from '../../../../../store'
 
 const Toolbar: FC = () => {
   const dispatch = useDispatch()
+
+  const qEditor = useSelector<StateType, StateWithHistory<QEditorStateType>>(state => state.qEditor)
+  const pastLen = (qEditor.past || []).length
+  const futureLen = (qEditor.future || []).length
+
   const { selectedId, selectedComponent, copiedComponentInfo, componentList } = useGetQEditorInfo()
   const isDisabled = !selectedId
   const { isLocked } = selectedComponent || {}
@@ -71,6 +81,16 @@ const Toolbar: FC = () => {
         isSortVisibleList: true,
       })
     )
+  }
+
+  // 撤销
+  const onUndo = () => {
+    dispatch(ActionCreators.undo())
+  }
+
+  // 重做
+  const onRedo = () => {
+    dispatch(ActionCreators.redo())
   }
 
   return (
@@ -131,6 +151,19 @@ const Toolbar: FC = () => {
           icon={<DownOutlined />}
           disabled={isLast || visibleListIsEmpty}
           onClick={onMoveDown}
+        />
+      </Tooltip>
+
+      <Tooltip title="撤销">
+        <Button shape="circle" icon={<UndoOutlined />} disabled={pastLen === 0} onClick={onUndo} />
+      </Tooltip>
+
+      <Tooltip title="重做">
+        <Button
+          shape="circle"
+          icon={<RedoOutlined />}
+          disabled={futureLen === 0}
+          onClick={onRedo}
         />
       </Tooltip>
     </Space>

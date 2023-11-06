@@ -1,9 +1,19 @@
 import React, { FC, useState } from 'react'
 import { useRequest, useTitle } from 'ahooks'
-import { Empty, Typography, Table, Tag, Space, Button, Modal, message, Spin } from 'antd'
+import {
+  Empty,
+  Typography,
+  Table,
+  Tag,
+  Space,
+  Button,
+  Modal,
+  message,
+  Spin,
+  TableColumnsType,
+} from 'antd'
 import styles from './common.module.scss'
 import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
-import { ColumnsType } from 'antd/es/table'
 import ListSearch from '../../components/ListSearch'
 import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
 import { Questionnaire } from '../../types'
@@ -77,7 +87,7 @@ const Star: FC = () => {
   }
 
   // 一定要定义 Typescript 类型才可以使用 align 等属性
-  const tableColumns: ColumnsType<Questionnaire> = [
+  const tableColumns: TableColumnsType<Questionnaire> = [
     {
       title: '标题',
       dataIndex: 'title',

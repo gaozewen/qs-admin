@@ -7,6 +7,7 @@ import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
 import { useTitle } from 'ahooks'
 import HeaderPanel from './HeaderPanel'
 import LeftPanel from './LeftPanel'
+import MainPanel from './MainPanel'
 
 const Statistic: FC = () => {
   const [selectedCompId, setSelectedCompId] = useState('')
@@ -52,7 +53,13 @@ const Statistic: FC = () => {
               setSelectedCompType={setSelectedCompType}
             />
           </div>
-          <div className={styles.main}>中间</div>
+          <div className={styles.main}>
+            <MainPanel
+              selectedCompId={selectedCompId}
+              setSelectedCompId={setSelectedCompId}
+              setSelectedCompType={setSelectedCompType}
+            />
+          </div>
           <div className={styles.right}>右边</div>
         </div>
       </div>

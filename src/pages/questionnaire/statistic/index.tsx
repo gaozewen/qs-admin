@@ -5,6 +5,7 @@ import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
 import styles from './index.module.scss'
 import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
 import { useTitle } from 'ahooks'
+import HeaderPanel from './HeaderPanel'
 
 const Statistic: FC = () => {
   const nav = useNavigate()
@@ -37,7 +38,7 @@ const Statistic: FC = () => {
 
   return isPublished ? (
     <div className={styles.container}>
-      <div className={styles.header}>头部</div>
+      <HeaderPanel />
       <div className={styles['content-wrapper']}>
         <div className={styles.content}>
           <div className={styles.left}>左边</div>

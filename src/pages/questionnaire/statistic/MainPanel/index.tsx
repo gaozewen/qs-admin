@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef, useState } from 'react'
 import { Spin, Table, Tooltip, Typography } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useRequest } from 'ahooks'
-import { ColumnsType } from 'antd/es/table'
+import { ColumnType } from 'antd/es/table'
 import { Reference } from 'rc-table'
 import styles from './index.module.scss'
 import { getStatisticListService } from '../../../../services/statistic'
@@ -51,11 +51,10 @@ const MainPanel: FC<PropsType> = props => {
     return 200
   }
 
-  const tableColumns: ColumnsType<{ [key: number]: any }> = [
+  const tableColumns: ColumnType<{ [key: number]: any }>[] = [
     {
       title: '答卷ID',
       dataIndex: '_id',
-      key: '_id',
       fixed: 'left',
       width: 80,
       ellipsis: {
@@ -89,7 +88,6 @@ const MainPanel: FC<PropsType> = props => {
             </div>
           ),
           dataIndex: compInfo.fe_id,
-          key: compInfo.fe_id,
           width: getColumnWidthByCompType(compInfo.type),
           ellipsis: {
             showTitle: false,
@@ -105,13 +103,26 @@ const MainPanel: FC<PropsType> = props => {
 
   const scrollX = tableColumns.reduce((total, cur) => total + parseInt(String(cur.width || 0)), 0)
 
+  const getScrollLeft = () => {
+    let left = 0
+    for (const col of tableColumns) {
+      if (col.dataIndex === selectedCompId) return left
+      if (col.dataIndex !== '_id') {
+        left += Number(col.width)
+      }
+    }
+
+    // 选中的组件类型不在表头中,默认回到第一列
+    return 0
+  }
+
+  const left = getScrollLeft()
+
+  // 选中组件时同步将表格滚动到对应列
   useEffect(() => {
     if (tableRef.current) {
-      console.log('gzw====>tableRef.current', tableRef.current)
-      console.log('gzw====>nativeElement', tableRef.current.nativeElement)
-      console.log('gzw====>scrollTo', tableRef.current.scrollTo)
-      // tableRef.current.scrollTo({ index: 9 })
-      tableRef.current.nativeElement.scrollLeft = 1300
+      const tableBodyDom = tableRef.current.nativeElement.querySelector('.ant-table-body')
+      tableBodyDom?.scrollTo({ left })
     }
   }, [selectedCompId])
 
@@ -124,8 +135,7 @@ const MainPanel: FC<PropsType> = props => {
         pagination={false}
         rowKey="_id"
         // 550 是 10 条数据所对应的表格高度（不连表头）
-        // scroll={{ x: scrollX, y: 550 }}
-        scroll={{ x: scrollX, y: 250 }}
+        scroll={{ x: scrollX, y: 588 }}
       />
     </>
   )

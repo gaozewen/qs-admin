@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
 import {
   QEditorComponentConfigGroup,
   QEditorComponentConfigType,
 } from '../../../../../components/QEditorComponents'
 import { Typography } from 'antd'
 import styles from './index.module.scss'
-import { useDispatch } from 'react-redux'
 import { addComponentAction } from '../../../../../store/qEditorReducer'
 import { nanoid } from '@reduxjs/toolkit'
 
@@ -14,7 +14,7 @@ const { Title } = Typography
 const genComponent = (config: QEditorComponentConfigType) => {
   const { type, title, Component, defaultProps } = config
   const dispatch = useDispatch()
-  const onAddComponent = () => {
+  const onAddComponent = useCallback(() => {
     dispatch(
       addComponentAction({
         fe_id: nanoid(),
@@ -23,7 +23,7 @@ const genComponent = (config: QEditorComponentConfigType) => {
         props: defaultProps,
       })
     )
-  }
+  }, [])
   return (
     <div key={type} className={styles['component-wrapper']} onClick={onAddComponent}>
       <div className={styles.component}>

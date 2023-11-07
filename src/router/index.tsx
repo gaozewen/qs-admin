@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 import MainLayout from '../layouts/MainLayout'
@@ -11,8 +11,12 @@ import List from '../pages/manage/List'
 import Star from '../pages/manage/Star'
 import Trash from '../pages/manage/Trash'
 import QuestionnaireLayout from '../layouts/QuestionnaireLayout'
-import Edit from '../pages/questionnaire/edit'
-import Statistic from '../pages/questionnaire/statistic'
+
+// 使用路由懒加载，拆分 bundle 优化首页体积
+const Edit = lazy(() => import(/* webpackChunkName: "edit" */ '../pages/questionnaire/edit'))
+const Statistic = lazy(
+  () => import(/* webpackChunkName: "statistic" */ '../pages/questionnaire/statistic')
+)
 
 const router = createBrowserRouter([
   {

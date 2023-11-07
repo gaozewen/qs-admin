@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useMemo } from 'react'
 import styles from './index.module.scss'
 import { Button, Popover, Space, Tooltip, Typography, message } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -16,7 +16,7 @@ const HeaderPanel: FC = () => {
   const { pageInfo } = useGetQEditorInfo()
   const { title, isPublished } = pageInfo
 
-  const genLinkAndQRCodeElem = () => {
+  const LinkAndQRCode = useMemo(() => {
     if (!isPublished) return null
 
     // TODO 上生产需要修改 url
@@ -39,7 +39,7 @@ const HeaderPanel: FC = () => {
         </Popover>
       </Space>
     )
-  }
+  }, [id, isPublished])
 
   return (
     <div className={styles['header-wrapper']}>
@@ -59,7 +59,7 @@ const HeaderPanel: FC = () => {
             <Title>{title}</Title>
           </Space>
         </div>
-        <div className={styles.main}>{genLinkAndQRCodeElem()}</div>
+        <div className={styles.main}>{LinkAndQRCode}</div>
         <div className={styles.right}>
           <Button type="primary" onClick={() => nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)}>
             编辑问卷

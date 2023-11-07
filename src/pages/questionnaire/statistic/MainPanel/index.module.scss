@@ -1,6 +1,9 @@
 .main-panel {
   height: calc(100vh - 110px);
-
-  // overflow-y: scroll;
+  overflow: hidden;
   background-color: #fff;
+
+  .loading {
+    height: 220px;
+  }
 }

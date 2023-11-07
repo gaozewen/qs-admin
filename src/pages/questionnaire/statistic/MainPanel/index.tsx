@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { Spin, Table, Tooltip, Typography } from 'antd'
+import { Empty, Pagination, Spin, Table, Tooltip, Typography } from 'antd'
 import { useParams } from 'react-router-dom'
 import { useRequest } from 'ahooks'
 import { ColumnType } from 'antd/es/table'
@@ -9,6 +9,7 @@ import { getStatisticListService } from '../../../../services/statistic'
 import { getVisibleComponentList } from '../../../../store/utils'
 import { ComponentInfoType } from '../../../../store/qEditorReducer'
 import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
+import { C_LIST_PAGE_SIZE } from '../../../../constant'
 
 const { Title } = Typography
 
@@ -21,6 +22,8 @@ type PropsType = {
 const MainPanel: FC<PropsType> = props => {
   const { selectedCompId, setSelectedCompId, setSelectedCompType } = props
   const { id = '' } = useParams()
+  const [page, setPage] = useState(1)
+  const [pageSize, setPageSize] = useState(C_LIST_PAGE_SIZE)
   const [total, setTotal] = useState(0)
   const [list, setList] = useState([])
   const tableRef = useRef<Reference>(null)
@@ -28,9 +31,11 @@ const MainPanel: FC<PropsType> = props => {
 
   const { loading } = useRequest(
     async () => {
-      return await getStatisticListService(id, { page: 1, pageSize: 10 })
+      return await getStatisticListService(id, { page, pageSize })
     },
     {
+      // 监听 page 和 pageSize 的变化，来刷新接口获取数据
+      refreshDeps: [page, pageSize],
       onSuccess(result) {
         const { total, list } = result
         setTotal(total)
@@ -126,6 +131,12 @@ const MainPanel: FC<PropsType> = props => {
     }
   }, [selectedCompId])
 
+  const pageChangeHandler = (page: number, pageSize: number) => {
+    // 页码改变时同步改变 url 参数
+    setPage(page)
+    setPageSize(pageSize)
+  }
+
   const TableElement = (
     <>
       <Table
@@ -137,21 +148,27 @@ const MainPanel: FC<PropsType> = props => {
         // 550 是 10 条数据所对应的表格高度（不连表头）
         scroll={{ x: scrollX, y: 588 }}
       />
+      {list.length > 0 && (
+        <div style={{ textAlign: 'center', marginTop: 28 }}>
+          <Pagination
+            current={page}
+            total={total}
+            pageSize={pageSize}
+            onChange={pageChangeHandler}
+          />
+        </div>
+      )}
     </>
   )
 
   return (
-    <div className={styles['left-panel']}>
-      {loading ? (
-        <div style={{ textAlign: 'center', marginTop: 188 }}>
-          <Spin />
-        </div>
-      ) : (
-        <>
-          <Title level={3} style={{ margin: '12px 0 12px 12px' }}>{`答卷数量：${total}`}</Title>
-          {TableElement}
-        </>
-      )}
+    <div className={styles['main-panel']}>
+      <Title level={3} style={{ margin: '12px 0 12px 12px' }}>{`答卷数量：${total}`}</Title>
+      <Spin spinning={loading}>
+        {loading && list.length === 0 && <div className={styles.loading}></div>}
+        {list.length > 0 && TableElement}
+        {!loading && list.length === 0 && <Empty description="暂无数据" />}
+      </Spin>
     </div>
   )
 }

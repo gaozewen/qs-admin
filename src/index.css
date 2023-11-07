@@ -12,11 +12,6 @@ code {
     monospace;
 }
 
-/* 使 spin 在容器正中间 */
-:where(.css-dev-only-do-not-override-xu9wm8).ant-spin-nested-loading >div>.ant-spin {
-  max-height: none;
-}
-
 /* 消除 dnd-kit 样式以防和我们自己的样式冲突 */
 div[role="button"] {
   outline: 0;

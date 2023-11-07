@@ -6,6 +6,8 @@ import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
 import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextarea'
 import { QEditorRadioConfig, QEditorRadioPropsType } from './QEditorRadio'
 import { QEditorCheckboxConfig, QEditorCheckboxPropsType } from './QEditorCheckbox'
+import { QEditorRadioStatisticPropsType } from './QEditorRadio/QEditorRadioStatistic'
+import { QEditorCheckboxStatisticPropsType } from './QEditorCheckbox/QEditorCheckboxStatistic'
 
 // 所有组件统一的 Props 类型定义
 export type QEditorComponentPropsType =
@@ -27,6 +29,11 @@ export type QEditorComponentType =
   | FC<QEditorRadioPropsType>
   | FC<QEditorCheckboxPropsType>
 
+// 所有统计组件的类型定义
+export type QEditorStatisticType =
+  | FC<QEditorRadioStatisticPropsType>
+  | FC<QEditorCheckboxStatisticPropsType>
+
 // 所有组件统一的 Config 类型定义
 export type QEditorComponentConfigType = {
   title: string
@@ -34,6 +41,7 @@ export type QEditorComponentConfigType = {
   defaultProps: QEditorComponentPropsType
   Component: QEditorComponentType
   PropsComponent: QEditorComponentType
+  StatisticComponent?: QEditorStatisticType
 }
 
 // 所有组件的配置列表
@@ -48,7 +56,9 @@ const QEditorComponentConfigList: QEditorComponentConfigType[] = [
 ]
 
 // 根据组件类型获取相应的组件配置
-export const getComponentConfigByType = (componentType: string) => {
+export const getComponentConfigByType = (
+  componentType: string
+): QEditorComponentConfigType | undefined => {
   return QEditorComponentConfigList.find(item => item.type === componentType)
 }
 

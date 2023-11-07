@@ -14,3 +14,13 @@ export const getStatisticListService = async (
   const data = (await ajax.get(url, { params: opt })) as ResDataType
   return data
 }
+
+// 获取单个组件的统计数据汇总
+export const getComponentStatisticService = async (
+  questionnaireId: string,
+  componentId: string
+): Promise<ResDataType> => {
+  const url = `/api/statistic/${questionnaireId}/${componentId}`
+  const data = (await ajax.get(url)) as ResDataType
+  return data
+}

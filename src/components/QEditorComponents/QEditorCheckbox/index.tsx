@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Checkbox, Space, Typography } from 'antd'
 import QEditorCheckboxPropsComponent from './QEditorCheckboxPropsComponent'
+import QEditorCheckboxStatistic from './QEditorCheckboxStatistic'
 
 const { Paragraph } = Typography
 export type QEditorCheckboxItemType = {
@@ -53,6 +54,7 @@ export const QEditorCheckboxConfig = {
   Component: QEditorCheckbox,
   PropsComponent: QEditorCheckboxPropsComponent,
   defaultProps: Q_EDITOR_CHECKBOX_DEFAULT_PROPS,
+  StatisticComponent: QEditorCheckboxStatistic,
 }
 
 export default QEditorCheckbox

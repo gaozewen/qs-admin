@@ -8,10 +8,10 @@ import { useTitle } from 'ahooks'
 import HeaderPanel from './HeaderPanel'
 import LeftPanel from './LeftPanel'
 import MainPanel from './MainPanel'
+import RightPanel from './RightPanel'
 
 const Statistic: FC = () => {
   const [selectedCompId, setSelectedCompId] = useState('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedCompType, setSelectedCompType] = useState('')
   const nav = useNavigate()
   const { loading } = useLoadQuestionnaireData()
@@ -60,7 +60,9 @@ const Statistic: FC = () => {
               setSelectedCompType={setSelectedCompType}
             />
           </div>
-          <div className={styles.right}>右边</div>
+          <div className={styles.right}>
+            <RightPanel selectedCompId={selectedCompId} selectedCompType={selectedCompType} />
+          </div>
         </div>
       </div>
     </div>

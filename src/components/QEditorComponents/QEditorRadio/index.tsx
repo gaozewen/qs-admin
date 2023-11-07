@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Radio, Space, Typography } from 'antd'
 import QEditorRadioPropsComponent from './QEditorRadioPropsComponent'
+import QEditorRadioStatistic from './QEditorRadioStatistic'
 
 const { Paragraph } = Typography
 export type QEditorRadioOptionType = {
@@ -57,6 +58,7 @@ export const QEditorRadioConfig = {
   Component: QEditorRadio,
   PropsComponent: QEditorRadioPropsComponent,
   defaultProps: Q_EDITOR_RADIO_DEFAULT_PROPS,
+  StatisticComponent: QEditorRadioStatistic,
 }
 
 export default QEditorRadio

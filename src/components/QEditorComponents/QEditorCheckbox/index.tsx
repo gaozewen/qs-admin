@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
 import { Checkbox, Space, Typography } from 'antd'
-import QEditorCheckboxPropsComponent from './QEditorCheckboxPropsComponent'
-import QEditorCheckboxStatistic from './QEditorCheckboxStatistic'
 
 const { Paragraph } = Typography
 export type QEditorCheckboxItemType = {
@@ -38,7 +36,7 @@ const QEditorCheckbox: FC<QEditorCheckboxPropsType> = (props: QEditorCheckboxPro
       <div>
         <Space direction={isVertical ? 'vertical' : 'horizontal'}>
           {list?.map(item => (
-            <Checkbox key={item.value} checked={item.checked}>
+            <Checkbox key={item.value} value={item.value} checked={item.checked}>
               {item.text}
             </Checkbox>
           ))}
@@ -46,15 +44,6 @@ const QEditorCheckbox: FC<QEditorCheckboxPropsType> = (props: QEditorCheckboxPro
       </div>
     </div>
   )
-}
-
-export const QEditorCheckboxConfig = {
-  title: '多选框',
-  type: 'checkbox',
-  Component: QEditorCheckbox,
-  PropsComponent: QEditorCheckboxPropsComponent,
-  defaultProps: Q_EDITOR_CHECKBOX_DEFAULT_PROPS,
-  StatisticComponent: QEditorCheckboxStatistic,
 }
 
 export default QEditorCheckbox

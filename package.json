@@ -42,7 +42,9 @@
     "lint:style": "stylelint \"src/**/*.(css|scss)\" --fix",
     "format": "prettier --write \"src/**/*.+(js|ts|jsx|tsx)\" ",
     "prepare": "husky install",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -66,20 +68,33 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
+    "@storybook/addon-essentials": "7.5.3",
+    "@storybook/addon-interactions": "7.5.3",
+    "@storybook/addon-links": "7.5.3",
+    "@storybook/addon-onboarding": "1.0.8",
+    "@storybook/blocks": "7.5.3",
+    "@storybook/preset-create-react-app": "7.5.3",
+    "@storybook/react": "7.5.3",
+    "@storybook/react-webpack5": "7.5.3",
+    "@storybook/testing-library": "0.2.2",
     "@types/lodash.clonedeep": "^4.5.8",
     "@typescript-eslint/eslint-plugin": "6.9.0",
     "@typescript-eslint/parser": "6.9.0",
+    "babel-plugin-named-exports-order": "0.0.2",
     "craco": "^0.0.3",
     "eslint": "8.52.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
     "postcss": "^8.4.31",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.9",
     "prettier": "3.0.3",
+    "prop-types": "15.8.1",
     "sass": "^1.69.5",
+    "storybook": "7.5.3",
     "stylelint": "^15.11.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-prettier": "^9.0.5",
@@ -88,6 +103,7 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.2.1"
+    "stylelint-scss": "^5.2.1",
+    "webpack": "5.89.0"
   }
 }

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
-import { StateType } from '../store'
-import { QEditorStateType } from '../store/qEditorReducer'
+
+import { StateType } from '@/store'
+import { QEditorStateType } from '@/store/qEditorReducer'
 
 // 获取 redux 中 QEditor State
 const useGetQEditorInfo = () => {

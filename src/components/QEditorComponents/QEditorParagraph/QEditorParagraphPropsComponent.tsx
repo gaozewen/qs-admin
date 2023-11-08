@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorParagraphPropsType } from '.'
 import { Checkbox, Form, Input } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorParagraphPropsType } from '.'
 
 const { TextArea } = Input
 

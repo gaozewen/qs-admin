@@ -1,7 +1,8 @@
 import { Pagination } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
-import { C_LIST_PAGE_SIZE, C_LIST_PAGE_PARAM_KEY, C_LIST_PAGE_SIZE_PARAM_KEY } from '../../constant'
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+
+import { C_LIST_PAGE_PARAM_KEY, C_LIST_PAGE_SIZE, C_LIST_PAGE_SIZE_PARAM_KEY } from '@/constant'
 
 type PropType = {
   total: number

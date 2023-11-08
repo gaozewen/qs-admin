@@ -1,18 +1,20 @@
+import cs from 'classnames'
 import React, { FC, MouseEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import cs from 'classnames'
-import styles from './index.module.scss'
-import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
+
+import SortableContainer from '@/components/DragSortable/SortableContainer'
+import SortableItem from '@/components/DragSortable/SortableItem'
+import { getComponentConfigByType } from '@/components/QEditorComponents'
+import useBindCanvasKeyPress from '@/hooks/useBindCanvasKeyPress'
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
 import {
-  ComponentInfoType,
   changeSelectedIdAction,
+  ComponentInfoType,
   moveComponentAction,
-} from '../../../../store/qEditorReducer'
-import { getComponentConfigByType } from '../../../../components/QEditorComponents'
-import { getVisibleComponentList } from '../../../../store/utils'
-import useBindCanvasKeyPress from '../../../../hooks/useBindCanvasKeyPress'
-import SortableContainer from '../../../../components/DragSortable/SortableContainer'
-import SortableItem from '../../../../components/DragSortable/SortableItem'
+} from '@/store/qEditorReducer'
+import { getVisibleComponentList } from '@/store/utils'
+
+import styles from './index.module.scss'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
   const { type, props } = componentInfo

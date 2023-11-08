@@ -1,8 +1,9 @@
-import { Button } from 'antd'
+import { Button, Typography } from 'antd'
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Typography } from 'antd'
-import { PN_MANAGE_INDEX } from '../../router'
+
+import { PN_MANAGE_INDEX } from '@/router'
+
 import styles from './index.module.scss'
 
 const { Title, Paragraph } = Typography

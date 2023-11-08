@@ -1,11 +1,13 @@
+import { useTitle } from 'ahooks'
+import { Button, Result, Spin } from 'antd'
 import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Result, Spin } from 'antd'
-import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
-import styles from './index.module.scss'
-import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
-import { useTitle } from 'ahooks'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import useLoadQuestionnaireData from '@/hooks/useLoadQuestionnaireData'
+
 import HeaderPanel from './HeaderPanel'
+import styles from './index.module.scss'
 import LeftPanel from './LeftPanel'
 import MainPanel from './MainPanel'
 import RightPanel from './RightPanel'

@@ -1,9 +1,10 @@
-import React, { ChangeEvent, FC, useState } from 'react'
-import { Button, Input, Space, Typography } from 'antd'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
 import { EditOutlined } from '@ant-design/icons'
+import { Button, Input, Space, Typography } from 'antd'
+import React, { ChangeEvent, FC, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { changePageTitleAction } from '../../../../../store/qEditorReducer'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { changePageTitleAction } from '@/store/qEditorReducer'
 
 const { Title } = Typography
 

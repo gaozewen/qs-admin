@@ -1,15 +1,16 @@
 import { FC } from 'react'
-import { QEditorInputConfig, QEditorInputPropsType } from './QEditorInput'
-import { QEditorTitleConfig, QEditorTitlePropsType } from './QEditorTitle'
-import { QEditorParagraphConfig, QEditorParagraphPropsType } from './QEditorParagraph'
-import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
-import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextarea'
-import { QEditorRadioPropsType } from './QEditorRadio'
-import { QEditorRadioConfig } from './QEditorRadio/config'
+
 import { QEditorCheckboxPropsType } from './QEditorCheckbox'
 import { QEditorCheckboxConfig } from './QEditorCheckbox/config'
-import { QEditorRadioStatisticPropsType } from './QEditorRadio/QEditorRadioStatistic'
 import { QEditorCheckboxStatisticPropsType } from './QEditorCheckbox/QEditorCheckboxStatistic'
+import { QEditorInfoConfig, QEditorInfoPropsType } from './QEditorInfo'
+import { QEditorInputConfig, QEditorInputPropsType } from './QEditorInput'
+import { QEditorParagraphConfig, QEditorParagraphPropsType } from './QEditorParagraph'
+import { QEditorRadioPropsType } from './QEditorRadio'
+import { QEditorRadioConfig } from './QEditorRadio/config'
+import { QEditorRadioStatisticPropsType } from './QEditorRadio/QEditorRadioStatistic'
+import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextarea'
+import { QEditorTitleConfig, QEditorTitlePropsType } from './QEditorTitle'
 
 // 所有组件统一的 Props 类型定义
 export type QEditorComponentPropsType =

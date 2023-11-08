@@ -1,8 +1,10 @@
 import { useRequest } from 'ahooks'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getUserInfoService } from '../services/user'
-import { loginAction } from '../store/userReducer'
+
+import { getUserInfoService } from '@/services/user'
+import { loginAction } from '@/store/userReducer'
+
 import useGetUserInfo from './useGetUserInfo'
 
 // 当 store 中用户信息不存在，则从后端加载用户信息

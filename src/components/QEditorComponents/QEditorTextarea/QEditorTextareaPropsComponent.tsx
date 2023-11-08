@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorTextareaPropsType } from '.'
 import { Form, Input } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorTextareaPropsType } from '.'
 
 const QEditorTextareaPropsComponent: FC<QEditorTextareaPropsType> = (
   props: QEditorTextareaPropsType

@@ -1,15 +1,13 @@
 import React, { FC } from 'react'
 import { useDispatch } from 'react-redux'
+
 import {
+  getComponentConfigByType,
   QEditorComponentConfigType,
   QEditorComponentPropsType,
-  getComponentConfigByType,
-} from '../../../../../components/QEditorComponents'
-import {
-  ComponentInfoType,
-  changeComponentInfoPropsAction,
-} from '../../../../../store/qEditorReducer'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
+} from '@/components/QEditorComponents'
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { changeComponentInfoPropsAction, ComponentInfoType } from '@/store/qEditorReducer'
 
 const NotSelected: FC = () => <div style={{ textAlign: 'center' }}>未选中组件</div>
 

@@ -1,7 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import useGetUserInfo from './useGetUserInfo'
 import { useEffect } from 'react'
-import { PN_LOGIN, PN_MANAGE_INDEX, isLoginOrRegisterRouter, isNotNeedLogin } from '../router'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { isLoginOrRegisterRouter, isNotNeedLogin, PN_LOGIN, PN_MANAGE_INDEX } from '@/router'
+
+import useGetUserInfo from './useGetUserInfo'
 
 // 根据不同情况处理当前页面路由的自动跳转
 const useAutoNavigate = (loadingUserData: boolean) => {

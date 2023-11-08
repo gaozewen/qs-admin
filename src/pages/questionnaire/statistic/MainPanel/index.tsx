@@ -1,15 +1,17 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
-import { Empty, Pagination, Spin, Table, Tooltip, Typography } from 'antd'
-import { useParams } from 'react-router-dom'
 import { useRequest } from 'ahooks'
-import { ColumnType } from 'antd/es/table'
-import { Reference } from 'rc-table'
+import { Empty, Pagination, Spin, Table, Tooltip, Typography } from 'antd'
+import type { ColumnType } from 'antd/es/table'
+import type { Reference } from 'rc-table'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
+import { C_LIST_PAGE_SIZE } from '@/constant'
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { getStatisticListService } from '@/services/statistic'
+import { ComponentInfoType } from '@/store/qEditorReducer'
+import { getVisibleComponentList } from '@/store/utils'
+
 import styles from './index.module.scss'
-import { getStatisticListService } from '../../../../services/statistic'
-import { getVisibleComponentList } from '../../../../store/utils'
-import { ComponentInfoType } from '../../../../store/qEditorReducer'
-import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
-import { C_LIST_PAGE_SIZE } from '../../../../constant'
 
 const { Title } = Typography
 

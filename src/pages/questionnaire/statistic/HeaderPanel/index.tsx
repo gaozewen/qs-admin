@@ -1,12 +1,14 @@
-import React, { FC, useMemo } from 'react'
-import styles from './index.module.scss'
-import { Button, Popover, Space, Tooltip, Typography, message } from 'antd'
-import { useNavigate, useParams } from 'react-router-dom'
 import { CopyOutlined, LeftOutlined, QrcodeOutlined } from '@ant-design/icons'
-import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
-import { PN_QUESTIONNAIRE_EDIT } from '../../../../router'
-import { copyToClipboard } from '../../../../utils/clipboard'
+import { Button, message, Popover, Space, Tooltip, Typography } from 'antd'
 import { QRCodeSVG } from 'qrcode.react'
+import React, { FC, useMemo } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { PN_QUESTIONNAIRE_EDIT } from '@/router'
+import { copyToClipboard } from '@/utils/clipboard'
+
+import styles from './index.module.scss'
 
 const { Title, Text } = Typography
 

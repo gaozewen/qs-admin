@@ -1,8 +1,10 @@
-import React, { FC, useEffect } from 'react'
 import { Form, Input } from 'antd'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
+import React, { FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { resetPageInfoAction } from '../../../../../store/qEditorReducer'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { resetPageInfoAction } from '@/store/qEditorReducer'
+
 import styles from './index.module.scss'
 
 const { TextArea } = Input

@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import userReducer, { UserStateType } from './userReducer'
+import undoable, { excludeAction, StateWithHistory } from 'redux-undo'
+
 import qEditorReducer, { QEditorStateType } from './qEditorReducer'
-import undoable, { StateWithHistory, excludeAction } from 'redux-undo'
+import userReducer, { UserStateType } from './userReducer'
 
 export type StateType = {
   user: UserStateType

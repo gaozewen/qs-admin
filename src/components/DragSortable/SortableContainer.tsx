@@ -1,13 +1,7 @@
-import React, { FC } from 'react'
-import {
-  DndContext,
-  closestCenter,
-  MouseSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent,
-} from '@dnd-kit/core'
+import type { DragEndEvent } from '@dnd-kit/core'
+import { closestCenter, DndContext, MouseSensor, useSensor, useSensors } from '@dnd-kit/core'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import React, { FC } from 'react'
 
 type SortableItemType = {
   id: string

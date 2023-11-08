@@ -1,13 +1,15 @@
+import { nanoid } from '@reduxjs/toolkit'
+import { Typography } from 'antd'
 import React, { FC, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+
 import {
   QEditorComponentConfigGroup,
   QEditorComponentConfigType,
-} from '../../../../../components/QEditorComponents'
-import { Typography } from 'antd'
+} from '@/components/QEditorComponents'
+import { addComponentAction } from '@/store/qEditorReducer'
+
 import styles from './index.module.scss'
-import { addComponentAction } from '../../../../../store/qEditorReducer'
-import { nanoid } from '@reduxjs/toolkit'
 
 const { Title } = Typography
 

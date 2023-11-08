@@ -1,7 +1,9 @@
 import { Button, Result } from 'antd'
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PN_MANAGE_INDEX } from '../../router'
+
+import { PN_MANAGE_INDEX } from '@/router'
+
 import styles from './index.module.scss'
 
 const NotFound: FC = () => {

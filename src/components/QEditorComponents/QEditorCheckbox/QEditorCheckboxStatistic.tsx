@@ -1,5 +1,6 @@
+import type { ColumnConfig } from '@ant-design/plots'
+import { Column } from '@ant-design/plots'
 import React, { FC } from 'react'
-import { Column, ColumnConfig } from '@ant-design/plots'
 
 export type QEditorCheckboxStatisticPropsType = {
   statistic: { name: string; count: number }[]

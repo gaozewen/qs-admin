@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import QEditorTextarea from '../../components/QEditorComponents/QEditorTextarea'
+
+import QEditorTextarea from '@/components/QEditorComponents/QEditorTextarea'
 
 const meta = {
   title: 'QEditor/QEditorTextarea',

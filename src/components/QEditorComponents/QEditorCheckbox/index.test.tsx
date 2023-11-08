@@ -1,7 +1,7 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
+import React from 'react'
 
-import QEditorCheckbox from './'
+import QEditorCheckbox from '.'
 
 test('默认属性', () => {
   render(<QEditorCheckbox />)

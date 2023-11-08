@@ -1,7 +1,7 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
+import React from 'react'
 
-import QEditorParagraph from './index'
+import QEditorParagraph from '.'
 
 test('默认属性', () => {
   render(<QEditorParagraph />)

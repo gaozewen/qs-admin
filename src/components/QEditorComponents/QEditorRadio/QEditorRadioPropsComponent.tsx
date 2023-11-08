@@ -1,8 +1,9 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorRadioOptionType, QEditorRadioPropsType } from '.'
-import { Button, Checkbox, Form, Input, Select, Space } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { nanoid } from '@reduxjs/toolkit'
+import { Button, Checkbox, Form, Input, Select, Space } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorRadioOptionType, QEditorRadioPropsType } from '.'
 
 const QEditorRadioPropsComponent: FC<QEditorRadioPropsType> = (props: QEditorRadioPropsType) => {
   const { title, options, value, isVertical, onChange, disabled } = props

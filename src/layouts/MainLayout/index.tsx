@@ -1,11 +1,13 @@
+import { Layout, Spin } from 'antd'
 import React, { FC } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Layout, Spin } from 'antd'
+
+import Logo from '@/components/Logo'
+import UserInfo from '@/components/UserInfo'
+import useAutoNavigate from '@/hooks/useAutoNavigate'
+import useLoadUserData from '@/hooks/useLoadUserData'
+
 import styles from './index.module.scss'
-import Logo from '../../components/Logo/index'
-import UserInfo from '../../components/UserInfo'
-import useLoadUserData from '../../hooks/useLoadUserData'
-import useAutoNavigate from '../../hooks/useAutoNavigate'
 
 const { Header, Footer, Content } = Layout
 

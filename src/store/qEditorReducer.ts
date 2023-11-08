@@ -1,6 +1,9 @@
-import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
 import cloneDeep from 'lodash.clonedeep'
-import { QEditorComponentPropsType } from '../components/QEditorComponents'
+
+import { QEditorComponentPropsType } from '@/components/QEditorComponents'
+
 import {
   getNextComponentSelectedId,
   getRealOldAndNewIndexOfComponentList,
@@ -10,6 +13,7 @@ import {
   insertNewComponentInfo,
   moveArray,
 } from './utils'
+
 // import { produce } from 'immer'
 
 // 后端返回的 QEditor 的组件数据

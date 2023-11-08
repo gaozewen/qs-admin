@@ -1,5 +1,6 @@
+import type { PieConfig } from '@ant-design/plots'
+import { Pie } from '@ant-design/plots'
 import React, { FC } from 'react'
-import { Pie, PieConfig } from '@ant-design/plots'
 
 export type QEditorRadioStatisticPropsType = {
   statistic: { name: string; count: number }[]

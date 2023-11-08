@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import React, { FC } from 'react'
 
 type PropsType = {
   id: string

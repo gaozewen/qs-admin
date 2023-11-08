@@ -1,16 +1,13 @@
+import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from '@ant-design/icons'
+import { useRequest } from 'ahooks'
+import { Button, Divider, message, Space } from 'antd'
 import React, { FC } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import { BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined } from '@ant-design/icons'
+
+import { PN_MANAGE_INDEX, PN_MANAGE_STAR, PN_MANAGE_TRASH, PN_QUESTIONNAIRE_EDIT } from '@/router'
+import { createQuestionnaireService } from '@/services/questionnaire'
+
 import styles from './index.module.scss'
-import { Button, Divider, Space, message } from 'antd'
-import {
-  PN_MANAGE_INDEX,
-  PN_MANAGE_STAR,
-  PN_MANAGE_TRASH,
-  PN_QUESTIONNAIRE_EDIT,
-} from '../../router'
-import { createQuestionnaireService } from '../../services/questionnaire'
-import { useRequest } from 'ahooks'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()

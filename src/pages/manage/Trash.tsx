@@ -1,27 +1,16 @@
-import React, { FC, useState } from 'react'
-import { useRequest, useTitle } from 'ahooks'
-import {
-  Empty,
-  Typography,
-  Table,
-  Tag,
-  Space,
-  Button,
-  Modal,
-  message,
-  Spin,
-  TableColumnsType,
-} from 'antd'
-import styles from './common.module.scss'
 import { ExclamationCircleOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
-import ListSearch from '../../components/ListSearch'
-import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
-import { Questionnaire } from '../../types'
-import QSPagination from '../../components/QSPagination'
-import {
-  deleteQuestionnairesService,
-  updateQuestionnaireService,
-} from '../../services/questionnaire'
+import { useRequest, useTitle } from 'ahooks'
+import type { TableColumnsType } from 'antd'
+import { Button, Empty, message, Modal, Space, Spin, Table, Tag, Typography } from 'antd'
+import React, { FC, useState } from 'react'
+
+import ListSearch from '@/components/ListSearch'
+import QSPagination from '@/components/QSPagination'
+import useLoadQuestionnaireListData from '@/hooks/useLoadQuestionnaireListData'
+import { deleteQuestionnairesService, updateQuestionnaireService } from '@/services/questionnaire'
+import { Questionnaire } from '@/types'
+
+import styles from './common.module.scss'
 
 const { Title } = Typography
 

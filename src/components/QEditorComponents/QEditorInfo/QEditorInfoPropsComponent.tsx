@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorInfoPropsType } from '.'
 import { Form, Input } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorInfoPropsType } from '.'
 
 const { TextArea } = Input
 

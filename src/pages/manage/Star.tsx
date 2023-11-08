@@ -1,12 +1,14 @@
-import React, { FC } from 'react'
 import { useTitle } from 'ahooks'
-import { Empty, Typography, Spin } from 'antd'
+import { Empty, Spin, Typography } from 'antd'
+import React, { FC } from 'react'
+
+import ListSearch from '@/components/ListSearch'
+import QSPagination from '@/components/QSPagination'
+import QuestionnaireCard from '@/components/QuestionnaireCard'
+import useLoadQuestionnaireListData from '@/hooks/useLoadQuestionnaireListData'
+import { Questionnaire } from '@/types'
+
 import styles from './common.module.scss'
-import QuestionnaireCard from '../../components/QuestionnaireCard'
-import ListSearch from '../../components/ListSearch'
-import useLoadQuestionnaireListData from '../../hooks/useLoadQuestionnaireListData'
-import { Questionnaire } from '../../types'
-import QSPagination from '../../components/QSPagination'
 
 const { Title } = Typography
 

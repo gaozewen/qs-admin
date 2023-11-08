@@ -12,19 +12,20 @@ import {
 import { Button, Space, Tooltip } from 'antd'
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ActionCreators, StateWithHistory } from 'redux-undo'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { StateType } from '@/store'
 import {
-  QEditorStateType,
   changeComponentIsHiddenAction,
   deleteSelectedComponentAction,
   duplicateComponentAction,
   moveComponentAction,
   pasteCopiedComponentAction,
+  QEditorStateType,
   toggleComponentIsLockedAction,
-} from '../../../../../store/qEditorReducer'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
-import { getSelectedIndex, getVisibleComponentList } from '../../../../../store/utils'
-import { ActionCreators, StateWithHistory } from 'redux-undo'
-import { StateType } from '../../../../../store'
+} from '@/store/qEditorReducer'
+import { getSelectedIndex, getVisibleComponentList } from '@/store/utils'
 
 const Toolbar: FC = () => {
   const dispatch = useDispatch()

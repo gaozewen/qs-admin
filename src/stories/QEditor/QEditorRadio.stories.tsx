@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import QEditorRadio from '../../components/QEditorComponents/QEditorRadio'
+
+import QEditorRadio from '@/components/QEditorComponents/QEditorRadio'
 
 const meta = {
   title: 'QEditor/QEditorRadio',

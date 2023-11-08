@@ -1,11 +1,13 @@
+import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
+import { message, Tabs } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { FileTextOutlined, SettingOutlined } from '@ant-design/icons'
-import { Tabs, message } from 'antd'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { changeSelectedIdAction } from '@/store/qEditorReducer'
+
 import ComponentProp from './ComponentProp'
 import PageSettings from './PageSettings'
-import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
-import { changeSelectedIdAction } from '../../../../store/qEditorReducer'
 
 enum TAB_KEYS {
   PROPS = 'props',

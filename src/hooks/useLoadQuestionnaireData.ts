@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom'
-import { getQuestionnaireService } from '../services/questionnaire'
 import { useRequest } from 'ahooks'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { resetQEditorAction } from '../store/qEditorReducer'
+import { useParams } from 'react-router-dom'
+
+import { getQuestionnaireService } from '@/services/questionnaire'
+import { resetQEditorAction } from '@/store/qEditorReducer'
 
 const useLoadQuestionnaireData = () => {
   const { id = '' } = useParams()

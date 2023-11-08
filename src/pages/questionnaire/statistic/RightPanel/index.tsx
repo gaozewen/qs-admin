@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from 'react'
-import styles from './index.module.scss'
-import { Typography } from 'antd'
 import { useRequest } from 'ahooks'
-import { getComponentStatisticService } from '../../../../services/statistic'
+import { Typography } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getComponentConfigByType } from '../../../../components/QEditorComponents'
+
+import { getComponentConfigByType } from '@/components/QEditorComponents'
+import { getComponentStatisticService } from '@/services/statistic'
+
+import styles from './index.module.scss'
 
 const { Title } = Typography
 

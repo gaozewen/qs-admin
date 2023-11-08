@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorTitlePropsType } from '.'
 import { Checkbox, Form, Input, Select } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorTitlePropsType } from '.'
 
 const QEditorTitlePropsComponent: FC<QEditorTitlePropsType> = (props: QEditorTitlePropsType) => {
   const { text, level, isCenter, onChange, disabled } = props

@@ -1,20 +1,23 @@
+import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
+import type { InputRef } from 'antd'
+import { Button, Input, message, Space } from 'antd'
+import cs from 'classnames'
 import React, { ChangeEvent, FC, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import cs from 'classnames'
-import { Button, Input, InputRef, Space, message } from 'antd'
-import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
+
+import SortableContainer from '@/components/DragSortable/SortableContainer'
+import SortableItem from '@/components/DragSortable/SortableItem'
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
 import {
-  ComponentInfoType,
   changeComponentIsHiddenAction,
   changeComponentTitleAction,
   changeSelectedIdAction,
+  ComponentInfoType,
   moveComponentAction,
   toggleComponentIsLockedAction,
-} from '../../../../../store/qEditorReducer'
+} from '@/store/qEditorReducer'
+
 import styles from './index.module.scss'
-import SortableContainer from '../../../../../components/DragSortable/SortableContainer'
-import SortableItem from '../../../../../components/DragSortable/SortableItem'
 
 const Layers: FC = () => {
   const { componentList, selectedId } = useGetQEditorInfo()

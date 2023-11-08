@@ -1,14 +1,16 @@
+import { UserAddOutlined } from '@ant-design/icons'
+import { useRequest } from 'ahooks'
+import { Button, Checkbox, Form, Input, message, Space, Typography } from 'antd'
 import React, { FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { Button, Checkbox, Form, Input, Space, Typography, message } from 'antd'
-import { UserAddOutlined } from '@ant-design/icons'
-import styles from './index.module.scss'
 import { Link } from 'react-router-dom'
-import { useRequest } from 'ahooks'
-import { loginService } from '../../services/user'
-import { PN_REGISTER } from '../../router'
-import { setToken } from '../../utils/user-token'
-import { loginAction } from '../../store/userReducer'
+
+import { PN_REGISTER } from '@/router'
+import { loginService } from '@/services/user'
+import { loginAction } from '@/store/userReducer'
+import { setToken } from '@/utils/user-token'
+
+import styles from './index.module.scss'
 
 const { Title } = Typography
 

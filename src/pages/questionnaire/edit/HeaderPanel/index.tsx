@@ -1,12 +1,13 @@
-import React, { FC } from 'react'
-import { Button, Space } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
+import { Button, Space } from 'antd'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import styles from './index.module.scss'
-import Toolbar from './Toolbar'
-import TitleEditor from './TitleEditor'
-import SaveButton from './SaveButton'
 import PublishButton from './PublishButton'
+import SaveButton from './SaveButton'
+import TitleEditor from './TitleEditor'
+import Toolbar from './Toolbar'
 
 const HeaderPanel: FC = () => {
   const nav = useNavigate()

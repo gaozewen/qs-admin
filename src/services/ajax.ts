@@ -1,6 +1,7 @@
 import { message } from 'antd'
 import axios from 'axios'
-import { getToken } from '../utils/user-token'
+
+import { getToken } from '@/utils/user-token'
 
 /**
  * @description 配置 axios 基本功能

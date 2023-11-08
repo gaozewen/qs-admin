@@ -2,9 +2,10 @@ import { useRequest } from 'ahooks'
 import { Button, message } from 'antd'
 import React, { FC } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { updateQuestionnaireService } from '../../../../../services/questionnaire'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
-import { PN_QUESTIONNAIRE_STATISTIC } from '../../../../../router'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { PN_QUESTIONNAIRE_STATISTIC } from '@/router'
+import { updateQuestionnaireService } from '@/services/questionnaire'
 
 const PublishButton: FC = () => {
   const { id = '' } = useParams()

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import QEditorInput from '../../components/QEditorComponents/QEditorInput'
+
+import QEditorInput from '@/components/QEditorComponents/QEditorInput'
 
 const meta = {
   title: 'QEditor/QEditorInput',

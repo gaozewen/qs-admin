@@ -1,15 +1,17 @@
-import React, { FC } from 'react'
-import { Spin } from 'antd'
-import { useDispatch } from 'react-redux'
 import { useTitle } from 'ahooks'
-import styles from './index.module.scss'
-import MainCanvas from './MainCanvas'
-import LeftPanel from './LeftPanel'
-import RightPanel from './RightPanel'
+import { Spin } from 'antd'
+import React, { FC } from 'react'
+import { useDispatch } from 'react-redux'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import useLoadQuestionnaireData from '@/hooks/useLoadQuestionnaireData'
+import { changeSelectedIdAction } from '@/store/qEditorReducer'
+
 import HeaderPanel from './HeaderPanel'
-import useGetQEditorInfo from '../../../hooks/useGetQEditorInfo'
-import useLoadQuestionnaireData from '../../../hooks/useLoadQuestionnaireData'
-import { changeSelectedIdAction } from '../../../store/qEditorReducer'
+import styles from './index.module.scss'
+import LeftPanel from './LeftPanel'
+import MainCanvas from './MainCanvas'
+import RightPanel from './RightPanel'
 
 const Edit: FC = () => {
   const dispatch = useDispatch()

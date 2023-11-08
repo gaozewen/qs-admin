@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import { Checkbox, Space, Typography } from 'antd'
+import React, { FC } from 'react'
 
 const { Paragraph } = Typography
 export type QEditorCheckboxItemType = {

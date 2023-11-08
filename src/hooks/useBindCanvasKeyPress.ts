@@ -1,13 +1,14 @@
 import { useKeyPress } from 'ahooks'
 import { useDispatch } from 'react-redux'
 import { ActionCreators } from 'redux-undo'
+
 import {
   deleteSelectedComponentAction,
   duplicateComponentAction,
   pasteCopiedComponentAction,
   selectNextComponentAction,
   selectPrevComponentAction,
-} from '../store/qEditorReducer'
+} from '@/store/qEditorReducer'
 
 // 是否激活的元素是有效的
 const isActiveElementValid = () => {

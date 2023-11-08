@@ -2,8 +2,9 @@ import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks'
 import { Button, message } from 'antd'
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { updateQuestionnaireService } from '../../../../../services/questionnaire'
-import useGetQEditorInfo from '../../../../../hooks/useGetQEditorInfo'
+
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { updateQuestionnaireService } from '@/services/questionnaire'
 
 const SaveButton: FC = () => {
   const { id = '' } = useParams()

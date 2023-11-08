@@ -1,10 +1,12 @@
-import React, { FC } from 'react'
 import cs from 'classnames'
+import React, { FC } from 'react'
+
+import { getComponentConfigByType } from '@/components/QEditorComponents'
+import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
+import { ComponentInfoType } from '@/store/qEditorReducer'
+import { getVisibleComponentList } from '@/store/utils'
+
 import styles from './index.module.scss'
-import useGetQEditorInfo from '../../../../hooks/useGetQEditorInfo'
-import { ComponentInfoType } from '../../../../store/qEditorReducer'
-import { getComponentConfigByType } from '../../../../components/QEditorComponents'
-import { getVisibleComponentList } from '../../../../store/utils'
 
 const genComponent = (componentInfo: ComponentInfoType) => {
   const { type, props } = componentInfo

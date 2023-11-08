@@ -1,5 +1,3 @@
-import React, { FC, useState } from 'react'
-import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd'
 import {
   CopyOutlined,
   DeleteOutlined,
@@ -9,15 +7,16 @@ import {
   StarFilled,
   StarOutlined,
 } from '@ant-design/icons'
-import { Link, useNavigate } from 'react-router-dom'
 import { useRequest } from 'ahooks'
+import { Button, Divider, message, Modal, Popconfirm, Space, Tag } from 'antd'
+import React, { FC, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '@/router'
+import { duplicateQuestionnaireService, updateQuestionnaireService } from '@/services/questionnaire'
+import { Questionnaire } from '@/types'
+
 import styles from './index.module.scss'
-import { PN_QUESTIONNAIRE_EDIT, PN_QUESTIONNAIRE_STATISTIC } from '../../router'
-import { Questionnaire } from '../../types'
-import {
-  duplicateQuestionnaireService,
-  updateQuestionnaireService,
-} from '../../services/questionnaire'
 
 const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const { _id, title, isStar, isPublished, answerCount, createdAt } = props

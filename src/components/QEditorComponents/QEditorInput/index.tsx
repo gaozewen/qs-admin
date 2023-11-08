@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
 import { Input, Typography } from 'antd'
+import React, { FC } from 'react'
+
 import QEditorInputPropsComponent from './QEditorInputPropsComponent'
 
 const { Paragraph } = Typography

@@ -1,12 +1,14 @@
 import { useRequest } from 'ahooks'
 import { useSearchParams } from 'react-router-dom'
+
 import {
   C_LIST_PAGE_PARAM_KEY,
   C_LIST_PAGE_SIZE,
   C_LIST_PAGE_SIZE_PARAM_KEY,
   C_LIST_SEARCH_PARAM_KEY,
-} from '../constant'
-import { getQuestionnaireListService } from '../services/questionnaire'
+} from '@/constant'
+import { getQuestionnaireListService } from '@/services/questionnaire'
+
 type Options = {
   isStar: boolean
   isDeleted: boolean

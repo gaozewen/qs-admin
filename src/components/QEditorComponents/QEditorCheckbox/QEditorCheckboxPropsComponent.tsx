@@ -1,8 +1,9 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorCheckboxItemType, QEditorCheckboxPropsType } from '.'
-import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 import { nanoid } from '@reduxjs/toolkit'
+import { Button, Checkbox, Form, Input, Space } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorCheckboxItemType, QEditorCheckboxPropsType } from '.'
 
 const QEditorCheckboxPropsComponent: FC<QEditorCheckboxPropsType> = (
   props: QEditorCheckboxPropsType

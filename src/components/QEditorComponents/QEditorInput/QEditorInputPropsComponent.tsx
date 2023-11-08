@@ -1,6 +1,7 @@
-import React, { FC, useEffect } from 'react'
-import { QEditorInputPropsType } from '.'
 import { Form, Input } from 'antd'
+import React, { FC, useEffect } from 'react'
+
+import { QEditorInputPropsType } from '.'
 
 const QEditorInputPropsComponent: FC<QEditorInputPropsType> = (props: QEditorInputPropsType) => {
   const { title, placeholder, onChange, disabled } = props

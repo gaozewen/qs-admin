@@ -1,5 +1,6 @@
-import React, { FC } from 'react'
 import { Typography } from 'antd'
+import React, { FC } from 'react'
+
 import QEditorTitlePropsComponent from './QEditorTitlePropsComponent'
 
 const { Title } = Typography

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+
 module.exports = {
   devServer: {
     // B 端使用 8000 端口
@@ -7,6 +10,10 @@ module.exports = {
     },
   },
   webpack: {
+    // 设置别名
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
     configure(webpackConfig) {
       if (webpackConfig.mode === 'production') {
         // 抽离公共代码，只在生产环境

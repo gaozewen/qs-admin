@@ -43,7 +43,7 @@ const List: FC = () => {
       // 需要手动触发 run 函数
       manual: true,
       onSuccess(result) {
-        const { list: resList, total: resTotal } = result as {
+        const { list: resList = [], total: resTotal = 0 } = result as {
           list: Questionnaire[]
           total: number
         }

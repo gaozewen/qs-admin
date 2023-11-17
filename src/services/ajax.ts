@@ -29,14 +29,14 @@ instance.interceptors.response.use(
     if (errno !== 0) {
       if (errno === 3 || errno === 4) {
         // JWT token 过期或未设置
-        return null
+        return {}
       }
 
       if (msg) {
         message.error(msg)
       }
       // 后端错误代码直接返回空
-      return null
+      return {}
     }
 
     // 这里需要是 any 类型

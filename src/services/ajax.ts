@@ -1,6 +1,7 @@
 import { message } from 'antd'
 import axios from 'axios'
 
+import { getUserClientTimezone } from '@/utils/user-timezone'
 import { getToken } from '@/utils/user-token'
 
 /**
@@ -15,6 +16,8 @@ instance.interceptors.request.use(
   config => {
     // JWT
     config.headers.token = getToken()
+    // User-Timezone
+    config.headers['User-Timezone'] = getUserClientTimezone()
     return config
   },
   error => Promise.reject(error)

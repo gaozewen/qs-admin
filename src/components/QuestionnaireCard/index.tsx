@@ -48,9 +48,9 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
     {
       manual: true,
       onSuccess: result => {
-        const { id } = result || {}
-        if (id) {
-          nav(`${PN_QUESTIONNAIRE_EDIT}/${id}`)
+        const { _id } = result || {}
+        if (_id) {
+          nav(`${PN_QUESTIONNAIRE_EDIT}/${_id}`)
           message.success('复制成功')
         }
       },

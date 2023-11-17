@@ -4,13 +4,16 @@
  */
 
 const KEY = 'USER_TOKEN'
-
+let TOKEN_CACHE = ''
 export const setToken = (token: string) => {
+  TOKEN_CACHE = token
   localStorage.setItem(KEY, token)
 }
 
 export const getToken = () => {
-  return localStorage.getItem(KEY)
+  if (TOKEN_CACHE) return TOKEN_CACHE
+  TOKEN_CACHE = localStorage.getItem(KEY) || ''
+  return TOKEN_CACHE
 }
 
 export const removeToken = () => {

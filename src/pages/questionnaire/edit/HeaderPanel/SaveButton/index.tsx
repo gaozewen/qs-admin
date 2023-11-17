@@ -1,6 +1,6 @@
 import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks'
 import { Button, message } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 
 import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
@@ -9,10 +9,19 @@ import { updateQuestionnaireService } from '@/services/questionnaire'
 const SaveButton: FC = () => {
   const { id = '' } = useParams()
   const { componentList, pageInfo } = useGetQEditorInfo()
+
+  // 为了避免第一次进入编辑问卷页时因 redux 中的 componentList 和 pageInfo 由于获取接口数据变更而触发的一次无效的 patch
+  const isFirstSaveRef = useRef(true)
+
   const onSaveHandler = async () => {
     if (!id) return
+    if (isFirstSaveRef.current) {
+      isFirstSaveRef.current = false
+      return
+    }
     await updateQuestionnaireService(id, { ...pageInfo, componentList })
   }
+
   const { loading, run: onSave } = useRequest(onSaveHandler, {
     manual: true,
     onSuccess() {

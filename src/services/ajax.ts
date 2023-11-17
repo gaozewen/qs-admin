@@ -13,8 +13,8 @@ const instance = axios.create({
 // request 拦截：每次请求都带上 token
 instance.interceptors.request.use(
   config => {
-    // JWT 的固定格式
-    config.headers['Authorization'] = `Bearer ${getToken()}`
+    // JWT
+    config.headers.token = getToken()
     return config
   },
   error => Promise.reject(error)
@@ -27,11 +27,16 @@ instance.interceptors.response.use(
     const { errno, data, msg } = resData
 
     if (errno !== 0) {
+      if (errno === 3 || errno === 4) {
+        // JWT token 过期或未设置
+        return null
+      }
+
       if (msg) {
         message.error(msg)
       }
-      // 后端错误代码直接返回空对象
-      return {}
+      // 后端错误代码直接返回空
+      return null
     }
 
     // 这里需要是 any 类型

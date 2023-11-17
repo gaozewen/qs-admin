@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { PN_LOGIN } from '@/router'
 import { registerService } from '@/services/user'
+import { rememberAccount } from '@/utils/account'
 
 import styles from './index.module.scss'
 
@@ -22,11 +23,13 @@ const Register: FC = () => {
   const nav = useNavigate()
   const { run: onRegister, loading } = useRequest(
     async (username: string, password: string, nickname: string) => {
-      await registerService(username, password, nickname)
+      return await registerService(username, password, nickname)
     },
     {
       manual: true,
-      onSuccess() {
+      onSuccess(result = {}) {
+        const { username, password } = result
+        rememberAccount(username, password)
         message.success('注册成功')
         nav(PN_LOGIN)
       },

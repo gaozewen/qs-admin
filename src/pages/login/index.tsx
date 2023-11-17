@@ -8,6 +8,11 @@ import { Link } from 'react-router-dom'
 import { PN_REGISTER } from '@/router'
 import { loginService } from '@/services/user'
 import { loginAction } from '@/store/userReducer'
+import {
+  deleteAccountFromLocalStorage,
+  getAccountFromLocalStorage,
+  rememberAccount,
+} from '@/utils/account'
 import { setToken } from '@/utils/user-token'
 
 import styles from './index.module.scss'
@@ -18,26 +23,6 @@ type ValuesType = {
   username: string
   password: string
   remember: boolean
-}
-
-const KEY_USERNAME = 'username'
-const KEY_PASSWORD = 'password'
-
-const rememberAccount = (username: string, password: string) => {
-  localStorage.setItem(KEY_USERNAME, username)
-  localStorage.setItem(KEY_PASSWORD, password)
-}
-
-const deleteAccountFromLocalStorage = () => {
-  localStorage.removeItem(KEY_USERNAME)
-  localStorage.removeItem(KEY_PASSWORD)
-}
-
-const getAccountFromLocalStorage = () => {
-  return {
-    username: localStorage.getItem(KEY_USERNAME),
-    password: localStorage.getItem(KEY_PASSWORD),
-  }
 }
 
 const Login: FC = () => {

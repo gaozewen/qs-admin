@@ -17,7 +17,6 @@ const Star: FC = () => {
 
   const { loading, data } = useLoadQuestionnaireListData({ isStar: true })
   const { list = [], total = 0 } = (data || {}) as { list: Questionnaire[]; total: number }
-  console.log('list', list)
 
   return (
     <>

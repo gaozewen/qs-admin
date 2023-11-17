@@ -39,7 +39,7 @@ const MainPanel: FC<PropsType> = props => {
       // 监听 page 和 pageSize 的变化，来刷新接口获取数据
       refreshDeps: [page, pageSize],
       onSuccess(result) {
-        const { total, list } = result
+        const { total = 0, list = [] } = result
         setTotal(total)
         setList(list)
       },

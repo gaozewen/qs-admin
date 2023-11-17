@@ -14,7 +14,7 @@ const PublishButton: FC = () => {
 
   const { loading, run } = useRequest(
     async () => {
-      await updateQuestionnaireService(id, { ...pageInfo, componentList, isPublish: true })
+      await updateQuestionnaireService(id, { ...pageInfo, componentList, isPublished: true })
     },
     {
       manual: true,

@@ -61,7 +61,7 @@ const QuestionnaireCard: FC<Questionnaire> = (props: Questionnaire) => {
   const [isDeletedState, setIsDeletedState] = useState(false)
   const { loading: deleteLoading, run: onDelete } = useRequest(
     async () => {
-      const data = await updateQuestionnaireService(_id, { isStar: toggleIsStarState })
+      const data = await updateQuestionnaireService(_id, { isDeleted: true })
       return data
     },
     {

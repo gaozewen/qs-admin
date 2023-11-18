@@ -51,10 +51,6 @@ const MainPanel: FC<PropsType> = props => {
       return 158
     }
 
-    // if (['textarea', 'checkbox'].includes(type)) {
-    //   return 200
-    // }
-
     return 200
   }
 
@@ -106,6 +102,12 @@ const MainPanel: FC<PropsType> = props => {
           ),
         }
       }),
+    {
+      title: '创建时间',
+      dataIndex: 'createdAt',
+      fixed: 'left',
+      width: 188,
+    },
   ]
 
   const scrollX = tableColumns.reduce((total, cur) => total + parseInt(String(cur.width || 0)), 0)

@@ -18,8 +18,8 @@ type PropsType = {
 const RightPanel: FC<PropsType> = props => {
   const { selectedCompId, selectedCompType } = props
   const { id } = useParams()
-
   const [statistic, setStatistic] = useState([])
+  const { StatisticComponent } = getComponentConfigByType(selectedCompType) || {}
 
   const { run } = useRequest(
     async (questionnaireId, componentId) =>
@@ -33,7 +33,7 @@ const RightPanel: FC<PropsType> = props => {
   )
 
   useEffect(() => {
-    if (selectedCompId) {
+    if (selectedCompId && StatisticComponent) {
       run(id, selectedCompId)
     }
   }, [selectedCompId])
@@ -41,7 +41,6 @@ const RightPanel: FC<PropsType> = props => {
   const genStatisticElem = () => {
     if (!selectedCompId) return <div style={{ textAlign: 'center' }}>未选中组件</div>
 
-    const { StatisticComponent } = getComponentConfigByType(selectedCompType) || {}
     if (StatisticComponent) {
       return <StatisticComponent statistic={statistic} />
     }

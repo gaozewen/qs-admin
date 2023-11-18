@@ -13,14 +13,13 @@ import { QEditorTextareaConfig, QEditorTextareaPropsType } from './QEditorTextar
 import { QEditorTitleConfig, QEditorTitlePropsType } from './QEditorTitle'
 
 // 所有组件统一的 Props 类型定义
-export type QEditorComponentPropsType =
-  | QEditorTitlePropsType
-  | QEditorInputPropsType
-  | QEditorParagraphPropsType
-  | QEditorInfoPropsType
-  | QEditorTextareaPropsType
-  | QEditorRadioPropsType
-  | QEditorCheckboxPropsType
+export type QEditorComponentPropsType = QEditorTitlePropsType &
+  QEditorInputPropsType &
+  QEditorParagraphPropsType &
+  QEditorInfoPropsType &
+  QEditorTextareaPropsType &
+  QEditorRadioPropsType &
+  QEditorCheckboxPropsType
 
 // 所有组件统一的类型定义
 export type QEditorComponentType =

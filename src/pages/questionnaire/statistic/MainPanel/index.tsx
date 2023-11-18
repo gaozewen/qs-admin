@@ -75,6 +75,8 @@ const MainPanel: FC<PropsType> = props => {
         return !['info', 'title', 'paragraph'].includes(compInfo.type)
       })
       .map((compInfo: ComponentInfoType) => {
+        const { props } = compInfo
+        const { title } = props || {}
         return {
           title: (
             <div
@@ -87,7 +89,7 @@ const MainPanel: FC<PropsType> = props => {
                 color: compInfo.fe_id === selectedCompId ? '#1890ff' : 'inherit',
               }}
             >
-              {compInfo.title}
+              {title}
             </div>
           ),
           dataIndex: compInfo.fe_id,
@@ -105,7 +107,6 @@ const MainPanel: FC<PropsType> = props => {
     {
       title: '创建时间',
       dataIndex: 'createdAt',
-      fixed: 'left',
       width: 188,
     },
   ]

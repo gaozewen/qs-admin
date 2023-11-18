@@ -32,7 +32,9 @@ const HeaderPanel: FC = () => {
 
     return (
       <Space>
-        <Text>答卷地址：{url}</Text>
+        <div style={{ width: 400 }}>
+          <Text ellipsis>答卷地址：{url}</Text>
+        </div>
         <Tooltip title="拷贝链接">
           <Button icon={<CopyOutlined />} onClick={onCopy} />
         </Tooltip>

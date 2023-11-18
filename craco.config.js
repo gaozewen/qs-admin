@@ -5,10 +5,11 @@ module.exports = {
   devServer: {
     // B 端使用 8000 端口
     port: 8000,
-    proxy: {
-      // '/api': 'http://localhost:3001', // mock
-      '/api': 'http://localhost:7001', // local
-    },
+    // 全都交由后端做跨域处理
+    // proxy: {
+    //    要使用，需要将 axios 中的 baseURL 去掉才生效
+    //   '/api': process.env.REACT_APP_API_HOST,
+    // },
   },
   webpack: {
     // 设置别名

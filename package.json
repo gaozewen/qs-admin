@@ -33,8 +33,10 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
+    "start:dev": "dotenv -e .env.dev craco start",
+    "start:prod": "dotenv -e .env.prod craco start",
+    "build:dev": "dotenv -e .env.dev craco build",
+    "build:prod": "dotenv -e .env.prod craco build",
     "test:watch": "craco test",
     "test": "craco test --watchAll=false",
     "eject": "react-scripts eject",

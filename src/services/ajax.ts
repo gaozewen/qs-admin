@@ -8,6 +8,7 @@ import { getToken } from '@/utils/user-token'
  * @description 配置 axios 基本功能
  */
 const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_HOST,
   timeout: 10 * 1000,
 })
 

@@ -21,7 +21,7 @@ const PublishButton: FC = () => {
       onSuccess() {
         message.success('发布成功')
         // 跳转到数据统计页
-        nav(`${PN_QUESTIONNAIRE_STATISTIC}/${id}`)
+        nav(`${PN_QUESTIONNAIRE_STATISTIC}/${id}`, { replace: true })
       },
     }
   )

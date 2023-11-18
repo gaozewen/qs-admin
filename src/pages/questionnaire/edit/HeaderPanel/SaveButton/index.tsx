@@ -1,13 +1,14 @@
 import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks'
 import { Button, message } from 'antd'
 import React, { FC, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import useGetQEditorInfo from '@/hooks/useGetQEditorInfo'
 import { updateQuestionnaireService } from '@/services/questionnaire'
 
 const SaveButton: FC = () => {
   const { id = '' } = useParams()
+  const nav = useNavigate()
   const { componentList, pageInfo } = useGetQEditorInfo()
 
   // 为了避免第一次进入编辑问卷页时因 redux 中的 componentList 和 pageInfo 由于获取接口数据变更而触发的一次无效的 patch
@@ -26,6 +27,7 @@ const SaveButton: FC = () => {
     manual: true,
     onSuccess() {
       message.success('保存成功')
+      nav(-1)
     },
   })
 

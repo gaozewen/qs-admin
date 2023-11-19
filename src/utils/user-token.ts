@@ -17,5 +17,7 @@ export const getToken = () => {
 }
 
 export const removeToken = () => {
+  // 清空缓存
+  TOKEN_CACHE = ''
   return localStorage.removeItem(KEY)
 }

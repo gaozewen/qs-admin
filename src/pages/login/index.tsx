@@ -41,13 +41,16 @@ const Login: FC = () => {
     },
     {
       manual: true,
-      async onSuccess(result) {
-        const { token = '', username, nickname } = result
-        // 存储 token
-        setToken(token)
-        dispatch(loginAction({ username, nickname }))
-        message.success('登录成功')
-        // 使用 useAutoNavigate 控制登录后的路由跳转 nav(PN_MANAGE_INDEX)
+      onSuccess(result) {
+        const { token = '', username, nickname } = result || {}
+        // 判断登录成功
+        if (token) {
+          // 存储 token
+          setToken(token)
+          dispatch(loginAction({ username, nickname }))
+          message.success('登录成功')
+          // 使用 useAutoNavigate 控制登录后的路由跳转 nav(PN_MANAGE_INDEX)
+        }
       },
     }
   )

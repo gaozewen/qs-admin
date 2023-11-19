@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks'
-import { Typography } from 'antd'
+import { Spin, Typography } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ const RightPanel: FC<PropsType> = props => {
   const [statistic, setStatistic] = useState([])
   const { StatisticComponent } = getComponentConfigByType(selectedCompType) || {}
 
-  const { run } = useRequest(
+  const { loading, run } = useRequest(
     async (questionnaireId, componentId) =>
       await getComponentStatisticService(questionnaireId, componentId),
     {
@@ -40,6 +40,13 @@ const RightPanel: FC<PropsType> = props => {
 
   const genStatisticElem = () => {
     if (!selectedCompId) return <div style={{ textAlign: 'center' }}>未选中组件</div>
+
+    if (loading)
+      return (
+        <Spin spinning={loading}>
+          <div style={{ marginTop: '24vh' }}></div>
+        </Spin>
+      )
 
     if (StatisticComponent) {
       return <StatisticComponent statistic={statistic} />

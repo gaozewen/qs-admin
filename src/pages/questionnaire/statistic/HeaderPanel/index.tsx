@@ -21,8 +21,7 @@ const HeaderPanel: FC = () => {
   const LinkAndQRCode = useMemo(() => {
     if (!isPublished) return null
 
-    // TODO 上生产需要修改 url
-    const url = `http://localhost:3000/questionnaire/${id}`
+    const url = `${process.env.REACT_APP_CLIENT_HOST}/questionnaire/${id}`
 
     const onCopy = () => {
       copyToClipboard(url, () => {

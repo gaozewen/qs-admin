@@ -1,46 +1,55 @@
-# Getting Started with Create React App
+# Qs-Admin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+基于 CreateReactApp + AntDesign5 + Typescript 的问卷后台管理系统 
 
-## Available Scripts
+## 使用
 
-In the project directory, you can run:
+### `前置准备`
 
-### `yarn start`
+- 确保你已经在本地克隆并运行了 [Qs-Client](https://github.com/gaozewen/qs-client)  和 [Qs-Api](https://github.com/gaozewen/qs-api) 项目
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node 环境 v18.x
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `安装 yarn`
 
-### `yarn test`
+~~~bash
+npm install -g yarn
+~~~
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `安装 CLI`
 
-### `yarn build`
+~~~bash
+npm install -g dotenv-cli
+~~~
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `安装依赖`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+~~~bash
+yarn install
+~~~
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `启动项目`
 
-### `yarn eject`
+~~~bash
+yarn start:dev
+~~~
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+应用访问：http://localhost:8000
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 可用的脚本
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `yarn start:dev`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+使用 .env.dev 文件中的环境变量（开发环境），将项目启动到本地
 
-## Learn More
+### `yarn start:prod`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+使用 .env.prod 文件中的环境变量（生产环境），将项目启动到本地
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `yarn build:dev`
+
+使用 .env.dev 文件中的环境变量（开发环境），打包项目到 build 文件夹中
+
+### `yarn build:prod`
+
+使用 .env.prod 文件中的环境变量（生产环境），打包项目到 build 文件夹中

@@ -16,3 +16,21 @@ code {
 div[role="button"] {
   outline: 0;
 }
+
+/* 统一处理滚动条样式 */
+::-webkit-scrollbar {
+  /* 滚动条最外层盒子宽度 */
+  width: 4px; 
+}
+
+::-webkit-scrollbar-thumb {
+  /* 移动指示条盒子 */
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  /* 指示条下面的背景盒子 */
+  background-color: transparent;
+  border-radius: 4px;
+}

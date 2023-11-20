@@ -1,5 +1,5 @@
 .wrapper {
-  height: 758px;
+  height: calc(100vh - 144px);
   overflow: hidden scroll;
 
   .sortable-item {

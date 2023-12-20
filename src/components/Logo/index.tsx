@@ -1,8 +1,8 @@
-import { FormOutlined } from '@ant-design/icons'
-import { Space, Typography } from 'antd'
+import { Image, Space, Typography } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import LOGO192 from '@/assets/images/logo192.png'
 import useGetUserInfo from '@/hooks/useGetUserInfo'
 import { PN_HOME, PN_MANAGE_INDEX } from '@/router'
 
@@ -20,10 +20,8 @@ const Logo: FC = () => {
   return (
     <div className={styles.container}>
       <Link to={pathname}>
-        <Space>
-          <Title>
-            <FormOutlined />
-          </Title>
+        <Space align="center">
+          <Image height={28} src={LOGO192} preview={false} />
           <Title>问卷系统</Title>
         </Space>
       </Link>

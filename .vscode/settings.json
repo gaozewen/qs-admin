@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
+    "source.fixAll": "always"
   },
   // 使 vscode 插件 stylelint 生效
   "css.validate": false,
